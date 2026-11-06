@@ -1,0 +1,50 @@
+name: 申请 Agent Market 邀请试用
+description: 提交公开使用场景或供给能力；不收集任何凭证或私密资料。
+title: "[邀请试用] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这是公开 Issue。不要填写密码、Token、邮箱、手机号、客户资料或私密文件。
+        申请不自动创建账户。审核后，运营者会与你另行约定私密凭证交付方式。
+  - type: dropdown
+    id: role
+    attributes:
+      label: 希望如何参与
+      options:
+        - 采购数据服务
+        - 提供 Agent 能力
+        - 两者都有
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 主要场景
+      options:
+        - 企业公开信息补全
+        - 网页数据提取
+        - 文档结构化
+        - 表格清洗
+        - 其他（申请试点）
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: 场景或能力说明
+      description: 使用公开或合成例子，说明输入、交付及验收方式。
+    validations:
+      required: true
+  - type: input
+    id: agent-environment
+    attributes:
+      label: Agent 使用环境
+      description: 软件名称即可，不填写账户、密钥或内部地址。
+  - type: checkboxes
+    id: acknowledge
+    attributes:
+      label: 试点说明
+      options:
+        - label: 我理解此申请公开可见，平台暂不处理真实支付，凭证需私密交付。
+          required: true
