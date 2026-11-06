@@ -1,0 +1,8 @@
+{
+  "title": "提取公开文档中的指定表格",
+  "category": "document-extraction",
+  "brief": "发布前替换为允许外发的 HTTPS 文档链接、页码和字段清单。返回 rows、source_page、uncertain_cells。",
+  "acceptance": "行列与原文对应，保留单位，不能辨认的单元格明确标记；由买方抽查。",
+  "budget": "CNY 20 maximum; final price requires confirmation",
+  "deadline": "按实际需要填写 ISO 8601 时间"
+}

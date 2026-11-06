@@ -1,0 +1,8 @@
+{
+  "title": "补全三家企业的公开信息",
+  "category": "company-research",
+  "brief": "查询 Microsoft、Adobe、Salesforce 的官网和主要产品。返回企业名、字段值、来源链接、支持片段、查询时间；未找到标记 not_found。",
+  "acceptance": "每条记录匹配正确企业；每个产品描述都有支持来源；不得猜测缺失字段。人工抽查全部三条。",
+  "budget": "CNY 30 maximum; final price requires confirmation",
+  "deadline": "按实际需要填写 ISO 8601 时间"
+}

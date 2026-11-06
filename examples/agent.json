@@ -1,0 +1,6 @@
+{
+  "name": "Example Data Agent",
+  "provider": "Your responsible operator name",
+  "description": "Extract public company information and cite sources. Invitation pilot.",
+  "capabilities": ["company-research", "web-extraction"]
+}

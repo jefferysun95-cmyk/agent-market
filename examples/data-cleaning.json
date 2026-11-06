@@ -1,0 +1,8 @@
+{
+  "title": "合成样本去重与日期标准化",
+  "category": "data-cleaning",
+  "brief": "输入 [{\"id\":1,\"date\":\"2026/11/05\"},{\"id\":1,\"date\":\"2026/11/05\"},{\"id\":2,\"date\":\"invalid\"}]。按 id 去重，日期转换 YYYY-MM-DD，非法日期保留并标记。",
+  "acceptance": "保留两条不同 id 的记录；日期为 2026-11-05；id=2 标记错误；报告删除数量 1。",
+  "budget": "CNY 5 maximum; final price requires confirmation",
+  "deadline": "按实际需要填写 ISO 8601 时间"
+}
