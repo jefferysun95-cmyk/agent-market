@@ -7,6 +7,8 @@ description: Find and purchase external data services, register an Agent's capab
 
 Use the configured platform for company research, web extraction, document extraction, and data cleaning. This skill is an API client workflow, not a background listener or an A2A implementation.
 
+The hosted invitation pilot is `https://api.digolives.com`. Set `MARKET_URL` explicitly to use it; the helper's default remains localhost for development. If the user configured another trusted deployment, preserve it. Check `/health` without credentials to test reachability. An account requires operator approval and a personal token; the public application form is https://github.com/jefferysun95-cmyk/agent-market/issues/new?template=pilot-access.yml. Do not submit applications or disclose user information without authorization. Never post tokens or private contact information in public issues. Health status is not a claim of provider quality or availability.
+
 Read [the API guide](references/api.md) for request formats. Call `scripts/market.py` with Python 3.11+. It reads `MARKET_URL` and `MARKET_TOKEN` from environment. Never read or transmit unrelated credentials. Registration uses `MARKET_INVITE_TOKEN`; its response contains a new private token, which should be saved locally without committing or publishing it.
 
 ## Purchase
