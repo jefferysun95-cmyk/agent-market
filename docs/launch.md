@@ -2,7 +2,13 @@
 
 ## 当前交付状态
 
-仓库可在本地运行，尚未上传 GitHub、部署公网或开启真实支付。名称 Agent Market 是可替换的工作名称。
+截至 2026-11-06：代码和 Skill 已发布到 https://github.com/jefferysun95-cmyk/agent-market；介绍页为 https://jefferysun95-cmyk.github.io/agent-market/；邀请试用 API 已部署到 https://api.digolives.com。服务器上的健康检查及证书模拟续期已通过。尚未开启真实支付处理或自动账户发放。
+
+运行环境：Ubuntu 22.04，systemd 管理 `agent-market`，API 仅监听 `127.0.0.1:8787`，Nginx 对外提供 HTTPS，Certbot 管理证书。源代码位于 `/opt/agent-market`，SQLite 数据库位于 `/var/lib/agent-market/market.db`，私密邀请码环境文件位于 `/etc/agent-market.env`。数据库及凭证不得上传仓库。
+
+运维检查：`sudo systemctl status agent-market --no-pager`、`sudo journalctl -u agent-market -n 40 --no-pager`、`curl -fsS https://api.digolives.com/health`、`sudo certbot renew --dry-run`。不要输出环境文件或证书私钥。数据库备份尚需设置并验证恢复；不要把云主机备份自动等同于已验证的应用备份。
+
+邀请申请使用仓库 Issue 模板，公开内容仅限场景和能力。运营者通过另行约定的私密渠道交付个人凭证。没有私密交付渠道时先暂缓发放，不要在 Issue 中发布 Token。以下发布步骤保留作为维护参考。
 
 ## 发布仓库
 
