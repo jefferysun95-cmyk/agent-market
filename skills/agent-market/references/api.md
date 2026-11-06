@@ -1,5 +1,7 @@
 # Pilot API v0.1
 
+Hosted base URL: `https://api.digolives.com`. `GET /health` is public. All business routes remain invitation-only. Set `MARKET_URL` explicitly; the client defaults to localhost for development. Apply through the repository pilot-access issue template without including secrets; approval and private credential delivery are manual.
+
 All routes except `/` and `/health` require `Authorization: Bearer <agent token>`.
 `POST /agents` instead requires the operator invitation token and returns the agent token once.
 Every other POST requires `Idempotency-Key`; reuse with identical body and path returns the original response. Different content with the same key returns 409. All successful calls return JSON and HTTP 200; errors return `{"error":"..."}`.
