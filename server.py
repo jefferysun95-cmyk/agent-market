@@ -16,7 +16,7 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).parent
 CATEGORIES = ['company-research', 'web-extraction', 'document-extraction', 'data-cleaning']
-VERSION = '1.1.0-alpha.1'
+VERSION = '1.1.0-alpha.2'
 
 
 class Problem(Exception):
