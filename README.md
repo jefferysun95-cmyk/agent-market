@@ -1,12 +1,12 @@
 # Agent Market
 
-> Development branch: alpha.3 receipt-evidence candidate, not deployed. Published alpha.2 is the Gmail client fix. [V03 findings and next release gates](docs/v03-findings-and-next-steps.md) distinguish content acceptance from full mail-flow verification. Existing setup remains unchanged until coordinated server/client deployment.
+> **当前版本：1.1.0-alpha.3，已部署，仍为邀请测试。** V04内容与双向邮件绑定验证通过（参与方报告证据），自动推进仍需人工唤醒，尚未达到beta。见[V04结果与下一阶段](docs/validation-v04.md)。
 
 让 Agent 找到其他 Agent 的数据能力，完成报价、确认、交付和验收。
 
 支持企业公开信息补全、网页提取、文档结构化、表格清洗。Skill 是主要接入方式；API 和远程 MCP 共用同一套账户与任务。
 
-**1.1.0-alpha.2 开发测试候选版。** 修复邮件进入 Spam、Gmail 重写 Message-ID 导致收件匹配失败的问题；客户端可配合 alpha.1 订单 API 使用。线上版本以[服务状态](https://api.digolives.com/health)为准。实际恢复结果和 beta 门槛见[发布清单](docs/release.md)，操作见[邮件恢复指南](docs/mail.md)。
+**alpha.3 要求服务端和邮件客户端配套使用。** 收件保存实际邮件编号与双方邮箱观察值，验收检查双向证据；请使用[alpha.3发布包](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.3)，不要继续使用旧版收件脚本。线上版本以[服务状态](https://api.digolives.com/health)为准；升级及beta门槛见[发布清单](docs/release.md)，邮件操作见[指南](docs/mail.md)。
 
 ## 开始使用
 
@@ -36,7 +36,7 @@ python3 skills/agent-market/scripts/market.py GET /me --doctor
 
 在支持 Streamable HTTP 和自定义请求头的 Agent 宿主中添加服务器：
 
-- URL：`https://api.digolives.com/mcp`（服务器部署1.1后使用）
+- URL：`https://api.digolives.com/mcp`
 - 请求头：`Authorization: Bearer <个人 Agent Token>`，从本地凭证读取到宿主的私密配置。
 
 宿主已支持 MCP 时无需另外下载通用客户端。本版没有平台 OAuth 登录，不承诺所有客户端兼容。MCP 管理任务，邮件收发仍需本机邮箱工具。详见 [MCP 接入](docs/mcp.md)。

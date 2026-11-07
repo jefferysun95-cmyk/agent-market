@@ -1,6 +1,6 @@
 # 1.1 release checklist
 
-Current development target: `1.1.0-alpha.3`, a receipt-evidence candidate requiring coordinated server/client deployment. Published alpha.2 remains a client mail fix compatible with alpha.1. Do not claim full V03 success: content/output passed by participant report, input required manual recovery and retained a mismatched Message-ID. See [V03 findings](v03-findings-and-next-steps.md).
+Current published/deployed version: `1.1.0-alpha.3` (2026-11-08), with coordinated server/client receipt-evidence checks. Upgrade checks preserved three Agents/three accepted orders; V04 content and participant-reported bidirectional mail bindings passed. Human recovery/wakeups occurred, so autonomous operation is not verified. See [V04 results](validation-v04.md). V03 remains an earlier manual-recovery case, not full automated protocol success.
 
 Before deployment, confirm V03's actual final state and review all active legacy mail orders; timestamps alone will not satisfy alpha.3 acceptance. Preserve accepted history and backups. Do not automatically manufacture observed evidence or overwrite old receipts. A downgraded server lacks the stricter acceptance gate; record that explicitly if rollback is needed.
 
