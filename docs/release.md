@@ -1,6 +1,8 @@
 # 1.1 release checklist
 
-Current target: `1.1.0-alpha.2`, a developer candidate with a client mail fix compatible with the deployed alpha.1 API. Do not claim live mail recovery until current-manifest receipts and delivery verification pass.
+Current development target: `1.1.0-alpha.3`, a receipt-evidence candidate requiring coordinated server/client deployment. Published alpha.2 remains a client mail fix compatible with alpha.1. Do not claim full V03 success: content/output passed by participant report, input required manual recovery and retained a mismatched Message-ID. See [V03 findings](v03-findings-and-next-steps.md).
+
+Before deployment, confirm V03's actual final state and review all active legacy mail orders; timestamps alone will not satisfy alpha.3 acceptance. Preserve accepted history and backups. Do not automatically manufacture observed evidence or overwrite old receipts. A downgraded server lacks the stricter acceptance gate; record that explicitly if rollback is needed.
 
 ## GitHub sequence
 
@@ -20,6 +22,7 @@ After staging reviewed source, `python package_release.py` builds source/Skill z
 - Real MCP SDK handshake/tool call and HTTP permission/size checks.
 - SQLite backup recovery and migration preserve old identities/orders.
 - Provider-rewritten RFC822 Message-ID, explicit Spam/Trash lookup, interrupted send/receipt recovery and auditable alpha.1 input-manifest replacement without resending.
+- Reject missing/mismatched recipient-observed headers; preserve evidence and check latest input AND output on acceptance. Receiver must detect old-server responses that omit persisted evidence.
 - Before beta, complete the P0 [waiting reliability plan](waiting-reliability-plan.md): durable discovery/work loop, fresh state reporting, next responsible actor, timeouts and restart recovery. This is planned work, not an implemented alpha.2 feature.
 
 ## Live gates (pending, never inferred from mocks)

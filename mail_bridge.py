@@ -68,6 +68,8 @@ def compose(task_id,manifest,paths):
 def extract_verified(raw,manifest):
     if len(raw)>9_000_000:raise ValueError('Email exceeds pilot size limit')
     message=BytesParser(policy=policy.default).parsebytes(raw)
+    if any(len(message.get_all(key,[]))!=1 for key in ('From','To','Message-ID')):
+        raise ValueError('Require single unambiguous From, To and Message-ID headers')
     if parseaddr(message['From'] or '')[1].lower()!=manifest['from']:raise ValueError('Unexpected sender')
     if parseaddr(message['To'] or '')[1].lower()!=manifest['to']:raise ValueError('Unexpected recipient')
     if str(message['Message-ID'])!=manifest['message_id']:raise ValueError('Message-ID mismatch')
@@ -215,7 +217,14 @@ def transfer(api,gmail,task_id,manifest_id,directory,send=False):
     if not matches:return {'status':'pending','manifest_id':manifest_id}
     parts=None
     for item in matches:
-        try:parts=extract_verified(gmail.raw(item['id']),manifest);break
+        try:
+            raw=gmail.raw(item['id'])
+            parts=extract_verified(raw,manifest)
+            headers=BytesParser(policy=policy.default).parsebytes(raw)
+            evidence={'observed_message_id':str(headers['Message-ID']),
+                      'observed_from':parseaddr(headers['From'])[1].lower(),
+                      'observed_to':parseaddr(headers['To'])[1].lower()}
+            break
         except ValueError:continue
     if parts is None:raise ValueError('No message matches manifest; do not acknowledge')
     directory.mkdir(parents=True,exist_ok=True)
@@ -228,7 +237,11 @@ def transfer(api,gmail,task_id,manifest_id,directory,send=False):
         if not target.exists():
             fd=os.open(target,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
             with os.fdopen(fd,'wb') as output:output.write(content)
-    api('POST',f'/tasks/{task_id}/mail-received',{'manifest_id':manifest_id,'files':manifest['files']},'mail-received-'+manifest_id)
+    receipt=api('POST',f'/tasks/{task_id}/mail-received',
+                dict(evidence,manifest_id=manifest_id,files=manifest['files']),
+                'mail-received-evidence-v1-'+manifest_id)
+    if any(receipt.get('receipt',{}).get(key)!=value for key,value in evidence.items()):
+        raise ValueError('Server did not retain observed receipt evidence; upgrade server before claiming verified receipt')
     return {'status':'received_verified','manifest_id':manifest_id,'files':list(parts)}
 
 

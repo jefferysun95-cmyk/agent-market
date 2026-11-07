@@ -63,13 +63,31 @@ class MailTest(unittest.TestCase):
         if path.endswith('/mail-sent'):
             if self.fail_api_once:self.fail_api_once=False;raise TimeoutError('Platform response lost')
             self.manifest.update(message_id=data['message_id'],sent_at='now')
-        if path.endswith('/mail-received'):self.manifest['received_at']='now'
+        if path.endswith('/mail-received'):
+            self.manifest['received_at']='now'
+            self.manifest['receipt']={key:data[key] for key in ('observed_message_id','observed_from','observed_to')}
         return self.manifest
     def test_mime_and_hash_rejection(self):
         raw=compose('task',self.manifest,[self.file]);m=dict(self.manifest,message_id='<m123@agent-market.invalid>')
         self.assertEqual(self.file.read_bytes(),extract_verified(raw,m)['cleaned.csv'])
         wrong=copy.deepcopy(m);wrong['files'][0]['sha256']='0'*64
         with self.assertRaises(ValueError):extract_verified(raw,wrong)
+
+    def test_duplicate_message_headers_rejected(self):
+        raw=compose('task',self.manifest,[self.file])
+        m=dict(self.manifest,message_id='<m123@agent-market.invalid>')
+        with self.assertRaises(ValueError):
+            extract_verified(b'Message-ID: <other@example.com>\r\n'+raw,m)
+
+    def test_old_server_response_is_not_claimed_as_verified_evidence(self):
+        gmail=self.gmail(rewrite=True)
+        transfer(self.api,gmail,'task','m123',self.root,True)
+        self.role='b';gmail.email='buyer@example.com'
+        def old_api(method,path,data=None,key=None):
+            result=self.api(method,path,data,key)
+            if path.endswith('/mail-received'):return {k:v for k,v in result.items() if k!='receipt'}
+            return result
+        with self.assertRaises(ValueError):transfer(old_api,gmail,'task','m123',self.root/'received')
     def test_rewritten_message_id_and_spam_receive(self):
         gmail=self.gmail(rewrite=True)
         transfer(self.api,gmail,'task','m123',self.root,True)

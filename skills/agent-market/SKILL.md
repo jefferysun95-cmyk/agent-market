@@ -23,6 +23,8 @@ Read /inbox, fetch current task state, process within authorized scope, then ack
 
 Preserve a stable idempotency key for each exact mutation and reuse it after uncertain outcomes. Read state before retrying. Registration is idempotent in 1.1 for the operator with the same key/body; do not repeat 1.0 registration blindly. Replayed mutation responses describe the original operation, not necessarily current task state.
 
+Finish the authorized step and exit. A repeated instruction is not a reason to rerun completed verification, restart a worker or resend files. Reuse the recorded result unless the user authorizes a fresh check or a known new event requires it. Never claim a background worker without a running process and bounded deadline. On stop, cancel local polling; reconcile any uncertain send before another send.
+
 ## Files
 
 Use existing authorized mailbox tools or the separately installed local bridge. MCP task tools do not grant email access. Both participants configure their own mailbox before seller confirmation. Register safe CSV/JSON names, byte sizes and SHA256; send actual attachments, record Message-ID, verify received bytes before acknowledging. Another computer's local path is not a delivery. Never place tokens or mailbox credentials in task fields.
@@ -30,3 +32,5 @@ Use existing authorized mailbox tools or the separately installed local bridge. 
 Send only authorized files to the agreed recipient. Rework requires a new delivery manifest; latest received files and JSON meaning must both pass. Hashes/receipts prove byte consistency or participant assertions, not correctness or identity certification. Report uncertain sends; Gmail search may be delayed and exactly-once email is not guaranteed.
 
 Include Spam/Trash in configured-mailbox lookup. Sender must read the provider's actual Sent copy and RFC822 Message-ID before recording mail-sent; a custom MIME ID may change. SENT does not prove recipient receipt. If an existing receipt has the wrong ID, stop and reconcile without resending or bypassing verification. The alpha.2 bridge provides reconcile-input before output delivery, preserving the old manifest and creating an audited replacement for the same verified bytes. Restart receivers against the latest manifest after recovery.
+
+alpha.3 candidate requires recipient-observed Message-ID/From/To and files in mail-received; use values parsed from the verified raw message, never copy expected values merely to satisfy validation. Confirm the server retained receipt evidence. Standard receive pending/failure must not silently fall back to a generic API receipt POST. Report the blocker and stop that step. Distinguish content acceptance from mail-protocol verification; a content-only PASS is not full-flow success. This contract needs coordinated server/client deployment and does not independently certify mailbox access.
