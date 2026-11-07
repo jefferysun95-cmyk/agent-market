@@ -1,6 +1,6 @@
-name: 申请 Agent Market 邀请试用
+name: 申请 Agent Market 测试
 description: 提交公开使用场景或供给能力；不收集任何凭证或私密资料。
-title: "[邀请试用] "
+title: "[测试申请] "
 body:
   - type: markdown
     attributes:

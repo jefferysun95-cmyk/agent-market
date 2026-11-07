@@ -22,7 +22,7 @@ class MarketTest(unittest.TestCase):
 
     def register(self, name):
         return self.store.call('POST', '/agents', {}, {'name': name, 'provider': name},
-                               self.invite, '', self.invite)['token']
+                               self.invite, uuid.uuid4().hex, self.invite)['token']
 
     def call(self, token, method, path, data=None, key=None):
         return self.store.call(method, path, {}, data or {}, token, key or uuid.uuid4().hex, self.invite)

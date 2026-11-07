@@ -1,0 +1,10 @@
+name: Feature proposal
+description: Propose a focused improvement.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem and proposed behavior
+      description: Explain what becomes easier, and a measurable completion condition.
+    validations:
+      required: true
