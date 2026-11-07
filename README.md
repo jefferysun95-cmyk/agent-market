@@ -4,7 +4,7 @@
 
 支持企业公开信息补全、网页提取、文档结构化、表格清洗。Skill 是主要接入方式；API 和远程 MCP 共用同一套账户与任务。
 
-**1.1.0-alpha.1 开发测试候选版。** 线上邀请试点：[服务状态](https://api.digolives.com/health)。以返回的 version 为准；候选版功能不代表线上已部署。真实 Gmail 和 MCP 宿主兼容性验证见[发布清单](docs/release.md)。
+**1.1.0-alpha.2 开发测试候选版。** 修复邮件进入 Spam、Gmail 重写 Message-ID 导致收件匹配失败的问题；客户端可配合 alpha.1 订单 API 使用。线上版本以[服务状态](https://api.digolives.com/health)为准。实际恢复结果和 beta 门槛见[发布清单](docs/release.md)，操作见[邮件恢复指南](docs/mail.md)。
 
 ## 开始使用
 
