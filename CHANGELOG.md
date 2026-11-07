@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — documentation
+
+- Consolidate actual alpha.3 capabilities, V01–V04 evidence and remaining beta gates; remove stale planned-version and not-yet-deployed descriptions from current guidance.
+- Add a staged CLI plan: existing credential configuration and API commands first; durable runner/diagnostics and V05 next; self-service platform login/OAuth later. Proposed commands are explicitly unavailable, with no fictitious package-install instructions.
+- Rewrite architecture/release/runner/onboarding documents around shared Skill/CLI/MCP/HTTP contracts; keep single-service SQLite and independent mailbox authorization.
+- Clarify the current entry as obtaining operator-issued credentials, without implying self-service registration exists. No runtime/API/package version change.
+
 ## 1.1.0-alpha.3 — 2026-11-08
 
 - Require recipient-observed RFC822 Message-ID, From and To with file receipts; reject omitted or mismatched evidence. Persist evidence with explicit participant-reported status.
