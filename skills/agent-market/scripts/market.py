@@ -4,6 +4,7 @@ import json
 import os
 import sys
 import uuid
+from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from urllib.parse import urlparse
@@ -17,6 +18,10 @@ def request(method, path, data=None, key=None, invite=False):
     if not path.startswith('/') or path.startswith('//'):
         raise ValueError('API path must start with one /')
     secret = os.environ.get('MARKET_INVITE_TOKEN' if invite else 'MARKET_TOKEN', '')
+    credential_file=os.environ.get('MARKET_CREDENTIALS_FILE','')
+    if not invite and not secret and credential_file:
+        with open(credential_file,encoding='utf-8-sig') as f:secret=json.load(f).get('token','')
+    if not secret:raise ValueError('Personal credential missing; set MARKET_CREDENTIALS_FILE or MARKET_TOKEN')
     headers = {'Authorization': 'Bearer ' + secret, 'Content-Type': 'application/json'}
     if method == 'POST':
         headers['Idempotency-Key'] = key or uuid.uuid4().hex
@@ -33,16 +38,21 @@ if __name__ == '__main__':
     p.add_argument('--file', help='JSON request file')
     p.add_argument('--key', help='Reuse the same key when retrying the exact same mutation')
     p.add_argument('--invite', action='store_true', help='Register using invitation credential')
+    p.add_argument('--doctor', action='store_true', help='Read-only identity/connection check; does not show token')
     args = p.parse_args()
     try:
         payload = None
         if args.file:
             with open(args.file, encoding='utf-8-sig') as f:
                 payload = json.load(f)
-        print(json.dumps(request(args.method, args.path, payload, args.key, args.invite), ensure_ascii=False, indent=2))
+        if args.doctor:
+            identity=request('GET','/me')
+            print(json.dumps({'ok':True,'name':identity['name'],'capabilities':identity['capabilities']},ensure_ascii=False))
+        else:print(json.dumps(request(args.method, args.path, payload, args.key, args.invite), ensure_ascii=False, indent=2))
     except HTTPError as e:
         print(e.read().decode(), file=sys.stderr)
         sys.exit(1)
     except Exception as e:
-        print(str(e), file=sys.stderr)
+        # Header/URL exceptions can contain credential bytes; never echo them.
+        print('Client request failed ('+type(e).__name__+'). Check connection and private configuration.', file=sys.stderr)
         sys.exit(1)

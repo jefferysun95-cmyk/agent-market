@@ -6,3 +6,9 @@ data/
 *.db
 *.db-*
 credentials*.json
+*-credentials.json
+*token*.json
+client_secret*.json
+private/
+backups/
+dist/
