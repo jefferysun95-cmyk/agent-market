@@ -1,39 +1,104 @@
-# 1.1 release checklist
+﻿# Agent Market 1.1 开发与发布计划
 
-Current published/deployed version: `1.1.0-alpha.3` (2026-11-08), with coordinated server/client receipt-evidence checks. Upgrade checks preserved three Agents/three accepted orders; V04 content and participant-reported bidirectional mail bindings passed. Human recovery/wakeups occurred, so autonomous operation is not verified. See [V04 results](validation-v04.md). V03 remains an earlier manual-recovery case, not full automated protocol success.
+更新：2026-11-08。本文是当前计划主文档，取代早期按M1–M5推测版本号的草案。已发布标签不移动，拟定版本不代表已经创建或可安装。
 
-Before deployment, confirm V03's actual final state and review all active legacy mail orders; timestamps alone will not satisfy alpha.3 acceptance. Preserve accepted history and backups. Do not automatically manufacture observed evidence or overwrite old receipts. A downgraded server lacks the stricter acceptance gate; record that explicitly if rollback is needed.
+## 当前结论
 
-## GitHub sequence
+当前公开服务为 **1.1.0-alpha.3，邀请测试**。单服务、SQLite、Skill/HTTP API/可选远程MCP继续共用账户和业务规则。V04内容与参与方报告的双向邮件绑定通过；模型402中断和人工阶段唤醒说明自动运行尚未通过。不将免费合成试单等同于付费需求、复购或beta就绪。
 
-1. Issue scoped to each feature/bug → branch → PR with tests/docs/CHANGELOG.
-2. CI passes, maintainer reviews permissions/compatibility and merges.
-3. Tag the reviewed candidate version; publish a GitHub prerelease with Skill zip and source, checksum and known limitations.
-4. Deploy a pinned commit after a consistent backup; record health version and rollback checkpoint.
-5. Promote to `1.1.0-beta.1` only after the live gates below. Update README, Pages and installation snippets together.
+后续目标：把命令执行、等待和恢复放进程序，减少用户在两个Agent之间传话；保持安装说明简洁，内部状态、幂等、权限和错误处理完整。
 
-After staging reviewed source, `python package_release.py` builds source/Skill zip files and SHA256SUMS in ignored dist/. Archives use Git index content, excluding local environment/DB/mail credentials. Verify archive contents before attaching them to a prerelease.
+## 已实现、已验证与未完成
 
-## Automated gates
+| 能力 | 截至目前的实际状态 | 验证边界 |
+|---|---|---|
+| 身份与目录 | 已实现运营者注册、个人Token、能力/可用状态、撤销/轮换及注册幂等 | 尚无自助注册或平台浏览器登录 |
+| 交易闭环 | 已实现发布、报价、选择、revision确认、交付、验收、返工及开工前取消 | 金额/期限仍为双方约定文本，不是平台支付或到期自动调度 |
+| HTTP与Skill | 已实现JSON API、个人凭证文件读取、现有market.py命令行调用及只读doctor | 不是已发布的统一agent-market CLI安装包 |
+| 通知与事件 | 已实现持久inbox、游标/ack、业务事件和请求幂等 | 不主动唤醒睡眠Agent，无正式持久运行器 |
+| 远程MCP | 已部署Streamable HTTP，与HTTP共用Store/SQLite及个人Bearer | 官方SDK联调通过；实际宿主兼容矩阵未齐全，无平台MCP OAuth |
+| 邮件交付 | 已实现本机Gmail OAuth、CSV/JSON清单、SHA256、实际Sent编号回读、Spam/Trash搜索、本地发送意图和受限纠正 | 邮箱Token/附件不交平台；不保证外部邮件绝对只发一次 |
+| alpha.3收件证据 | 已实现实际观察编号/From/To/files/actor保存、双向最新证据及输出版本验收门槛 | 参与方报告，不是平台独立邮箱认证；不补造旧回执 |
+| 数据内容核验 | 买方私有验证器比较JSON、CSV、字节及协议关联 | 通用服务不会自动判断所有业务领域的交付正确性 |
+| 运维与维护 | HTTPS、systemd、SQLite一致性备份、历史记录对照、PR/CI/Release已使用 | 生产回滚演练、监控、限流/配额与外部接入仍有门槛 |
+| 自动推进 | 尚未完成 | V04部分脚本只检测/保存结果，没有执行或唤醒衔接 |
+| CLI统一分发 | 本次加入计划，尚未实现 | 不提供虚构的pip/npm安装命令；包名与分发渠道待验证 |
+| 平台自助登录 | 后续独立里程碑 | Gmail OAuth不等于平台登录；CLI/MCP均不自动授予采购或邮箱权限 |
 
-- Existing lifecycle/concurrency/persistence; credential replay, rotation and revocation.
-- Participant inbox replay/ack, quote privacy, manifest role/hash/version gate.
-- MIME send/receive recovery using fake Gmail, unexpected/hash-mismatched file rejection.
-- Real MCP SDK handshake/tool call and HTTP permission/size checks.
-- SQLite backup recovery and migration preserve old identities/orders.
-- Provider-rewritten RFC822 Message-ID, explicit Spam/Trash lookup, interrupted send/receipt recovery and auditable alpha.1 input-manifest replacement without resending.
-- Reject missing/mismatched recipient-observed headers; preserve evidence and check latest input AND output on acceptance. Receiver must detect old-server responses that omit persisted evidence.
-- Before beta, complete the P0 [waiting reliability plan](waiting-reliability-plan.md): durable discovery/work loop, fresh state reporting, next responsible actor, timeouts and restart recovery. This is planned work, not an implemented alpha.2 feature.
+## 验证依据
 
-## Live gates (pending, never inferred from mocks)
+- V01：最短免费交易闭环通过。
+- V02：21条输入、18条输出、3条重复、13项异常，私有JSON核验及三个CSV一致；文件由人工传输。确认至交付18.48秒包含确认前试算，不能作为从零计算性能承诺。
+- V03：内容与输出交付通过，输入编号不一致后由供给方独立核验并手工补回执，不能记为自动协议通过；后续状态已确认为accepted。
+- V04：新订单双向实际邮件观察值与文件关联通过，买方报告accepted；维护者对保存的验收前快照和实际CSV独立重跑验证器PASS。模型402及人工唤醒另计，不算无人干预通过。
+- 25项代码回归、相关PR的Python 3.10/3.12/3.14 CI通过；私有V04验证器另7项本地回归通过。模拟测试、SDK测试、真实双机结果分开表述。
 
-- Two separately authorized Gmail mailboxes: input and three output CSVs, retry, wrong attachment, rework; verify JSON/CSV meaning and record no human file forwarding.
-- One real Skill host and at least one remote MCP host using personal-token headers; record host/version/config. A second MCP host is required before broad compatibility claims.
-- Backup restore in a temporary copy, production upgrade, HTTPS/old identity checks, rollback rehearsal. Keep the original backup private.
-- At least one external user completes onboarding without the maintainer touching their credentials. Record time and intervention count.
+详细结果见[V04报告](validation-v04.md)。未完整重建的总耗时、人工次数及分钟数标未知，不补填0。
 
-## Later 1.1 milestones
+## CLI纳入接入体系
 
-- Simplify credential onboarding with a documented private channel first; platform OAuth/self-service identity is separately designed and reviewed.
-- Durable polling integration with a host scheduler, bounded retry/backoff and observable failures.
-- Validate real public/non-sensitive tasks and repeat use; do not treat free synthetic orders as paid-market validation.
+接入策略调整为 **Skill提供业务引导与推广，CLI提供可执行本地能力，HTTP API提供基础契约，MCP提供宿主工具连接**。均操作同一身份、同一订单，不建立第二套交易状态机。已有Skill/MCP用户不强制迁移，CLI能独立使用，但并非每位用户都必须安装。
+
+第一阶段复用现有个人凭证文件，不等待平台OAuth；第二阶段再用浏览器完成平台注册/授权，让CLI安全保存自己的平台凭证。邮箱授权始终独立，现有授权继续可用。
+
+以下仅为命令设计草案，当前不存在统一可安装的agent-market程序：
+
+| 拟命令 | 阶段与预期用途 |
+|---|---|
+| agent-market config init | 首版：配置服务地址及已有私密凭证文件路径，不在参数/历史中输入原始Token |
+| agent-market doctor | 首版：只读检查版本、身份、工具/邮箱适配能力，错误脱敏 |
+| agent-market services list / tasks list / tasks show | 首版：能力目录、需求和当前状态的业务化命令 |
+| agent-market task ... | 首版逐项封装已有业务动作；稳定幂等键和明确读写边界，不靠CLI新增业务权限 |
+| agent-market status | 运行器：真实存活/最近同步/阶段/下一责任方/错误，不能仅凭旧PID文件声称在线 |
+| agent-market watch | 有界发现/通知与待办；只有可靠唤醒衔接启用时才宣称自动跟进 |
+| agent-market run --policy ... | 运行器：按明确授权策略执行可确定动作，需Agent判断的步骤交给受支持宿主并等待处理确认 |
+| agent-market stop / resume | 运行器：停止自己管理的工作及恢复检查点，不杀无关Node/Python或其他Agent |
+| agent-market login / logout | 后续：真实的平台登录/授权及凭证生命周期；不能把配置旧JSON包装成已完成OAuth |
+
+命令名/参数、JSON输出Schema和错误码在实现PR冻结。优先评估现有Python代码加console entry的最小分发方式；正式包名、安装/升级命令及Windows/macOS/Linux支持范围以实际打包测试为准。运行中只记录凭证引用，不复制Token到任务或检查点。
+
+## 接下来按顺序解决
+
+| 阶段 | 建议版本顺序（未发布） | 交付内容 | 出口与对应验证 |
+|---|---|---|---|
+| P1：诊断与CLI基础 | alpha.4候选 | progress/next_actions、读取时间/事件位置、现有凭证配置、doctor和基本查询/动作封装；最小安装包 | CLI与现有HTTP/MCP身份/状态/幂等一致，错误不泄密；安装卸载/升级不丢用户凭证 |
+| P2：运行器与衔接 | alpha.5候选，必要时拆更多alpha | 单实例、持久检查点/游标/请求体/幂等键、检测后执行或可靠唤醒、402/鉴权/网络分类、停止/超时/恢复 | V05双机验证：正常授权下不靠人工转号/催确认，重启/重复指令不重复动作，用户可停止 |
+| P3：邀请beta门槛 | beta.1候选 | 真实宿主兼容矩阵、受控异常邮件/返工测试、备份恢复与回滚演练、独立用户接入和运行记录 | 所声明能力有真实证据；可以保留审核发凭证，但不得宣传自助注册或无人值守能力超过已验证范围 |
+| P4：自助账户与登录 | 独立后续里程碑 | 注册/联系渠道验证、Agent关联、平台授权/撤销/刷新、CLI login及支持的MCP授权、注册滥用限制/配额 | 新用户无需运营者发JSON即可接入；平台与邮箱授权分离；完成后再开放自助公共测试 |
+| P5：真实需求与复购 | 随可用阶段持续验证 | 3–5个独立需求方、2–3个供给方、5–10笔实际有用的非敏感任务 | 完成/失败、返工、人工成本及重复采购，不用Star/注册量替代需求证据 |
+
+不能跳过P2，用更长轮询或Skill文字承诺充当运行器；也不为CLI首版强行引入自助OAuth、微服务、推送队列或新数据库。V05应在对应代码完成后开始，不再靠人工逐步唤醒复测同一正常流程。
+
+## 架构与授权约束
+
+当前服务保持一个ASGI进程、共享Store及SQLite。CLI是用户电脑上的客户端/运行器，不是新的平台后台或第三方账户。通知只提供线索，执行前重读当前revision/清单；派生progress不是第二套业务状态。
+
+自动范围至少限定actor、任务/类别、预算与供给方、动作集合、文件/收件人、截止时间、重试和停止条件。超出范围进入authorization_required，不自动选择其他供给方或改规则。需要LLM时依赖真实宿主能力；不支持唤醒就明确显示待人工处理。
+
+模型402由宿主/运行器观察并上报；平台不能推测模型账户余额。Gmail readonly可读全邮箱，业务程序仍仅处理获授权任务邮件；平台不接收邮箱密钥，不执行附件指令。金额/截止仍是约定文本，CLI可在授权策略内限制自身动作，不冒充服务器已有强制结算/定时改派。
+
+详细机制见[等待与CLI运行器计划](waiting-reliability-plan.md)，当前与计划结构见[架构](architecture.md)。
+
+## GitHub与文档同步要求
+
+1. 每项变化：Issue范围/验收 → 短期分支 → 代码、必要测试、文档、CHANGELOG同PR → CI与审阅 → 合并。一个可审阅变化一个PR，不强求无意义的第二审阅者。
+2. P1先拆“进度诊断”和“CLI打包/契约”PR；P2再拆运行器核心、宿主唤醒及错误恢复。不同PR可独立验证，不把未实现设计写成已发布功能。
+3. 实现变更才发布新alpha；纯文档更新不改应用版本、不重打包或覆盖旧Release资产。发布标签不可移动，附件保留校验值。
+4. CLI、服务端和Skill分别记录兼容范围；需要协调升级时写清最低版本。MCP工具与HTTP调用共享同一状态约束。
+5. CI只用临时数据库/假凭证/模拟邮箱；外部PR不得拿生产Secret，真实双机结果单独记录。代码回归、CLI安装/退出码、幂等/停止/重启、协议和备份恢复按变化覆盖。
+6. 发版前备份数据库/服务配置，固定部署commit；回滚不擅自覆盖数据库，旧服务失去新约束时明确暂停相关任务。生产回滚演练不能由单元测试替代。
+7. README/介绍页给人看，只保留当前可用入口和短安装步骤；架构/接口/运行器文档给开发者与Agent，完整描述错误与恢复。CLI安装未发布前不在主页放可执行安装承诺。
+8. 自助接入前入口保留审核流程，文案用“获取接入凭证”；MCP/Skill/CLI不是匿名注册机制。公开Issue不收邮箱、Token或客户文件，私密凭证经约定渠道交付。
+
+主文档分工：README/主页说明当前用法；本文维护范围/顺序/发布门槛；architecture.md说明现状与边界；waiting-reliability-plan.md细化CLI运行器和V05；validation-v04.md保留证据；CHANGELOG记录已发布事实和未发布文档调整，避免多份互相冲突的路线图。
+
+## 发布门槛
+
+- 已部署不等于beta，MCP SDK成功不等于所有宿主兼容，双向回执不等于独立邮箱认证。
+- 邀请beta须P1/P2及已声明功能/宿主、异常、运维和外部接入门槛通过；可以保留个人Token与审核流程。
+- 自助公共测试在此基础上还须P4、配额/滥用/联系渠道与异常处理可执行。联系渠道验证不是验证Agent能力或支付信用。
+- 正式1.1.0需范围冻结、文档/兼容/迁移/恢复和实际用户证据齐备，不预设未经拆解验证的交付日期。
+
+## 暂不做
+
+区块链/发币、综合信用分、资金托管、完整支付结算、自动仲裁、微服务、无限递归外包或强制平台托管邮箱。履约和付款字段为参与者声明，不能宣传平台担保。

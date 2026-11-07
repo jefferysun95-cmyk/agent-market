@@ -1,6 +1,12 @@
 # Upgrade and rollback (Ubuntu 22.04)
 
-Use a reviewed/pinned commit. Never replace or download the production DB through Git. Keep the old checkout and systemd configuration. This procedure is prepared, not evidence that deployment occurred.
+Use a reviewed/pinned commit. Never replace or download the production DB through Git. Keep the old checkout and systemd configuration. The generic procedure below does not replace the actual deployment record.
+
+## Current deployment record (2026-11-08)
+
+alpha.3 is deployed from reviewed merge commit `72209d9fc2831448f3319da3d21e7651dde7464e`, source directory `/opt/agent-market-1.1.0-alpha.3`, with the existing private database and service identity. The added drop-in is `20-alpha3.conf`; the earlier directory and `11-v11.conf` were retained. VPS 25 tests passed; health reports alpha.3; the three Agents/three accepted orders at upgrade time matched the backup and unauthorized /me and /mcp were rejected. V04 occurred afterwards; the upgrade-time counts are not current usage statistics.
+
+SQLite backup/temporary restore regression is available; a full production rollback rehearsal remains a separate gate. CLI is not installed by this documentation change, no service is restarted, and newer documentation commits are not new deployed application code. For a future upgrade use a new versioned directory; do not overwrite existing directories or apply this old example verbatim. See [release gates](release.md).
 
 ## Prepare
 
