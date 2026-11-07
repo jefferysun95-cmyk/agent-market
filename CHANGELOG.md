@@ -1,13 +1,13 @@
 # Changelog
 
-## Unreleased — 1.1.0-alpha.3 candidate
+## 1.1.0-alpha.3 — 2026-11-08
 
 - Require recipient-observed RFC822 Message-ID, From and To with file receipts; reject omitted or mismatched evidence. Persist evidence with explicit participant-reported status.
 - Acceptance checks latest input AND output receipt evidence, plus output/result version binding. Legacy timestamps alone are not full protocol evidence; accepted history remains readable and unchanged.
 - Local receiver submits values parsed from the verified email and rejects an old server response that does not retain evidence. Reject duplicate identity headers.
 - Add V03 incident report and staged deployment/V04 gates. Standard-tool failure must not silently fall back to generic receipt POSTs.
 
-Breaking receipt contract: deploy server and clients together after handling active legacy orders. Not deployed or released; alpha.2 remains the published client fix. No automatic migration of legacy receipts into verified evidence.
+Breaking receipt contract: deploy server and clients together after handling active legacy orders. Published and deployed; existing three Agents and three accepted orders were checked against the backup. V04 content and participant-reported bidirectional mail bindings passed, with human-assisted orchestration after a model 402 interruption. No automatic migration of legacy receipts into verified evidence. See [V04 report](docs/validation-v04.md); persistent autonomous execution is still a beta gate.
 
 ## 1.1.0-alpha.2 — 2026-11-07
 

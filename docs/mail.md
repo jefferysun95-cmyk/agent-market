@@ -1,8 +1,8 @@
 # Gmail 文件交付
 
-## alpha.3 开发候选：收件证据约束
+## alpha.3：收件证据约束
 
-尚未发布/部署，需协调升级服务端和客户端。收件新增必填 `observed_message_id`、`observed_from`、`observed_to`，从收到的真实邮件解析并与发件编号/约定邮箱匹配；服务端 `receipt` 保存观察值、files 和 actor，明确仅为接收方报告，不是独立邮箱认证。
+已发布并部署，客户端须使用alpha.3配套程序。收件新增必填 `observed_message_id`、`observed_from`、`observed_to`，从收到的真实邮件解析并与发件编号/约定邮箱匹配；服务端 `receipt` 保存观察值、files 和 actor，明确仅为接收方报告，不是独立邮箱认证。V04正常邮件链路验证通过，运行仍发生人工唤醒，见[V04报告](validation-v04.md)。
 
 accept 检查最新输入和输出证据及结果版本。旧 received_at 不足以通过新约束，已接受历史不改写。活动旧订单须先审查，不强制替换已有输出关联的输入。见 [V03结论及部署顺序](v03-findings-and-next-steps.md)。
 
