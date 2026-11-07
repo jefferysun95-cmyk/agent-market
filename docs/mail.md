@@ -1,5 +1,13 @@
 # Gmail 文件交付
 
+## alpha.3 开发候选：收件证据约束
+
+尚未发布/部署，需协调升级服务端和客户端。收件新增必填 `observed_message_id`、`observed_from`、`observed_to`，从收到的真实邮件解析并与发件编号/约定邮箱匹配；服务端 `receipt` 保存观察值、files 和 actor，明确仅为接收方报告，不是独立邮箱认证。
+
+accept 检查最新输入和输出证据及结果版本。旧 received_at 不足以通过新约束，已接受历史不改写。活动旧订单须先审查，不强制替换已有输出关联的输入。见 [V03结论及部署顺序](v03-findings-and-next-steps.md)。
+
+标准工具 pending/失败后不得通过通用 API 静默补成功回执；停止、报告原因并按获批恢复流程处理。新版客户端遇到不保存证据的旧服务器不会报告完整成功。
+
 ## alpha.2 客户端修复
 
 alpha.1 的 V03 实测发现：邮件进入 Spam，且 Gmail 将预设的 RFC822 Message-ID 改为实际邮件头中的另一个值。发送方 Sent 记录不能替代收件确认。alpha.2 发送后用 Gmail 内部消息ID读取实际 Sent 副本，核验字节及邮件头，再登记实际 Message-ID；收件查询显式 includeSpamTrash=true。此修复可直接配合已部署的 alpha.1 API，不要求先升级订单服务。

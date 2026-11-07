@@ -16,7 +16,19 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).parent
 CATEGORIES = ['company-research', 'web-extraction', 'document-extraction', 'data-cleaning']
-VERSION = '1.1.0-alpha.2'
+VERSION = '1.1.0-alpha.3'
+
+
+def receipt_matches(manifest):
+    """Participant-reported binding, not independent proof of mailbox access."""
+    evidence = manifest.get('receipt', {})
+    return bool(manifest.get('sent_at') and manifest.get('received_at')
+                and manifest.get('message_id')
+                and evidence.get('observed_message_id') == manifest['message_id']
+                and evidence.get('observed_from') == manifest['from']
+                and evidence.get('observed_to') == manifest['to']
+                and evidence.get('files') == manifest['files']
+                and evidence.get('actor') == manifest['recipient'])
 
 
 class Problem(Exception):
@@ -273,8 +285,13 @@ class Store:
                     raise Problem(409, 'Buyer can review delivered work only')
                 required(data, 'note')
                 if action=='accept':
-                    deliveries=[m for m in t.get('mail',{}).get('manifests',[]) if m['kind']=='delivery']
-                    if deliveries and (not deliveries[-1].get('received_at') or t['delivery'].get('manifest_id')!=deliveries[-1]['id']):raise Problem(409,'Latest mail delivery not verified as received or not bound to this result')
+                    manifests=t.get('mail',{}).get('manifests',[])
+                    for kind in ('input','delivery'):
+                        latest=next((m for m in reversed(manifests) if m['kind']==kind),None)
+                        if latest and not receipt_matches(latest):
+                            raise Problem(409,'Latest '+kind+' mail requires matching observed receipt evidence; legacy timestamps alone are insufficient')
+                    deliveries=[m for m in manifests if m['kind']=='delivery']
+                    if deliveries and t['delivery'].get('manifest_id')!=deliveries[-1]['id']:raise Problem(409,'Latest mail delivery not bound to this result')
                 state = 'accepted' if action == 'accept' else 'working'
             elif action == 'cancel':
                 if not buyer or state not in ['open', 'awaiting_confirmation']:
@@ -360,6 +377,13 @@ class Store:
             if manifest['recipient']!=actor:raise Problem(403,'Recipient only')
             if not manifest.get('sent_at'):raise Problem(409,'Sender has not recorded transmission')
             if data.get('files')!=manifest['files']:raise Problem(409,'File manifest mismatch')
+            evidence={key:required(data,key) for key in ('observed_message_id','observed_from','observed_to')}
+            if (evidence['observed_message_id']!=manifest['message_id']
+                    or evidence['observed_from']!=manifest['from'] or evidence['observed_to']!=manifest['to']):
+                raise Problem(409,'Observed mail headers do not match sender receipt and agreed mailboxes')
+            evidence.update(files=manifest['files'],actor=actor,evidence_level='recipient-reported; not independently verified')
+            if manifest.get('receipt') and manifest['receipt']!=evidence:raise Problem(409,'Receipt evidence already recorded; inspect before retrying')
+            manifest['receipt']=evidence
             manifest['received_at']=manifest.get('received_at',stamp())
         return manifest
 
