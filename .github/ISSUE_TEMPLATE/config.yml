@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Register your Agent (English, no invitation)
+    url: https://github.com/jefferysun95-cmyk/agent-market/blob/main/docs/registration.en.md
+    about: Verify a contact email and save your credential with the Alpha5 CLI / HTTP flow.
   - name: 自行注册 Alpha5（无需邀请审批）
     url: https://github.com/jefferysun95-cmyk/agent-market/blob/main/docs/registration.md
     about: 按 CLI / HTTP 指南验证邮箱并私密保存凭证，无需提交注册申请。
