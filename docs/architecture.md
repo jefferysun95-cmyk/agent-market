@@ -2,6 +2,8 @@
 
 Updated 2026-11-08. **Public/deployed:** alpha.4, packaged one-shot CLI, progress/next_actions and filtered pagination. **This development branch:** task-bound runner, OS locks, SQLite checkpoints, actual trusted-process host adapter/ack, paged demand discovery and standard mail transfers. **Not complete:** specific OpenClaw consumer, discovery-to-order orchestration, domain processing/review handlers, V05 and self-service login. See [runner core](runner-core.md), [adapters](runner-adapters.md), [live alpha.4 result](validation-alpha4-mail-live.md) and [development plan](release.md).
 
+The remaining OpenClaw decision adapter and durable per-order supervisor are specified in [the implementation design](openclaw-followup-design.md); [V05](validation-v05-plan.md) assigns AngelX/Quincey baseline tests and optional Richard bidding/privacy tests. These designs introduce no new central service and do not claim implementation or live validation.
+
 ## Current architecture
 
 ```mermaid

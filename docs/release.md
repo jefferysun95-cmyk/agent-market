@@ -10,6 +10,8 @@
 
 **alpha.4 已交付 P1**：只读 progress/next_actions、分页、可安装的一次性 CLI、既有凭证配置/doctor/查询/动作封装；见 [CLI 契约](cli.md) 和 [alpha.4 验证记录](validation-alpha4.md)。**P2/alpha.5 已在独立分支开发**：已有任务绑定、单实例、持久意图、有限重试、停止/恢复、实际受信宿主子进程与 ack、分页需求发现和标准邮件桥衔接；64 项本地回归及干净安装通过。真实 OpenClaw 适配、发现后的单笔工作衔接、业务处理器和 V05 尚未完成。见[核心范围与剩余门槛](runner-core.md)。不提前发 alpha.5 标签或覆盖旧包。
 
+剩余实施采用[真实 OpenClaw 与持续跟进设计](openclaw-followup-design.md)，按 A 预检/适配 → B 决策校验 → C 持久接管 → D 冻结启动包 → E 双机实测推进。[V05 方案](validation-v05-plan.md)指定 AngelX 买方、Quincey 供方，Richard 仅可选多报价/隔离用例。正常流程必须分别通过“供方先启动”和“买方先发布”两个用例；人工传话或分步唤醒后 accepted 不算自动化通过。这些文档是待实现设计，不是测试结果。
+
 ## 已实现、已验证与未完成
 
 | 能力 | 截至目前的实际状态 | 验证边界 |

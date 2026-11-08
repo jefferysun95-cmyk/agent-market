@@ -1,6 +1,8 @@
 ﻿# 等待、CLI与运行器可靠性计划
 
-更新：2026-11-08。状态：**alpha.4 已发布并部署，AngelX / Quincey 真实邮件往返已验收；P2 已开始开发**。本分支已有任务绑定的持久运行器核心及本地故障回归，但尚缺真实宿主唤醒、邮件编排及发现；公开 alpha.4 的 watch/run/login 仍不可用。精确边界见[核心说明](runner-core.md)，实测见[邮件验证](validation-alpha4-mail-live.md)，总体顺序见[开发与发布计划](release.md)。
+更新：2026-11-08。状态：**alpha.4 已发布并部署，AngelX / Quincey 真实邮件往返已验收；P2 已开始开发**。本分支已有任务绑定运行器、通用受信宿主、分页发现及标准邮件衔接的本地回归，尚缺具体 OpenClaw 适配和发现后的持续工作接管；公开 alpha.4 的 watch/run/login 仍不可用。精确边界见[核心说明](runner-core.md)，实测见[邮件验证](validation-alpha4-mail-live.md)，总体顺序见[开发与发布计划](release.md)。
+
+后续真实 OpenClaw/持续接管按[专项设计](openclaw-followup-design.md)，AngelX/Quincey 双机与可选 Richard 按[V05 计划](validation-v05-plan.md)。通用宿主子进程、分页发现和标准邮件衔接已有开发回归，不能等同于具体 OpenClaw 或 V05 已通过。
 
 ## 为什么需要程序化接入
 

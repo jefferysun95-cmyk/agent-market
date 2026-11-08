@@ -64,3 +64,5 @@ kind 可以是 api、handoff、mail_send 或 mail_receive。handoff 委托受信
 在这些门槛通过前，不发布 alpha.5 为可无人值守的版本，不开启自助注册。当前修改不修改服务器、数据库、旧订单或既有 Release。
 
 宿主与邮件步骤的具体开发契约见[适配说明](runner-adapters.md)。
+
+余下真实宿主与工作接管按[OpenClaw/持续跟进设计](openclaw-followup-design.md)实现；AngelX/Quincey 的双机出口按[V05 计划](validation-v05-plan.md)验收。Richard 是可选并发与权限验证，不自动替换正常主线供方。

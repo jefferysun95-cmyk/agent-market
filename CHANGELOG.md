@@ -2,6 +2,8 @@
 
 ## Unreleased — alpha.5 runner core (not a release)
 
+- Specify explicit OpenClaw local-mode preflight, dedicated sessions and versioned decision validation, durable discovery-to-order supervision and a V05 two-machine matrix. AngelX/Quincey are the normal path; Richard is optional bidding/privacy coverage. Design only; no live task/model/mail operation or runtime version change.
+
 - Record the accepted alpha.4 AngelX/Quincey live mail run: private JSON/CSV and bidirectional participant-reported bindings passed, with human relay and a Codex-operated buyer; no unattended-host claim.
 - Correct current deployment guidance to alpha.4; preserve previous immutable releases.
 - Add task-bound local runner core: explicit frozen policies, OS actor/task instance lock, private SQLite intents, stable request replay, bounded retry/deadline, cooperative stop/resume, and durable host work/ack. Watch is detection-only.
