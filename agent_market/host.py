@@ -48,12 +48,19 @@ class ProcessTree:
             class Extended(ctypes.Structure):
                 _fields_=[('BasicLimitInformation',Basic),('IoInfo',IO),('ProcessMemoryLimit',ctypes.c_size_t),
                     ('JobMemoryLimit',ctypes.c_size_t),('PeakProcessMemoryUsed',ctypes.c_size_t),('PeakJobMemoryUsed',ctypes.c_size_t)]
+            class Accounting(ctypes.Structure):
+                _fields_=[(name,ctypes.c_int64) for name in ('TotalUserTime','TotalKernelTime','ThisPeriodTotalUserTime','ThisPeriodTotalKernelTime')]+[
+                    ('TotalPageFaultCount',w.DWORD),('TotalProcesses',w.DWORD),('ActiveProcesses',w.DWORD),('TotalTerminatedProcesses',w.DWORD)]
             kernel=ctypes.WinDLL('kernel32',use_last_error=True)
             kernel.CreateJobObjectW.argtypes=[ctypes.c_void_p,w.LPCWSTR];kernel.CreateJobObjectW.restype=w.HANDLE
             kernel.SetInformationJobObject.argtypes=[w.HANDLE,ctypes.c_int,ctypes.c_void_p,w.DWORD]
             kernel.AssignProcessToJobObject.argtypes=[w.HANDLE,w.HANDLE]
+            kernel.TerminateJobObject.argtypes=[w.HANDLE,w.UINT]
+            kernel.QueryInformationJobObject.argtypes=[w.HANDLE,ctypes.c_int,ctypes.c_void_p,w.DWORD,ctypes.c_void_p]
             kernel.CloseHandle.argtypes=[w.HANDLE]
             self.kernel=kernel
+            self.accounting_type=Accounting
+            self.ctypes=ctypes
             self.job=kernel.CreateJobObjectW(None,None)
             info=Extended();info.BasicLimitInformation.LimitFlags=0x2000 # KILL_ON_JOB_CLOSE
             if not self.job or not kernel.SetInformationJobObject(self.job,9,ctypes.byref(info),ctypes.sizeof(info)) or not kernel.AssignProcessToJobObject(self.job,int(process._handle)):
@@ -65,7 +72,21 @@ class ProcessTree:
     def close(self):
         if os.name=='nt':
             if self.job:
-                self.kernel.CloseHandle(self.job);self.job=None
+                try:
+                    # Closing a KILL_ON_JOB_CLOSE handle requests termination but
+                    # does not wait for descendants to release their file handles.
+                    if not self.kernel.TerminateJobObject(self.job,1):
+                        raise HostError('host_cleanup_uncertain')
+                    end=time.monotonic()+5
+                    while True:
+                        info=self.accounting_type()
+                        if not self.kernel.QueryInformationJobObject(self.job,1,self.ctypes.byref(info),self.ctypes.sizeof(info),None):
+                            raise HostError('host_cleanup_uncertain')
+                        if info.ActiveProcesses==0:break
+                        if time.monotonic()>=end:raise HostError('host_cleanup_uncertain')
+                        time.sleep(0.02)
+                finally:
+                    self.kernel.CloseHandle(self.job);self.job=None
         else:
             try:os.killpg(self.process.pid,signal.SIGTERM)
             except ProcessLookupError:pass
