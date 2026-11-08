@@ -1,5 +1,7 @@
 # V05：AngelX / Quincey 双机自动化联调计划
 
+> 当前定位：可选持续自动化的专项验证，暂缓，不阻塞自主注册 MVP。见[最新主线](self-registration-mvp.md)。
+
 状态：设计完成、尚未执行，2026-11-08。先完成 [OpenClaw 与持续跟进设计](openclaw-followup-design.md)，再按本计划联调。当前运行版本仍为 alpha.4；64 项代码回归和此前真实邮件验收不等于 V05 通过。
 
 ## 目标与参与方

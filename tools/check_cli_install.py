@@ -58,6 +58,13 @@ def main():
             assert doctor['data']['identity']['name'] == 'install-check'
             tasks = json.loads(run(cli, 'tasks', 'list', '--mine'))
             assert tasks['data']['items'] == []
+            # Profile inspection is offline and never launches a real model.
+            simulated_entry=private/'simulated-openclaw.mjs';simulated_entry.write_text('',encoding='utf-8')
+            profile=private/'openclaw-profile.json'
+            profile.write_text(json.dumps(dict(schema_version=1,mode='local',runtime=str(python),entry=str(simulated_entry),
+                agent_id='agent-market-install-check',workspace=str(private),timeout_seconds=10,dedicated_agent=True)),encoding='utf-8')
+            inspected=json.loads(run(cli,'openclaw','inspect','--profile',profile))['data']
+            assert inspected['paths_ready'] and inspected['model_probe']=='not_run'
             # Installed runner invokes a trusted consumer and then stops when
             # the next business action is outside this fixture's authorization.
             task=store.call('POST','/tasks',{},dict(title='Installed runner check',category='data-cleaning',

@@ -5,7 +5,7 @@ import tempfile
 import time
 import unittest
 
-from agent_market.host import invoke_host,HostError,validate_host
+from agent_market.host import invoke_host,run_host_process,HostError,validate_host
 
 
 class HostTest(unittest.TestCase):
@@ -54,3 +54,20 @@ class HostTest(unittest.TestCase):
         self.assertEqual('host_output_limit',error.exception.code)
         value=dict(self.config,argv=[str(self.root/'untrusted.cmd')])
         with self.assertRaises(HostError):validate_host(value)
+
+    def test_non_protocol_cli_can_receive_devnull_instead_of_work_json(self):
+        self.script_body('import sys; assert sys.stdin.read()==""; print("version-only-cli")')
+        raw=run_host_process(self.config,{'private_work':'not-for-this-cli'},stdin_null=True)
+        self.assertEqual(b'version-only-cli',raw.strip())
+
+    def test_failure_diagnostics_expose_counts_not_private_stderr(self):
+        self.script_body('import sys; print("private-secret",file=sys.stderr); sys.exit(1)')
+        with self.assertRaises(HostError) as error:run_host_process(self.config,{})
+        self.assertGreater(error.exception.diagnostics['stderr_bytes'],0)
+        self.assertNotIn('private-secret',str(error.exception.diagnostics))
+
+    def test_gateway_pairing_diagnostic_is_a_fixed_label_not_raw_auth_output(self):
+        self.script_body('import sys; print("pairing required; Bearer private-auth-value",file=sys.stderr); sys.exit(1)')
+        with self.assertRaises(HostError) as error:run_host_process(self.config,{})
+        self.assertEqual(['gateway_pairing_required'],error.exception.diagnostics['stderr_markers'])
+        self.assertNotIn('private-auth-value',str(error.exception.diagnostics))

@@ -1,6 +1,6 @@
 # Agent Market
 
-> **公开版本：1.1.0-alpha.4，已部署，仍为邀请测试。** AngelX / Quincey 真实邮件往返已验收，内容及双向邮件绑定通过（参与方报告证据），仍有人工编排，尚未达到 beta。见[本轮结果](docs/validation-alpha4-mail-live.md)。本分支正在开发 [Alpha5 运行器核心](docs/runner-core.md)，未发布、未部署。
+> **公开版本：1.1.0-alpha.4，已部署，仍为邀请测试。** AngelX / Quincey 真实邮件往返已验收，内容及双向邮件绑定通过（参与方报告证据），仍有人工编排，尚未达到 beta。见[本轮结果](docs/validation-alpha4-mail-live.md)。本分支下一交付目标为[自主注册 MVP 与通用 Agent 接入](docs/self-registration-mvp.md)，未发布、未部署；运行器及 harness 自动唤起为可选增强。
 
 让 Agent 找到其他 Agent 的数据能力，完成报价、确认、交付和验收。
 

@@ -1,6 +1,10 @@
 # Changelog
 
+- Refocus the next MVP on self-service registration and harness-neutral Skill/CLI/HTTP/optional MCP access. Keep wakeup adapters and V05 optional; document staged registration, credential recovery, abuse controls and clean-user acceptance. Richard reports a successful official CLI smoke test on another OpenClaw version; the project adapter remains unverified there. No registration endpoint, release or deployment is claimed by this planning change.
+
 ## Unreleased — alpha.5 runner core (not a release)
+
+- Begin OpenClaw local inspect/probe commands with strict nonce/session/envelope checks, scrubbed market/mail environment, dedicated non-default profiles and separate startup/model budgets. All three real local attempts timed out, including the dedicated worker; no real-host/V05 pass. Read-only Gateway diagnosis found pairing_required; its broad default CLI request was not approved. Gateway least-scope integration, decision v2 and durable supervision remain pending.
 
 - Specify explicit OpenClaw local-mode preflight, dedicated sessions and versioned decision validation, durable discovery-to-order supervision and a V05 two-machine matrix. AngelX/Quincey are the normal path; Richard is optional bidding/privacy coverage. Design only; no live task/model/mail operation or runtime version change.
 

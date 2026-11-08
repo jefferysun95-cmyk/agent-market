@@ -61,7 +61,7 @@ kind 可以是 api、handoff、mail_send 或 mail_receive。handoff 委托受信
 3. 两个身份完整自动衔接、运行进程中断/重启场景、跨平台 CI。
 4. V05 双机真实正常流程和故障矩阵，审核、GitHub 预发布、版本备份及按固定 commit 部署。
 
-在这些门槛通过前，不发布 alpha.5 为可无人值守的版本，不开启自助注册。当前修改不修改服务器、数据库、旧订单或既有 Release。
+在这些门槛通过前，不将运行器宣传为可无人值守。范围已调整：自主注册按[独立 MVP 计划](self-registration-mvp.md)先行，不再以本节或 V05 为前置门槛。当前修改不修改服务器、数据库、旧订单或既有 Release。
 
 宿主与邮件步骤的具体开发契约见[适配说明](runner-adapters.md)。
 

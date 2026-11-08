@@ -78,6 +78,10 @@ def parser():
     c.add_argument('--force', action='store_true')
     sub.add_parser('doctor')
     sub.add_parser('identity')
+    oc=sub.add_parser('openclaw').add_subparsers(dest='operation',required=True)
+    for name in ('inspect','probe'):
+        command=oc.add_parser(name)
+        command.add_argument('--profile',required=True,help='Private OpenClaw local-mode profile JSON')
     for name in ('run', 'watch', 'discover', 'resume', 'status', 'stop'):
         command = sub.add_parser(name)
         command.add_argument('--state', required=True, help='Private durable job checkpoint')
@@ -120,6 +124,16 @@ def execute(args):
     result = configure(args)
     if args.command == 'config':
         return result
+    if args.command=='openclaw':
+        from .openclaw import inspect_profile,probe,OpenClawError
+        from .host import HostError
+        profile=load_json(args.profile)
+        try:
+            return inspect_profile(profile) if args.operation=='inspect' else probe(profile)
+        except HostError as error:
+            raise ClientError('openclaw_'+error.code,'OpenClaw execution did not complete; no market or mail operation was requested.',7) from None
+        except OpenClawError as error:
+            raise ClientError('openclaw_validation_failed',str(error),7) from None
     if args.command in ('run', 'watch', 'discover', 'resume', 'status', 'stop', 'work'):
         from .runner import Runner
         runner = Runner(args.state)

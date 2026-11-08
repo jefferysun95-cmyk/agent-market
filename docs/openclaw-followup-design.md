@@ -1,6 +1,10 @@
 # Alpha5：真实 OpenClaw 适配与持续跟进设计
 
+> 范围调整：本设计保留为可选 harness 自动化增强；自主注册 MVP 不以 OpenClaw 或 V05 通过为前提。通用接入与下一主线见 [自主注册计划](self-registration-mvp.md)。
+
 状态：设计待实现，2026-11-08。承接 `8271e2b` 的通用运行器、宿主、发现和邮件核心；不代表已经接通真实 OpenClaw，不改变线上 alpha.4。联调安排见 [V05](validation-v05-plan.md)。
+
+进度更新：A 阶段的 inspect/probe 适配已有开发实现，命令见[预检说明](openclaw-preflight.md)。两次本机真实预检超时，尚未通过；会话隔离已增加专用非默认内部 Agent 门槛，见[实际记录](validation-openclaw-preflight.md)。下文决策 v2、持续接管及双机出口仍为待实现设计。
 
 ## 目标与分工
 
@@ -23,6 +27,8 @@
 首版选择**用户明确配置的 local/embedded 模式**，以专用会话调用真实 OpenClaw；不改变用户正在使用的 Gateway/聊天会话。原因是之前 Gateway 分发曾出现 pairing_required，不能把自动 fallback 当作成功适配。local 仍须具备邮箱持有者/机器用户已授权的模型配置、工作目录和工具权限。
 
 Gateway 模式只在该设备配对、实际响应协议及强制执行路径验证完成后另行启用；禁止 local/Gateway 失败后互相静默降级。若当前宿主不能使用所选模式，应在发布任务前报阻塞。
+
+实际预检新增的约束：已在本机发现 Gateway 的 CLI 配对阻塞，而现有官方 CLI 默认申请的权限比适配器所需更广。Gateway 产品连接应采用受支持 SDK/显式设备身份与必要 operator.read/operator.write 范围；设备密钥和连接凭据留在本机。先验证最小范围请求与取消/超时确认，再由用户完成一次配对。不得让“默认 CLI 全量管理权限批准”成为 V05 通过的捷径；未实现该受限连接前，只做只读诊断，不宣称 Gateway 宿主已接通。
 
 适配器调用绝对路径的受信运行时和 OpenClaw 入口，shell=False，不执行 cmd/bat 或任务文字拼成的命令；不使用 `--deliver`，不向微信或其他聊天渠道发回复。
 

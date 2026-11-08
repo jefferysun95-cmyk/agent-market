@@ -98,11 +98,11 @@ class ProcessTree:
         except subprocess.TimeoutExpired:raise HostError('host_cleanup_uncertain') from None
 
 
-def invoke_host(config, work, should_stop=lambda:False, deadline=None):
-    """Bounded subprocess protocol. No stdout/stderr is echoed or checkpointed."""
+def run_host_process(config, work, should_stop=lambda:False, deadline=None, env=None, stdin_null=False):
+    """Shared bounded execution; returns private stdout bytes, never stderr."""
     validate_host(config)
     if should_stop(): raise HostError('stopped')
-    payload=json.dumps(dict(config=config,work=work),ensure_ascii=False,allow_nan=False).encode('utf-8')
+    payload=json.dumps(dict(config=config,work=work,stdin_null=stdin_null),ensure_ascii=False,allow_nan=False).encode('utf-8')
     if len(payload)>2*1024*1024:raise HostError('host_input_limit')
     if deadline is not None and time.time()>=deadline:raise HostError('timed_out')
     end=min(time.time()+config['timeout_seconds'], deadline if deadline is not None else float('inf'))
@@ -112,12 +112,13 @@ def invoke_host(config, work, should_stop=lambda:False, deadline=None):
         # succeeds. No trusted host or its descendants can run before assignment.
         process=subprocess.Popen([sys.executable,str(Path(__file__).with_name('host_worker.py'))],
             stdin=subprocess.PIPE,stdout=output,stderr=errors,
-            shell=False,start_new_session=os.name!='nt',
+            shell=False,env=env,start_new_session=os.name!='nt',
             creationflags=(subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW) if os.name=='nt' else 0)
         try:tree=ProcessTree(process)
         except Exception:
             if process.stdin:process.stdin.close()
             raise
+        failure=None
         try:
             first=True
             while process.poll() is None:
@@ -132,14 +133,34 @@ def invoke_host(config, work, should_stop=lambda:False, deadline=None):
             if process.returncode:raise HostError('host_failed')
             output.seek(0);raw=output.read(65537)
             if len(raw)>65536:raise HostError('host_output_limit')
-            try:reply=json.loads(raw)
-            except (UnicodeError,ValueError):raise HostError('invalid_host_reply') from None
-            if not isinstance(reply,dict) or set(reply)!={'schema_version','work_id','outcome'} or type(reply['schema_version']) is not int or reply['schema_version']!=1 or reply['work_id']!=work['work_id']:
-                raise HostError('invalid_host_reply')
-            if reply['outcome'] not in ('completed','pending','provider_402','handler_failed','mail_auth_failed',
-                    'mail_validation_failed','mail_dependencies_missing','send_uncertain','mail_service_failed'):
-                raise HostError('invalid_host_reply')
-            return reply['outcome']
+            return raw
+        except HostError as error:
+            failure=error
+            error.diagnostics=dict(stdout_bytes=os.fstat(output.fileno()).st_size,
+                stderr_bytes=os.fstat(errors.fileno()).st_size,process_exit_code_before_cleanup=process.poll())
+            raise
         finally:
             tree.close()
             if process.stdin:process.stdin.close()
+            if failure is not None:
+                errors.seek(0)
+                diagnostic=errors.read(65536).decode('utf-8',errors='replace').lower()
+                # Fixed observation labels only; never expose exception bodies,
+                # URLs, credential values or arbitrary provider text.
+                failure.diagnostics['stderr_markers']=[label for label,marker in (
+                    ('gateway_pairing_required','pairing required'),
+                    ('gateway_auth_mismatch','token mismatch'),
+                    ('gateway_connection_refused','econnrefused')) if marker in diagnostic]
+
+
+def invoke_host(config, work, should_stop=lambda:False, deadline=None):
+    """Bounded subprocess protocol. No stdout/stderr is echoed or checkpointed."""
+    raw=run_host_process(config,work,should_stop,deadline)
+    try:reply=json.loads(raw)
+    except (UnicodeError,ValueError):raise HostError('invalid_host_reply') from None
+    if not isinstance(reply,dict) or set(reply)!={'schema_version','work_id','outcome'} or type(reply['schema_version']) is not int or reply['schema_version']!=1 or reply['work_id']!=work['work_id']:
+        raise HostError('invalid_host_reply')
+    if reply['outcome'] not in ('completed','pending','provider_402','handler_failed','mail_auth_failed',
+            'mail_validation_failed','mail_dependencies_missing','send_uncertain','mail_service_failed'):
+        raise HostError('invalid_host_reply')
+    return reply['outcome']
