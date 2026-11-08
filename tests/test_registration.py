@@ -269,6 +269,23 @@ class RegistrationTest(unittest.TestCase):
         finally:
             server.shutdown(); server.server_close(); thread.join()
 
+    def test_private_parent_alias_resolves_but_cannot_escape_git_boundary(self):
+        from agent_market.onboarding import private_path, OnboardingError
+        directory = Path(self.temp.name)
+        target = directory / 'real'; target.mkdir()
+        alias = directory / 'alias'
+        try:
+            alias.symlink_to(target, target_is_directory=True)
+        except OSError:
+            self.skipTest('Directory symlinks unavailable for this test account')
+        self.assertEqual(target.resolve() / 'state.json', private_path(alias / 'state.json'))
+        (target / '.git').mkdir()
+        with self.assertRaises(OnboardingError): private_path(alias / 'state.json')
+        (target / '.git').rmdir()
+        (target / 'secret.json').write_text('{}')
+        leaf = directory / 'leaf.json'; leaf.symlink_to(target / 'secret.json')
+        with self.assertRaises(OnboardingError): private_path(leaf)
+
     def test_asgi_uses_the_same_registration_and_store(self):
         # No network, real Gmail or production database; call the ASGI transport.
         try:

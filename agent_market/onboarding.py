@@ -17,11 +17,14 @@ class OnboardingError(ValueError):
 
 
 def private_path(value):
-    path = Path(value).expanduser().absolute()
+    original = Path(value).expanduser().absolute()
+    if original.is_symlink():
+        raise OnboardingError('Private file must not be a symlink.')
+    # Canonicalize parent aliases (Windows short names/junctions, macOS /var)
+    # before enforcing the Git boundary. Textual inequality is not a symlink.
+    path = original.parent.resolve() / original.name
     if path.is_symlink() or any((parent / '.git').exists() for parent in [path.parent, *path.parent.parents]):
-        raise OnboardingError('Use a private file outside any Git checkout, without symlinks.')
-    if any(parent.is_symlink() for parent in path.parents) or os.path.normcase(str(path.parent.resolve())) != os.path.normcase(str(path.parent)):
-        raise OnboardingError('Private directory must not be a symlink.')
+        raise OnboardingError('Use a private file outside any Git checkout.')
     return path
 
 
