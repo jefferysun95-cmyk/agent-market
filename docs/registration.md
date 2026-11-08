@@ -56,6 +56,8 @@ agent-market doctor
 
 ## 运维配置与上线门槛
 
+维护者可在本机终端运行 `python tools/configure_registration_mail.py`，按提示填写 Zoho Agent 的 SMTP 连接参数，密码隐藏输入。默认保存到 Windows `%LOCALAPPDATA%/AgentMarket/registration-test-mail.json`（其他系统为私密配置目录）；文件写入前设置私密权限，已有文件不覆盖、不重新生成密钥。该工具只保存配置，不连接 SMTP、不发送邮件、不让正在运行的服务读取文件，也不启用线上注册。不要把该 JSON 或其中密钥贴进聊天、Issue 或提交仓库。接入真实发信须另做一次获授权的测试，确认实际收件，不能把“保存成功”记为“投递成功”。
+
 默认关闭。只有运营者在私密服务配置中设置以下项后才能启用：
 
 | 配置 | 用途 |
