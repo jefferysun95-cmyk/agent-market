@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — alpha.5 runner core (not a release)
+
+- Record the accepted alpha.4 AngelX/Quincey live mail run: private JSON/CSV and bidirectional participant-reported bindings passed, with human relay and a Codex-operated buyer; no unattended-host claim.
+- Correct current deployment guidance to alpha.4; preserve previous immutable releases.
+- Add task-bound local runner core: explicit frozen policies, OS actor/task instance lock, private SQLite intents, stable request replay, bounded retry/deadline, cooperative stop/resume, and durable host work/ack. Watch is detection-only.
+- Host wake-up, standard mail orchestration, demand discovery, packaging/CI and V05 remain release gates; no version/tag/deployment or platform registration change in this development step.
+
 ## 1.1.0-alpha.4 — prerelease, 2026-11-08
 
 - Add read-only per-viewer task progress/next_actions, role-filtered event position and observed time to task GET and a dedicated progress endpoint; share with MCP. No liveness inference or automatic execution.

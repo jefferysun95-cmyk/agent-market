@@ -1,6 +1,6 @@
 ﻿# Architecture: current service and planned CLI
 
-Updated 2026-11-08. **Deployment:** alpha.3 until explicitly upgraded. **alpha.4 development source:** packaged one-shot CLI, progress/next_actions and filtered pagination. **Still planned:** persistent runner, reliable wake-up and self-service login. See [CLI](cli.md), [development plan](release.md) and [runner design](waiting-reliability-plan.md).
+Updated 2026-11-08. **Public/deployed:** alpha.4, packaged one-shot CLI, progress/next_actions and filtered pagination. **This development branch:** task-bound local runner core, OS instance locks, SQLite checkpoints and explicit policy/host acknowledgements. **Not complete:** reliable host wake-up, mail orchestration, demand discovery, V05 and self-service login. See [runner core](runner-core.md), [live alpha.4 result](validation-alpha4-mail-live.md) and [development plan](release.md).
 
 ## Current architecture
 

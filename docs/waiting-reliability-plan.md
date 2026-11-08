@@ -1,6 +1,6 @@
 ﻿# 等待、CLI与运行器可靠性计划
 
-更新：2026-11-08。状态：**alpha.4 本地候选已实现 P1 的 progress、分页和一次性 CLI；P2 持久运行器尚未实现**。watch/run/login仍不可用，生产版本看 /health。总体顺序见[开发与发布计划](release.md)。
+更新：2026-11-08。状态：**alpha.4 已发布并部署，AngelX / Quincey 真实邮件往返已验收；P2 已开始开发**。本分支已有任务绑定的持久运行器核心及本地故障回归，但尚缺真实宿主唤醒、邮件编排及发现；公开 alpha.4 的 watch/run/login 仍不可用。精确边界见[核心说明](runner-core.md)，实测见[邮件验证](validation-alpha4-mail-live.md)，总体顺序见[开发与发布计划](release.md)。
 
 ## 为什么需要程序化接入
 

@@ -78,6 +78,17 @@ def parser():
     c.add_argument('--force', action='store_true')
     sub.add_parser('doctor')
     sub.add_parser('identity')
+    for name in ('run', 'watch', 'resume', 'status', 'stop'):
+        command = sub.add_parser(name)
+        command.add_argument('--state', required=True, help='Private durable job checkpoint')
+        if name in ('run', 'watch'):
+            command.add_argument('--policy', required=True, help='Explicit local authorization policy JSON')
+    work = sub.add_parser('work').add_subparsers(dest='operation', required=True)
+    work.add_parser('show').add_argument('--state', required=True)
+    ack = work.add_parser('ack')
+    ack.add_argument('--state', required=True)
+    ack.add_argument('--id', required=True)
+    ack.add_argument('--outcome', required=True, choices=['completed', 'provider_402', 'handler_failed'])
     s = sub.add_parser('services').add_subparsers(dest='operation', required=True).add_parser('list')
     s.add_argument('--category', default='')
     ts = sub.add_parser('tasks').add_subparsers(dest='operation', required=True)
@@ -109,6 +120,21 @@ def execute(args):
     result = configure(args)
     if args.command == 'config':
         return result
+    if args.command in ('run', 'watch', 'resume', 'status', 'stop', 'work'):
+        from .runner import Runner
+        runner = Runner(args.state)
+        if args.command in ('run', 'watch'):
+            runner.initialize(load_json(args.policy), args.command)
+        if args.command in ('run', 'watch', 'resume'):
+            value = runner.resume() if args.command=='resume' else runner.run()
+            if value['status'] in ('blocked', 'timed_out'):
+                code = value['error'] or value['status']
+                status = 3 if code in ('credentials_missing','authentication_failed','identity_mismatch') else 4 if code=='conflict' else 6 if code=='network_error' else 7
+                raise ClientError(code, 'Runner stopped; inspect its private checkpoint with status before resuming.', status)
+            return value
+        if args.command == 'work':
+            return runner.work() if args.operation=='show' else runner.acknowledge(args.id, args.outcome)
+        return runner.status() if args.command=='status' else runner.stop()
     if args.command == 'doctor':
         service = health()
         if not service.get('ok'):

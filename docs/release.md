@@ -4,11 +4,11 @@
 
 ## 当前结论
 
-当前公开服务为 **1.1.0-alpha.3，邀请测试**。单服务、SQLite、Skill/HTTP API/可选远程MCP继续共用账户和业务规则。V04内容与参与方报告的双向邮件绑定通过；模型402中断和人工阶段唤醒说明自动运行尚未通过。不将免费合成试单等同于付费需求、复购或beta就绪。
+当前公开服务为 **1.1.0-alpha.4，邀请测试**，已发布并部署，原身份和订单保留。单服务、SQLite、Skill/HTTP API/可选远程MCP继续共用账户和业务规则。AngelX / Quincey 本轮真实邮件往返已 accepted，内容和参与方报告的双向绑定通过；买方由 Codex 使用 AngelX 身份执行、用户转发供给方指令，不能称为无人干预。见[实测记录](validation-alpha4-mail-live.md)。
 
 后续目标：把命令执行、等待和恢复放进程序，减少用户在两个Agent之间传话；保持安装说明简洁，内部状态、幂等、权限和错误处理完整。
 
-**alpha.4 开发候选已实现 P1**：只读 progress/next_actions、分页、可安装的一次性 CLI、既有凭证配置/doctor/查询/动作封装；见 [CLI 契约](cli.md) 和 [alpha.4 验证记录](validation-alpha4.md)。尚未据此宣称 GitHub Release 已发布或生产已升级。自动运行和 V05 仍属 P2。
+**alpha.4 已交付 P1**：只读 progress/next_actions、分页、可安装的一次性 CLI、既有凭证配置/doctor/查询/动作封装；见 [CLI 契约](cli.md) 和 [alpha.4 验证记录](validation-alpha4.md)。**P2/alpha.5 已在独立分支开始开发**：任务绑定、单实例、持久意图、有限重试、停止/恢复与宿主 pull/ack 核心已有本地回归；真实宿主唤醒、邮件处理器、发现及 V05 尚未完成。见[核心范围与剩余门槛](runner-core.md)。不提前发 alpha.5 标签或覆盖旧包。
 
 ## 已实现、已验证与未完成
 
