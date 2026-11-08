@@ -182,3 +182,26 @@ class RunnerTest(unittest.TestCase):
         self.assertFalse(self.runner.tick())
         self.assertEqual('completed',self.runner.state()['status'])
         self.assertEqual(0,len([c for c in self.calls if c[0]=='POST']))
+
+    def test_configured_host_is_invoked_and_acknowledged_without_human_resume(self):
+        self.policy['steps'][0]['kind']='handoff'
+        self.policy['host']=dict(argv=[sys.executable,'host.py'],cwd=str(self.root),timeout_seconds=5)
+        self.runner.initialize(self.policy)
+        def host(config,work,stop,deadline):
+            self.assertEqual('stable-confirm',work['intent']['step']['key'])
+            self.assertEqual('seller',work['scope']['actor_id'])
+            self.api('POST','/tasks/task/confirm',{'revision':1},'stable-confirm')
+            return 'completed'
+        with patch('agent_market.host.invoke_host',side_effect=host) as invoke:
+            self.assertTrue(self.runner.tick())
+            self.assertEqual(1,invoke.call_count)
+        self.assertEqual([],self.runner.work())
+        self.assertEqual('working',self.task['status'])
+
+    def test_host_ack_rejects_superseded_manifest(self):
+        self.policy['steps'][0].update(kind='handoff',action='mail-received')
+        self.task['progress']['next_actions']=[dict(action='mail-received',actor_id='seller',executable=True,manifest_id='old')]
+        self.task['mail']={'manifests':[dict(id='old',kind='input')]}
+        self.runner.initialize(self.policy);self.runner.tick()
+        self.task['mail']['manifests'].append(dict(id='new',kind='input'))
+        with self.assertRaises(RunnerError):self.runner.acknowledge('confirm-r1','completed')

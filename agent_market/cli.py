@@ -78,10 +78,10 @@ def parser():
     c.add_argument('--force', action='store_true')
     sub.add_parser('doctor')
     sub.add_parser('identity')
-    for name in ('run', 'watch', 'resume', 'status', 'stop'):
+    for name in ('run', 'watch', 'discover', 'resume', 'status', 'stop'):
         command = sub.add_parser(name)
         command.add_argument('--state', required=True, help='Private durable job checkpoint')
-        if name in ('run', 'watch'):
+        if name in ('run', 'watch', 'discover'):
             command.add_argument('--policy', required=True, help='Explicit local authorization policy JSON')
     work = sub.add_parser('work').add_subparsers(dest='operation', required=True)
     work.add_parser('show').add_argument('--state', required=True)
@@ -120,12 +120,15 @@ def execute(args):
     result = configure(args)
     if args.command == 'config':
         return result
-    if args.command in ('run', 'watch', 'resume', 'status', 'stop', 'work'):
+    if args.command in ('run', 'watch', 'discover', 'resume', 'status', 'stop', 'work'):
         from .runner import Runner
         runner = Runner(args.state)
-        if args.command in ('run', 'watch'):
+        if args.command=='discover' or (args.command not in ('run','watch') and runner.state().get('mode')=='discover'):
+            from .discovery import Discovery
+            runner=Discovery(args.state)
+        if args.command in ('run', 'watch', 'discover'):
             runner.initialize(load_json(args.policy), args.command)
-        if args.command in ('run', 'watch', 'resume'):
+        if args.command in ('run', 'watch', 'discover', 'resume'):
             value = runner.resume() if args.command=='resume' else runner.run()
             if value['status'] in ('blocked', 'timed_out'):
                 code = value['error'] or value['status']

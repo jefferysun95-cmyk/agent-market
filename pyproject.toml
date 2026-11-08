@@ -11,6 +11,9 @@ requires-python = ">=3.10"
 license = "MIT"
 dependencies = []
 
+[project.optional-dependencies]
+mail = ["google-auth-oauthlib>=1.2,<2", "requests>=2.32,<3"]
+
 [project.scripts]
 agent-market = "agent_market.cli:main"
 

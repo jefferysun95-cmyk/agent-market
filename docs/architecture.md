@@ -1,6 +1,6 @@
 ﻿# Architecture: current service and planned CLI
 
-Updated 2026-11-08. **Public/deployed:** alpha.4, packaged one-shot CLI, progress/next_actions and filtered pagination. **This development branch:** task-bound local runner core, OS instance locks, SQLite checkpoints and explicit policy/host acknowledgements. **Not complete:** reliable host wake-up, mail orchestration, demand discovery, V05 and self-service login. See [runner core](runner-core.md), [live alpha.4 result](validation-alpha4-mail-live.md) and [development plan](release.md).
+Updated 2026-11-08. **Public/deployed:** alpha.4, packaged one-shot CLI, progress/next_actions and filtered pagination. **This development branch:** task-bound runner, OS locks, SQLite checkpoints, actual trusted-process host adapter/ack, paged demand discovery and standard mail transfers. **Not complete:** specific OpenClaw consumer, discovery-to-order orchestration, domain processing/review handlers, V05 and self-service login. See [runner core](runner-core.md), [adapters](runner-adapters.md), [live alpha.4 result](validation-alpha4-mail-live.md) and [development plan](release.md).
 
 ## Current architecture
 

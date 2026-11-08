@@ -5,7 +5,8 @@
 - Record the accepted alpha.4 AngelX/Quincey live mail run: private JSON/CSV and bidirectional participant-reported bindings passed, with human relay and a Codex-operated buyer; no unattended-host claim.
 - Correct current deployment guidance to alpha.4; preserve previous immutable releases.
 - Add task-bound local runner core: explicit frozen policies, OS actor/task instance lock, private SQLite intents, stable request replay, bounded retry/deadline, cooperative stop/resume, and durable host work/ack. Watch is detection-only.
-- Host wake-up, standard mail orchestration, demand discovery, packaging/CI and V05 remain release gates; no version/tag/deployment or platform registration change in this development step.
+- Add actual trusted-process host invocation with work-id-bound replies, bounded output/time and own-process-tree cleanup; task text is stdin, never shell input. Add paged demand discovery with atomic queue/cursor and bounded mailbox transfers using the existing verified adapter/outbox journal.
+- 64 local tests and clean wheel install/host-step/reinstall/uninstall pass. A specific OpenClaw consumer, discovery-to-order orchestration, domain processing/review, CI and V05 remain release gates; no version/tag/deployment or platform registration change in this development step.
 
 ## 1.1.0-alpha.4 — prerelease, 2026-11-08
 

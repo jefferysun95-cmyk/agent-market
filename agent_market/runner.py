@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import re
 import sqlite3
+import sys
 import time
 from urllib.error import HTTPError, URLError
 
@@ -27,8 +28,15 @@ def encoded(value):
 
 def validate_policy(policy):
     required = {'actor_id', 'task_id', 'url', 'expires_at', 'max_seconds', 'interval_seconds', 'steps'}
-    if set(policy) != required:
+    if not required <= set(policy) or set(policy)-required-{'host','mail'}:
         raise RunnerError('Policy fields must match the documented schema.')
+    if 'host' in policy:
+        from .host import validate_host
+        validate_host(policy['host'])
+    if 'mail' in policy:
+        mail=policy['mail']
+        if not isinstance(mail,dict) or set(mail)!={'credentials_file'} or not Path(mail['credentials_file']).is_absolute():
+            raise RunnerError('Mail configuration holds only an absolute credential-file reference.')
     for name in ('actor_id', 'task_id'):
         if not isinstance(policy[name], str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', policy[name]):
             raise RunnerError('Invalid policy identity.')
@@ -50,7 +58,7 @@ def validate_policy(policy):
         if not isinstance(step['id'], str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,80}', step['id']) or step['id'] in ids:
             raise RunnerError('Step IDs must be unique identifiers.')
         ids.add(step['id'])
-        if step['kind'] not in ('api', 'handoff') or step['action'] not in allowed | {'process_work'}:
+        if step['kind'] not in ('api', 'handoff', 'mail_send','mail_receive') or step['action'] not in allowed | {'process_work','mail-manifests','mail-sent','mail-received'}:
             raise RunnerError('Unsupported action or handler.')
         if step['kind'] == 'api' and step['action'] not in allowed:
             raise RunnerError('Business processing requires a host handler.')
@@ -62,6 +70,20 @@ def validate_policy(policy):
         keys.add(key)
         if not isinstance(step['body'], dict):
             raise RunnerError('Step body must be an object.')
+        if step['kind'] in ('mail_send','mail_receive'):
+            body=step['body']
+            if 'mail' not in policy or step['action']!=('mail-sent' if step['kind']=='mail_send' else 'mail-received'):
+                raise RunnerError('Mail steps require the matching transfer action and mail configuration.')
+            if set(body)-{'manifest_kind','directory','from','to','files','expected_files'} or not {'manifest_kind','directory','from','to','files'}<=set(body):
+                raise RunnerError('Mail scope must bind manifest kind, directory, mailboxes and files.')
+            if body['manifest_kind'] not in ('input','delivery') or not Path(body['directory']).is_absolute():
+                raise RunnerError('Invalid mail scope.')
+            if not isinstance(body['files'],list) or not 1<=len(body['files'])<=10 or len(set(body['files']))!=len(body['files']):
+                raise RunnerError('Mail scope requires explicit filenames.')
+            if any(not isinstance(f,str) or '/' in f or '\\' in f or ':' in f or f in ('.','..') or Path(f).suffix.lower() not in ('.json','.csv') for f in body['files']):
+                raise RunnerError('Unsafe mail filename.')
+            if any(not isinstance(body[k],str) or '@' not in body[k] or '\n' in body[k] or '\r' in body[k] for k in ('from','to')):
+                raise RunnerError('Mailboxes must be explicitly agreed.')
         def check(value):
             if isinstance(value, dict):
                 for k, v in value.items():
@@ -210,8 +232,15 @@ class Runner:
             if row is None or row['status'] not in ('handoff_pending', 'completed'):
                 raise RunnerError('No matching pending host work.')
             intent = json.loads(row['body'])
-            if current['revision'] != intent['revision']:
+            selected_transition=(intent['step']['action']=='select' and current['revision']==intent['revision']+1
+                and intent['step']['body'].get('proposal_id') and current.get('selected')==intent['step']['body']['proposal_id'])
+            if current['revision'] != intent['revision'] and not selected_transition:
                 raise RunnerError('Stale host acknowledgement; revision changed.')
+            if intent.get('manifest_id'):
+                manifests=current.get('mail',{}).get('manifests',[])
+                original=next((m for m in manifests if m['id']==intent['manifest_id']),None)
+                if not original or next(m for m in reversed(manifests) if m['kind']==original['kind'])['id']!=original['id']:
+                    raise RunnerError('Stale host acknowledgement; manifest changed.')
             if row['status']=='completed':
                 return dict(acknowledged=True, replay=True)
             db.execute('UPDATE intents SET status=? WHERE id=?',
@@ -250,7 +279,9 @@ class Runner:
                 continue
             if step['revision'] != task['revision']:
                 self.update(status='blocked', error='revision_changed'); return False
-            intent = dict(step=step, task_id=task['id'], actor_id=me['id'], revision=task['revision'])
+            action=next(a for a in progress['next_actions'] if a['action']==step['action'] and a['executable'] and a['actor_id']==me['id'])
+            intent = dict(step=step, task_id=task['id'], actor_id=me['id'], revision=task['revision'],
+                manifest_id=action.get('manifest_id'))
             with self.db() as db:
                 db.execute('BEGIN IMMEDIATE')
                 old = db.execute('SELECT * FROM intents WHERE id=?', (step['id'],)).fetchone()
@@ -261,13 +292,53 @@ class Runner:
                 failed = old['status'] if old and old['status'] in ('provider_402', 'handler_failed') else None
                 if not old:
                     db.execute('INSERT INTO intents VALUES (?,?,?)',
-                        (step['id'], encoded(intent), 'pending' if step['kind']=='api' else 'handoff_pending'))
+                        (step['id'], encoded(intent), 'handoff_pending' if step['kind']=='handoff' else 'pending'))
             if failed:
                 self.update(status='blocked', error=failed); return False
             if self.state()['stop_requested']:
                 self.update(status='stopped'); return False
             if step['kind']=='handoff':
+                if policy.get('host'):
+                    from .host import invoke_host, HostError
+                    work_id=hashlib.sha256(encoded(intent).encode()).hexdigest()
+                    self.update(status='invoking_host',host_work_id=work_id)
+                    try:
+                        outcome=invoke_host(policy['host'],dict(schema_version=1,work_id=work_id,
+                            authority='explicit_local_policy_only; re-read current platform state before mutations',
+                            scope={k:v for k,v in policy.items() if k!='host'},
+                            intent=intent,task=task),lambda:self.state()['stop_requested'],state['deadline'])
+                    except HostError as error:
+                        self.update(status='stopped' if error.code=='stopped' else 'blocked',error=error.code)
+                        return False
+                    if outcome!='pending':
+                        if outcome not in ('completed','provider_402','handler_failed'):
+                            self.update(status='blocked',error=outcome);return False
+                        self.acknowledge(step['id'],outcome)
+                        return outcome=='completed'
                 self.update(status='awaiting_host', error='host_ack_required'); return False
+            if step['kind'] in ('mail_send','mail_receive'):
+                from .host import invoke_host, HostError
+                scope=step['body']
+                manifest=next((m for m in reversed(task.get('mail',{}).get('manifests',[])) if m['kind']==scope['manifest_kind']),None)
+                if not manifest or manifest['id']!=intent['manifest_id'] or manifest['from']!=scope['from'] or manifest['to']!=scope['to'] or sorted(f['name'] for f in manifest['files'])!=sorted(scope['files']) or ('expected_files' in scope and manifest['files']!=scope['expected_files']):
+                    self.update(status='blocked',error='mail_scope_mismatch');return False
+                work_id=hashlib.sha256(encoded(intent).encode()).hexdigest()
+                work=dict(schema_version=1,work_id=work_id,mail=dict(task_id=task['id'],revision=task['revision'],
+                    manifest_id=manifest['id'],directory=scope['directory'],credentials_file=policy['mail']['credentials_file'],
+                    send=step['kind']=='mail_send'))
+                config=dict(argv=[sys.executable,str(Path(__file__).with_name('mail_worker.py'))],cwd=str(self.path.parent),timeout_seconds=180)
+                self.update(status='transferring_mail',host_work_id=work_id)
+                try:outcome=invoke_host(config,work,lambda:self.state()['stop_requested'],state['deadline'])
+                except HostError as error:
+                    self.update(status='stopped' if error.code=='stopped' else 'blocked',
+                        error='send_uncertain' if step['kind']=='mail_send' else error.code);return False
+                if outcome=='pending':
+                    self.update(status='waiting_for_mail');return True
+                if outcome!='completed':
+                    self.update(status='blocked',error=outcome);return False
+                with self.db() as db:
+                    db.execute("UPDATE intents SET status='completed' WHERE id=?",(step['id'],))
+                self.update(status='running');return True
             # Response loss leaves this exact key/body pending. Resume re-reads
             # current state and replays only when that action is still applicable.
             self.transport('POST', '/tasks/' + task['id'] + '/' + step['action'], step['body'], step['key'])
