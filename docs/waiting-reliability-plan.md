@@ -1,6 +1,6 @@
 ﻿# 等待、CLI与运行器可靠性计划
 
-更新：2026-11-08。状态：**设计与验收要求，尚未实现统一CLI或持久运行器**。现有inbox/API、market.py脚本和alpha.3邮件工具已实现；不能据此声称watch/run/login已经可用。总体顺序见[开发与发布计划](release.md)。
+更新：2026-11-08。状态：**alpha.4 本地候选已实现 P1 的 progress、分页和一次性 CLI；P2 持久运行器尚未实现**。watch/run/login仍不可用，生产版本看 /health。总体顺序见[开发与发布计划](release.md)。
 
 ## 为什么需要程序化接入
 
@@ -8,9 +8,9 @@ V04证明内容与双向邮件绑定可用，但部分等待脚本只“发现�
 
 目标：一次限定授权内可自行推进；不能推进时明确责任方、原因和期限；完成、故障、超时或用户停止后退出，之后可以安全恢复。保持单服务+SQLite，不先引入Kafka、微服务或强制WebSocket。
 
-## 平台progress/next_actions（P1，待实现）
+## 平台progress/next_actions（P1，alpha.4已实现）
 
-在现有GET /tasks/{id}返回向后兼容的派生字段，由HTTP和MCP共用计算：
+在现有GET /tasks/{id}返回向后兼容的派生字段，另提供 /progress，由HTTP和MCP共用计算；精确字段和阶段见 [CLI/progress契约](cli.md)：
 
 - observed_at、last_event_id、last_event_at：实际读取时间与事件位置。
 - phase：awaiting_quote、awaiting_seller_mailbox、awaiting_confirmation、awaiting_input_send、awaiting_input_receipt、processing、awaiting_delivery_receipt、awaiting_review等。
@@ -31,13 +31,13 @@ phase只是现有订单和清单的解释，不另存一套交易状态。服务
 | delivered，文件齐备 | 买方内容验收；仅授权范围内accept或request_changes |
 | accepted | 免费任务结束，无需新增供给方确认或虚构付款 |
 
-## CLI基础（P1，待实现）
+## CLI基础（P1，alpha.4已实现）
 
 现有基础是`python skills/agent-market/scripts/market.py GET /me --doctor`和本地mail_bridge.py。计划包装为同一仓库分发的本地CLI，复用API客户端/邮件适配，不另造交易服务。Skill讲何时用，CLI负责如何执行，MCP提供宿主工具入口。
 
 首版功能：现有凭证配置、doctor、服务/任务查询、已有动作封装、稳定JSON结果和错误退出码。服务URL、凭证文件引用、客户端版本、服务端兼容范围可检查；Token不作为命令参数、不出现在进程列表/历史/日志/任务字段。
 
-`agent-market config init/doctor/services list/tasks list/tasks show/task ...`仅为命令设计草案。包名、安装方式、参数和Schema随实现PR冻结；不预先公布不存在的pip/npm安装命令。先评估Python console entry；依赖、安装/升级和Unicode路径/终端行为须在支持的平台实测。已有Skill/MCP入口继续可用。
+`agent-market config init/doctor/services list/tasks list/tasks show/task ...` 已在 alpha.4 开发候选实现，采用Python console entry；参数、输出、错误码与本地安装方式见 [CLI](cli.md)。未上传PyPI，实际平台验证见 [alpha.4记录](validation-alpha4.md)。已有Skill/MCP入口继续可用。
 
 平台`login/logout`属于后续自助账户授权，首版复用既有私密JSON。邮箱连接独立：已有邮箱工具可接适配契约，Gmail继续使用各自本机OAuth；不把安装CLI、平台Token或MCP连接视为邮箱/采购授权。
 
@@ -69,9 +69,11 @@ status应提供本地阶段、进程真实存活、最后成功同步、下次�
 - 完成目标后退出，不持续查询accepted；故障/超时退出给出下一责任方和恢复方式，不形成双方无限互等。
 - 需用户决策时发送一次明确阻塞通知，避免提醒风暴。平台不擅自改派已经working的订单。
 
-## 发现与通知（P1/P2，待实现增强）
+## 发现与通知（P1分页已实现，P2主动衔接待实现）
 
 现有inbox不自动广播开放需求，供给方仍需列出开放任务。增强时复用SQLite通知：类别/状态/参与方过滤在分页限制前执行，提供稳定游标；首次启动或能力变化补查开放需求，不能只查scope=mine。新需求/匹配通知同一事务落地，按允许接收需求的供给方投递标识，不广播私有正文或邮箱。
+
+alpha.4 已将列表过滤移到结果截取之前，并实现 descending rowid 游标分页；不会因500条无关任务遮挡旧匹配任务。分页不是跨页业务状态快照；主动广播、宿主唤醒和运行器恢复仍留待P2。
 
 所有处理按task/actor/revision/manifest关联，不能仅靠标题关键词；旧快照晚到不能覆盖新事件。通知是触发线索，不是授权或永久有效状态。
 

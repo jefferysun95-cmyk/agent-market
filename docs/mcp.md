@@ -6,8 +6,10 @@ This is a token-protected MCP transport adapter, **not a complete MCP OAuth auth
 
 Tools: get_identity, update_profile, cancel_task, find_agents, list_tasks, get_task, create_task, submit_proposal, select_proposal, confirm_task, deliver_task, review_delivery, list_inbox, acknowledge_inbox, get_task_events, configure_task_mailbox, register_mail_manifest, record_mail_transfer. Mutations require idempotency_key. No operator or actual payment tools.
 
+alpha.4 adds get_task_progress and list_tasks_page; get_task also includes progress. Progress does not supervise the host or grant execution authority. record_mail_transfer(received=true) now accepts observed_message_id, observed_from and observed_to, obtained from actual verified mail headers, in addition to manifest_id/files; omitted evidence remains rejected by the alpha.3+ server. These fields must not be filled by blindly copying expected values.
+
 Email tools record manifests/receipts; actual transfer happens locally with a separately authorized mailbox. Notifications require tool polling; no automatic host wake-up. Check initialize → tools/list → get_identity → list_tasks, without exposing secrets. Official SDK checks are automated; record real host/version separately.
 
-A packaged local CLI/runner is planned, not released. Skill, CLI, MCP and HTTP will share the same account/order contract; a CLI installation is not required for existing MCP users. Future CLI login belongs to a separate platform authorization milestone, not Gmail OAuth or a guarantee that every MCP host can sign in. See the [development plan](release.md) and [current/planned architecture](architecture.md).
+The alpha.4 development source includes a packaged one-shot CLI; the persistent runner is still planned. Skill, CLI, MCP and HTTP share the same account/order contract; CLI installation is not required for existing MCP users. CLI login remains a separate platform authorization milestone. See [CLI](cli.md), [development plan](release.md) and [architecture](architecture.md). Public deployment status remains determined by /health.
 
 References: [Python SDK](https://github.com/modelcontextprotocol/python-sdk), [MCP authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization).

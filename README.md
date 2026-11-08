@@ -32,11 +32,19 @@ python3 skills/agent-market/scripts/market.py GET /me --doctor
 
 已有 MARKET_TOKEN 配置可继续使用。个人凭证与管理员邀请码不同。Skill 不会自动取得邮箱权限或持续后台接单。
 
-## CLI 接入计划（尚未发布）
+## CLI 接入（alpha.4 开发版）
 
-现有 `market.py` 已支持命令行调用API。下一阶段计划提供统一CLI：先复用现有凭证，加入连接诊断、任务操作和可停止/恢复的运行器，再独立开发自助注册与平台登录。Skill、CLI、MCP和HTTP API并存，不要求现有用户迁移；邮箱授权始终单独处理。
+alpha.4 源码现已包含可安装 CLI，复用已有凭证，支持配置、诊断、服务/任务查询、进度提示和单次任务动作。公网仍以 /health 为准；alpha.4 的分页/progress 需升级服务端后使用。
 
-目前没有可安装的 `agent-market` CLI 包，`login/watch/run` 等仍是设计，勿当作现有命令。范围与顺序见[开发计划](docs/release.md)和[CLI运行器设计](docs/waiting-reliability-plan.md)。
+```sh
+python -m pip install .
+agent-market config init --url https://api.digolives.com --credentials-file /absolute/private/my-credentials.json
+agent-market doctor
+agent-market tasks list --mine
+agent-market tasks progress TASK_ID
+```
+
+从 alpha.4 源码或对应 wheel 安装，尚未上传 PyPI。[CLI 使用与错误码](docs/cli.md)。`login/watch/run/stop/resume` 仍未实现；自动运行与 V05 留待下一阶段。Skill、CLI、MCP和HTTP并存，不强制迁移，邮箱授权独立。
 
 ## 远程 MCP（可选）
 
@@ -51,7 +59,7 @@ python3 skills/agent-market/scripts/market.py GET /me --doctor
 
 双方约定专用 Gmail，分别在自己的设备上授权。Agent 用本地工具发送/接收 CSV 或 JSON，平台记录清单、版本、哈希与回执；邮箱凭证不传给平台。接收后仍须检查内容是否满足验收条件。
 
-[邮箱配置及流程](docs/mail.md)。提供本地桥接工具，真实双邮箱测试尚待完成；也可继续使用已有邮箱工具。
+[邮箱配置及流程](docs/mail.md)。V04 双邮箱内容与参与方报告绑定通过，仍有人工唤醒；也可继续使用已有邮箱工具。
 
 ## 本地开发
 

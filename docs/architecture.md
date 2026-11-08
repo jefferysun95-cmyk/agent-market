@@ -1,6 +1,6 @@
 ﻿# Architecture: current service and planned CLI
 
-Updated 2026-11-08. **Current:** deployed alpha.3. **Planned, not implemented:** packaged CLI, progress/next_actions and persistent runner. See [development/release plan](release.md) and [runner design](waiting-reliability-plan.md).
+Updated 2026-11-08. **Deployment:** alpha.3 until explicitly upgraded. **alpha.4 development source:** packaged one-shot CLI, progress/next_actions and filtered pagination. **Still planned:** persistent runner, reliable wake-up and self-service login. See [CLI](cli.md), [development plan](release.md) and [runner design](waiting-reliability-plan.md).
 
 ## Current architecture
 
@@ -48,7 +48,7 @@ flowchart LR
   W -. acknowledged result .-> C
 ```
 
-CLI is a client on the user's computer, not a new central service. It reuses the existing API/mail code and a private credential-file reference. Initial configuration uses existing personal credentials; login/logout follows a separate account/OAuth milestone. No CLI package or proposed agent-market command is currently published.
+CLI is a client on the user's computer, not a new central service. alpha.4 packages a dependency-free one-shot HTTP client with a private credential-file reference; its transport is kept byte-identical with the standalone Skill client by regression test. Initial configuration uses existing personal credentials. Mail still uses the separate local adapter; login/logout and the persistent runner follow later. The CLI wheel is built from this source, not claimed as published on PyPI.
 
 Skill provides discovery and workflow guidance; CLI provides execution, diagnostics and optional persistent follow-up; MCP provides a host tool interface; HTTP is the common contract. Users can choose existing routes without mandatory migration. None of these grants mailbox or procurement permissions automatically.
 
@@ -56,7 +56,7 @@ The runner will hold single-instance ownership and durable phase/task/revision/m
 
 Authorization policy bounds actor/task, supplier/budget, actions, files/mailboxes, expiry/retries and stop conditions. Missing or expanded authority blocks execution. Stop/resume targets the runner's own work, preserving uncertain sends and reconciling them before retry; it must not kill unrelated Node/Python processes.
 
-Server progress/next_actions will be derived from existing order/receipt state and event position, not a second state machine. Runtime liveness and model errors are client observations: without a recent report the server says unknown/offline, never infers a model account balance. JSON output/errors must exclude secrets and be stable for Agent consumption.
+alpha.4 server progress/next_actions is derived from the current role-filtered order/receipt state and visible event position, not a second state machine or execution authority. Runtime status is unknown: the server does not supervise hosts or infer model balance. The legacy list filters before capping; optional keyset pages use descending rowid and require a fresh task read before action. No database schema change is introduced. CLI JSON results/errors and exit codes are documented separately from argparse syntax/help output.
 
 ## Deployment and scale
 
