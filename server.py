@@ -13,10 +13,11 @@ from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
+from registration import SCHEMA as REGISTRATION_SCHEMA, RegistrationError, from_environment
 
 ROOT = Path(__file__).parent
 CATEGORIES = ['company-research', 'web-extraction', 'document-extraction', 'data-cleaning']
-VERSION = '1.1.0-alpha.4'
+VERSION = '1.1.0-alpha.5'
 
 
 def receipt_matches(manifest):
@@ -65,6 +66,7 @@ class Store:
             CREATE INDEX IF NOT EXISTS notifications_recipient ON notifications(recipient,id);
             CREATE TABLE IF NOT EXISTS inbox_cursors(agent_id TEXT PRIMARY KEY, cursor INTEGER NOT NULL);
             ''')
+            db.executescript(REGISTRATION_SCHEMA)
 
     @contextmanager
     def connect(self):
@@ -111,6 +113,16 @@ class Store:
                             if row['status']!='open' and current['buyer']!=actor and (not selected or selected['seller']!=actor):
                                 raise Problem(403,'Order access changed')
                     return result
+            # Public accounts share a verified-address quota across their slots.
+            # Existing operator-issued identities retain their current behavior.
+            if method == 'POST' and (path == '/tasks' or path.endswith('/proposals')):
+                owner = db.execute('SELECT email_hash FROM self_service_accounts WHERE agent_id=?', (actor,)).fetchone()
+                if owner:
+                    action, limit = ('created', 20) if path == '/tasks' else ('proposals', 50)
+                    used = db.execute('SELECT COUNT(*) FROM events e JOIN self_service_accounts a ON a.agent_id=e.actor WHERE a.email_hash=? AND e.action=? AND e.created_at>=?',
+                                      (owner['email_hash'], action, stamp()[:10])).fetchone()[0]
+                    if used >= limit:
+                        raise Problem(429, 'Daily verified-account action quota reached')
             result = self.dispatch(db, method, path, query, data, actor)
             if method == 'POST':
                 db.execute('INSERT INTO receipts VALUES(?,?,?,?)',
@@ -153,6 +165,8 @@ class Store:
             if not row:raise Problem(404,'Agent not found')
             token_hash=hashlib.sha256(secret.encode()).hexdigest() if op=='rotate' else 'revoked:'+uuid.uuid4().hex
             db.execute('UPDATE agents SET token_hash=? WHERE id=?',(token_hash,aid))
+            if op == 'revoke':
+                db.execute('UPDATE self_service_accounts SET recovery_blocked=1 WHERE agent_id=?', (aid,))
             db.execute('INSERT INTO admin_receipts VALUES(?,?,?,?)',(key,fingerprint,aid,op))
             return {'agent':json.loads(row['profile']),'token':secret} if op=='rotate' else {'revoked':True,'agent_id':aid}
         raise Problem(404,'Unknown operator route')
@@ -435,7 +449,7 @@ class Store:
                 db.execute('INSERT INTO notifications(recipient,task_id,action,created_at) VALUES(?,?,?,?)',(recipient,tid,action,stamp()))
 
 
-def handler(store, invitation):
+def handler(store, invitation, registration=None):
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
             self.handle_request()
@@ -455,7 +469,8 @@ def handler(store, invitation):
                     self.wfile.write(content)
                     return
                 if self.command == 'GET' and parsed.path == '/health':
-                    return self.reply(200, {'ok': True, 'mode': 'invitation-only-pilot','version':VERSION})
+                    return self.reply(200, {'ok': True, 'mode': 'self-service-preview' if registration else 'invitation-only-pilot','version':VERSION,
+                                            'self_registration': registration is not None})
                 length = int(self.headers.get('Content-Length', '0'))
                 if length < 0 or length > 1_000_000:
                     raise Problem(413, 'Maximum request size is 1 MB')
@@ -464,10 +479,17 @@ def handler(store, invitation):
                     raise Problem(400, 'JSON object required')
                 auth = self.headers.get('Authorization', '')
                 token = auth[7:] if auth.startswith('Bearer ') else ''
+                if parsed.path.startswith('/registration/'):
+                    if registration is None:
+                        raise RegistrationError(503, 'Self-service registration is disabled')
+                    if length > 8192:
+                        raise RegistrationError(413, 'Maximum registration request size is 8 KB')
+                    result = registration.call(self.command, parsed.path, data, self.headers.get('Idempotency-Key', ''), self.client_address[0])
+                    return self.reply(200, result)
                 result = store.call(self.command, parsed.path, parse_qs(parsed.query), data, token,
                                     self.headers.get('Idempotency-Key', ''), invitation)
                 self.reply(200, result)
-            except Problem as e:
+            except (Problem, RegistrationError) as e:
                 self.reply(e.status, {'error': e.message})
             except (ValueError, UnicodeError):
                 self.reply(400, {'error': 'Invalid request encoding or JSON'})
@@ -496,4 +518,6 @@ if __name__ == '__main__':
     if len(invitation) < 24:
         parser.error('Set MARKET_INVITE_TOKEN to a random secret of at least 24 characters')
     print(f'Agent Market: http://{args.host}:{args.port}', flush=True)
-    ThreadingHTTPServer((args.host, args.port), handler(Store(args.db), invitation)).serve_forever()
+    store = Store(args.db)
+    registration = from_environment(store, CATEGORIES)
+    ThreadingHTTPServer((args.host, args.port), handler(store, invitation, registration)).serve_forever()

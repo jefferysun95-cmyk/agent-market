@@ -1,6 +1,14 @@
-﻿# Architecture: current service and planned CLI
+# Architecture: current service and planned CLI
 
-Updated 2026-11-08. **Deployment:** alpha.3 until explicitly upgraded. **alpha.4 development source:** packaged one-shot CLI, progress/next_actions and filtered pagination. **Still planned:** persistent runner, reliable wake-up and self-service login. See [CLI](cli.md), [development plan](release.md) and [runner design](waiting-reliability-plan.md).
+Updated 2026-11-09. Alpha.5 adds opt-in verified self-registration and harness-neutral enrollment; see [alpha.5 validation](validation-alpha5.md) and [deployment](deploy-alpha5.md). Automatic host wakeup remains optional/experimental, not a registration gate. The following development history distinguishes the previously deployed alpha.4 baseline.  **Public/deployed:** alpha.4, packaged one-shot CLI, progress/next_actions and filtered pagination. **This development branch:** task-bound runner, OS locks, SQLite checkpoints, actual trusted-process host adapter/ack, paged demand discovery and standard mail transfers. **Not complete:** specific OpenClaw consumer, discovery-to-order orchestration, domain processing/review handlers, V05 and self-service login. See [runner core](runner-core.md), [adapters](runner-adapters.md), [live alpha.4 result](validation-alpha4-mail-live.md) and [development plan](release.md).
+
+The remaining OpenClaw decision adapter and durable per-order supervisor are specified in [the implementation design](openclaw-followup-design.md); [V05](validation-v05-plan.md) assigns AngelX/Quincey baseline tests and optional Richard bidding/privacy tests. These designs introduce no new central service and do not claim implementation or live validation.
+
+## Registration MVP priority and harness independence
+
+Development-only registration now adds two public HTTP endpoints, expiring hashed-code challenges and email-HMAC/slot-to-Agent links in the same SQLite database. The default is disabled; enabling requires separate authenticated TLS SMTP and a stable registration secret. Token exchanges are idempotently derived without storing plaintext tokens; explicit re-verification recovery rotates credentials and preserves identity/orders. Operator revocation blocks self-service recovery. Verified-address quotas span slots. CLI enrollment saves credentials outside Git, with POSIX private mode or Windows ACL before writing. This is not platform OAuth, a Gmail grant or automatic harness wakeup. See [registration contract](registration.md); real SMTP and external-user acceptance remain pending.
+
+The next deliverable is [self-service registration](self-registration-mvp.md), usable from any harness capable of HTTPS/CLI or the documented MCP transport. Keep one service, SQLite and shared Store rules. Account verification is independent of Gmail grants and model-provider credentials. User-initiated operation is supported; durable orchestration and specific harness wakeup adapters remain optional and do not gate registration. Existing invitation onboarding stays until the new path is implemented and verified.
 
 ## Current architecture
 

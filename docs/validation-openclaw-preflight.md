@@ -1,0 +1,40 @@
+# OpenClaw 预检进度（2026-11-08）
+
+这是 Alpha5 A 阶段的实际记录，不是 V05 订单结果。真实操作仅针对本机；Quincey 电脑尚未由维护者验证。
+
+## 已实现并本地检查
+
+- 开发分支新增 openclaw inspect/probe，显式 local 模式、原生运行时/入口、结构化 CLI envelope/provider/model 校验、专用会话 nonce 校验及环境变量清理。
+- 通用宿主 v1/邮件 worker 保持原契约，OpenClaw 决策 v2 及持续单笔工作仍待实现。probe 只检查模型回合，不执行业务决策。
+- 模拟 CLI 的 nonce、会话和环境测试与真实模型预检分别记录；不能把模拟进程返回视为真实 OpenClaw 通过。
+
+## 本机真实观察
+
+1. Node --version 正常，v24.13.0；OpenClaw --version 正常，2026.4.11。版本启动检查分别约 0.13 秒和 1.19 秒，不涉及模型。
+2. 两次真实 local 模型 nonce 预检均未在模型期限 90 秒加外层余量内返回有效结果，报 host_timeout；受管进程树随后清理。没有因此宣称模型 402、平台故障或设备休眠；具体卡点尚未证实。
+3. 未发布新任务，未请求 Gmail 操作，也未把平台或邮箱凭据作为模型消息/命令参数。宿主工具行为没有独立认证，不能把提示“不要使用工具”当作安全沙箱。
+4. 只读检查的本机 Agent 列表当时仅有日常 main。安装源码表明 --agent 会使用该 Agent 的主 session key；仅给新 session-id 不足以证明与日常聊天隔离。因此后续 profile 拒绝 main/default，要求专用非默认角色和独立工作目录。
+
+第一次探测的隔离假设已据此修正，不能把它记作专用工作角色的通过记录。专用角色的创建和其真实只读 probe 须另有实际结果，未取得前不得标 ready。
+
+## 专用角色与 Gateway 后续观察
+
+- 本机已通过官方 CLI 创建 agent-market-angelx，并再次只读核验：非默认、零聊天渠道绑定、独立 workspace，原 main 仍为默认。这不是新平台注册身份；没有向该角色复制其他参与方的凭证。OpenClaw 自己在私密配置目录生成了配置备份，不纳入开发 Git/备份包。
+- 专用角色的一次真实 local nonce 预检采用模型 90 秒、额外启动 120 秒（总上限 210 秒），仍因外层 host_timeout 退出；清理前 stdout/stderr 均为 0 字节，没有有效模型回报。该结果不能记为模型供应商超时、402 或休眠。
+- 用户报告原主聊天能够正常回复。适配器/CLI 调用路径仍待定位，不能要求用户据此重新配置其已正常工作的邮箱或模型账户。
+- 只读 Gateway health RPC 明确返回 pairing_required，本机 CLI 有待批准的 operator 设备请求。仅列出必要申请元数据，尚未批准、未轮换令牌，也未向 Gateway 提交新模型工作。
+- 官方 CLI 请求包含管理、审批/配对及 secrets 等范围，超出交易宿主适配通常所需的读写范围。不能为了测试自动批准整组权限；正式 Gateway 适配先明确独立设备/最小权限连接及配对流程，并验证请求范围后再请用户授权。不能静默从 local fallback 到 Gateway 或反向降级。
+
+当前专用角色配置完成不等于模型预检通过。V05 尚未开始；Gateway 模型执行、决策 v2、持续工作接管和两端 readiness 均没有据此宣称完成。
+
+## 继续条件
+
+先配置并确认专用非默认内部 Agent，不添加聊天路由、不替换原 main；沿用市场 AngelX 身份，不重复注册平台账户。确认模型授权/工具范围后，再在有明确授权的情况下做一次有界真实预检。Quincey 端执行同样流程但使用自己的配置和授权。
+
+两端宿主预检通过、决策 v2/持续接管/私有验收及固定候选包完成后，才按 [V05](validation-v05-plan.md) 创建新联调任务。本文件没有证明这些门槛已达成。
+
+## Subsequent comparison and scope
+
+Another explicitly authorized dedicated local call timed out with empty stdout/stderr; no trade or mail operation was requested. Richard reports a successful official CLI call on another computer: Node v26.1.0, OpenClaw 2026.5.7, dedicated oc-smoke-test, matching nonce, exit code 0, approximately 120 seconds. This is participant-reported, not a run of this project's adapter. Version and configuration differences do not establish the AngelX root cause.
+
+[Self-service registration](self-registration-mvp.md) now takes priority. This integration is optional; no repeated probe loop is enabled. The current code passed 75 local tests and a clean candidate-wheel install check; simulated tests do not establish real model readiness.

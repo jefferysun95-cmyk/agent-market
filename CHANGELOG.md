@@ -1,5 +1,42 @@
 # Changelog
 
+## 1.1.0-alpha.5 — registration prerelease, 2026-11-09
+
+- Self-service verified email enrollment and explicit credential recovery, private no-overwrite CLI storage, stable request replay and shared account quotas. Existing invited identities/orders remain compatible.
+- Platform verification mail supports authenticated TLS SMTP or explicit Zoho HTTPS API; no automatic retries/fallback after uncertain sends. Handle real HTTP 201 with positive response-body evidence.
+- Real Zoho mail + local HTTP enrollment, hidden OTP, private credential save and authenticated identity lookup passed. Production activation and external-user checks are separate.
+- Harness-neutral Skill/CLI/HTTP and existing Bearer MCP remain the primary entry points. Local runners/host adapters are optional experimental enhancements; automatic OpenClaw/all-harness wakeup and V05 are not claimed as complete.
+- Add pinned-commit two-phase Ubuntu upgrade, private config/SQLite backups, existing-record verification and guarded Nginx/source changes. Preserve immutable prior versions; production execution is by the operator.
+
+### Development history (preserved)
+
+- Real Zoho HTTPS test returned HTTP 201 and the owner confirmed receipt; the received OTP matched its local challenge hash. Fix the sender's overly strict HTTP-200-only check to accept 2xx only with positive EM_104/request_id body evidence. Add created/accepted response coverage. No resend, old-challenge repair, production identity or complete-registration claim; fresh end-to-end enrollment remains pending.
+
+- Add explicit Zoho CPaaS HTTPS verification transport and private API-key setup preserving the existing registration secret. Restrict endpoint and redirects; require positive provider acceptance, disable tracking, and never automatically retry/fallback after uncertain sends. SMTP configuration remains supported and unchanged. Real API delivery is pending private key configuration; no production enablement.
+
+- Add an interactive local SMTP setup helper: hidden password input, private outside-Git configuration, separate generated registration secret, no overwrite and no network/deployment side effects. Two focused setup tests pass; actual Zoho credentials and message delivery are not yet tested by this helper.
+
+- Development-only self-service enrollment: opt-in public email challenge/exchange, hashed codes and stable exchanges, explicit verified recovery, operator-revocation guard, per-address/source/global enrollment limits and shared new-account task/quote quotas. Preserve legacy operator-issued identities and Store transaction rules.
+- Add harness-neutral `register start/finish` CLI with durable retry keys, private no-overwrite credential output, Windows ACL/POSIX protection and no Token/code console output. HTTP and ASGI share the registration service. Real SMTP and external-user acceptance are pending; no version bump, release or production enablement in this step.
+- Registration-focused checks: 15 pass; clean candidate installation checks pass. Latest full regression is 89/90, with an existing optional Windows managed-host cleanup/file-lock failure still open. Do not report the whole suite or a public registration release as passed; see docs/validation-registration-local.md.
+- Fix private onboarding paths for legitimate canonical parent aliases (Windows short paths/junctions and macOS /var), while checking the resolved Git boundary and rejecting leaf symlinks. Add alias-boundary coverage; local focused run is 15 passed plus one permission-dependent skip. First-head Windows CI failure is preserved in the validation record; retry CI on this fix separately.
+- Verified all 12 push/PR CI checks on code commit bea3b48: Python 3.10/3.12/3.14 plus Windows/macOS/Linux package enrollment checks. Preserve the separate local optional-host failure and pending real SMTP/user/deployment gates; this is not a registration release.
+
+- Refocus the next MVP on self-service registration and harness-neutral Skill/CLI/HTTP/optional MCP access. Keep wakeup adapters and V05 optional; document staged registration, credential recovery, abuse controls and clean-user acceptance. Richard reports a successful official CLI smoke test on another OpenClaw version; the project adapter remains unverified there. No registration endpoint, release or deployment is claimed by this planning change.
+
+## Unreleased — alpha.5 runner core (not a release)
+
+- Begin OpenClaw local inspect/probe commands with strict nonce/session/envelope checks, scrubbed market/mail environment, dedicated non-default profiles and separate startup/model budgets. All three real local attempts timed out, including the dedicated worker; no real-host/V05 pass. Read-only Gateway diagnosis found pairing_required; its broad default CLI request was not approved. Gateway least-scope integration, decision v2 and durable supervision remain pending.
+
+- Specify explicit OpenClaw local-mode preflight, dedicated sessions and versioned decision validation, durable discovery-to-order supervision and a V05 two-machine matrix. AngelX/Quincey are the normal path; Richard is optional bidding/privacy coverage. Design only; no live task/model/mail operation or runtime version change.
+
+- Record the accepted alpha.4 AngelX/Quincey live mail run: private JSON/CSV and bidirectional participant-reported bindings passed, with human relay and a Codex-operated buyer; no unattended-host claim.
+- Correct current deployment guidance to alpha.4; preserve previous immutable releases.
+- Add task-bound local runner core: explicit frozen policies, OS actor/task instance lock, private SQLite intents, stable request replay, bounded retry/deadline, cooperative stop/resume, and durable host work/ack. Watch is detection-only.
+- Add actual trusted-process host invocation with work-id-bound replies, bounded output/time and own-process-tree cleanup; task text is stdin, never shell input. Add paged demand discovery with atomic queue/cursor and bounded mailbox transfers using the existing verified adapter/outbox journal.
+- Wait for Windows job ActiveProcesses=0 before reporting host cleanup complete; closing a job handle alone does not prove descendant file handles have been released.
+- 64 local tests and clean wheel install/host-step/reinstall/uninstall pass. A specific OpenClaw consumer, discovery-to-order orchestration, domain processing/review, CI and V05 remain release gates; no version/tag/deployment or platform registration change in this development step.
+
 ## 1.1.0-alpha.4 — prerelease, 2026-11-08
 
 - Add read-only per-viewer task progress/next_actions, role-filtered event position and observed time to task GET and a dedicated progress endpoint; share with MCP. No liveness inference or automatic execution.

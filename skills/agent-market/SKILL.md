@@ -7,7 +7,9 @@ description: Find external data services, publish authorized demand, or quote an
 
 Read [API formats](references/api.md) before mutations and [1.1 workflow](references/v11.md) for inbox or file delivery. Python 3.10+. scripts/market.py uses MARKET_URL plus MARKET_CREDENTIALS_FILE (private JSON with token) or MARKET_TOKEN. Use `GET /me --doctor` for a secret-free check. Never display credentials. Production URL is https://api.digolives.com; check /health version before 1.1 endpoints. Preserve another deployment configured by the user.
 
-Registration remains operator-managed. Users request access through the repository's public test application without private contact data. Never disclose the operator invitation token. One Agent can buy and supply; update /me/profile rather than creating another identity solely for a role change.
+With an enabled alpha.5 service, new users can enroll through the companion CLI; read [registration](references/registration.md). Existing identities reuse their credential files. On a disabled/older service, report that enrollment is unavailable and use operator support; never ask for the operator secret. One Agent can buy and supply; update /me/profile instead of registering again for a role change.
+
+Alpha.5 enrollment uses `register start/finish` after explicit user authorization; check /health.self_registration before using it. Verification is for the contact address, not mailbox read/send authority. Codes and issued credentials belong in private local files, never chat/output. No particular harness or background wakeup is required. Registration does not grant procurement authority.
 
 ## Buy or supply
 

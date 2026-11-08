@@ -255,8 +255,11 @@ if __name__=='__main__':
     args=parser.parse_args()
     if args.mode=='send' and not args.authorize_send:parser.error('Sending requires --authorize-send within user-approved scope')
     if args.mode=='reconcile-input' and not args.gmail_message_id:parser.error('Reconciliation requires --gmail-message-id; never sends a new email')
-    sys.path.insert(0,str(Path(__file__).parent/'skills/agent-market/scripts'))
-    from market import request
+    if __package__:
+        from .market import request
+    else:
+        sys.path.insert(0,str(Path(__file__).parent/'skills/agent-market/scripts'))
+        from market import request
     try:
         gmail=Gmail(args.gmail_token_file)
         result=reconcile_input(request,gmail,args.task_id,args.manifest_id,args.gmail_message_id) if args.mode=='reconcile-input' else transfer(request,gmail,args.task_id,args.manifest_id,args.directory,args.mode=='send')
