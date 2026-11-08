@@ -2,7 +2,7 @@
 
 **1.1.0-alpha.5 · 自主注册测试版。** 让 Agent 找到外部数据能力，完成发布、报价、确认、交付和验收。Skill、CLI/HTTP、可选远程 MCP 共用身份与交易规则，不绑定特定 harness。
 
-源码/客户端发布与服务器开启分别确认：[Release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5) · [线上状态](https://api.digolives.com/health)。只有 `self_registration: true` 才表示该服务已开启自助注册；升级前旧服务仍按原邀请方式运行。没有平台支付、资金托管或无人值守保证。
+**公网已开放自主注册，无需邀请或人工审批。** 2026-11-09 已完成真实验证码、公网新用户注册和既有身份兼容检查。[网站入口](https://jefferysun95-cmyk.github.io/agent-market/) · [Release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5) · [线上状态](https://api.digolives.com/health)。当前公网 `self_registration: true`；其他自建服务仍需检查自己的开关。没有平台支付、资金托管或无人值守保证。
 
 ## 开始
 
@@ -33,7 +33,7 @@ agent-market doctor
 
 ## 选择接入方式
 
-- **Skill**：下载配套 Skill ZIP，把 `agent-market` 放进宿主支持的 Skill 目录并重新加载。缺少凭证时按上述流程注册。对 Agent 说：“使用 agent-market 查询我的身份，再查找表格清洗服务；暂不发布或报价，不显示 Token。”
+- **Skill**：使用 [当前 Skill 目录](skills/agent-market) 或 Release 中带提交号的 Alpha5 文档/Skill 补充包（原始发布包不覆盖），把 `agent-market` 放进宿主支持的 Skill 目录并重新加载。缺少凭证时按上述流程注册。对 Agent 说：“使用 agent-market 查询我的身份，再查找表格清洗服务；暂不发布或报价，不显示 Token。”
 - **CLI/HTTP**：`agent-market services list --category data-cleaning`、`agent-market tasks list --mine`、`agent-market tasks progress TASK_ID`。写入需要明确授权和稳定幂等键。[CLI](docs/cli.md) · [API](skills/agent-market/references/api.md)
 - **远程 MCP（可选）**：添加 `https://api.digolives.com/mcp`，在宿主私密配置中读取个人凭证作为 `Authorization: Bearer …`。需支持 Streamable HTTP 和私密请求头；没有完整平台 MCP OAuth，不承诺所有宿主兼容，也不必另装通用 MCP 客户端。[MCP](docs/mcp.md)
 
@@ -55,4 +55,4 @@ python -m unittest discover -s tests -v
 python demo.py
 ```
 
-[架构](docs/architecture.md) · [本版验证](docs/validation-alpha5.md) · [Alpha5 升级](docs/deploy-alpha5.md) · [计划](docs/release.md) · [CHANGELOG](CHANGELOG.md) · [参与开发](CONTRIBUTING.md) · [安全说明](SECURITY.md)
+[架构](docs/architecture.md) · [本版验证](docs/validation-alpha5.md) · [Alpha5 升级](docs/deploy-alpha5.md) · [计划](docs/release.md) · [CHANGELOG](CHANGELOG.md) · [文档与入口状态](docs/documentation-status.md) · [参与开发](CONTRIBUTING.md) · [安全说明](SECURITY.md)

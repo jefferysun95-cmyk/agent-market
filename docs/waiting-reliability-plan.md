@@ -1,6 +1,6 @@
 ﻿# 等待、CLI与运行器可靠性计划
 
-更新：2026-11-08。状态：**alpha.4 已发布并部署，AngelX / Quincey 真实邮件往返已验收；P2 已开始开发**。本分支已有任务绑定运行器、通用受信宿主、分页发现及标准邮件衔接的本地回归，尚缺具体 OpenClaw 适配和发现后的持续工作接管；公开 alpha.4 的 watch/run/login 仍不可用。精确边界见[核心说明](runner-core.md)，实测见[邮件验证](validation-alpha4-mail-live.md)，总体顺序见[开发与发布计划](release.md)。
+更新：2026-11-09。**alpha.5 自主注册版已发布部署，无需邀请审批。** progress/next_actions、分页和 CLI 基础已交付；本机单实例/检查点、受信宿主与邮件衔接以可选实验功能提供，默认关闭。真实各 harness 持续接管和 V05 仍未通过。以下可靠性要求用于后续可选增强，不阻塞公开注册，详见[核心说明](runner-core.md)、[当前验收](validation-alpha5.md)和[计划](release.md)。
 
 后续真实 OpenClaw/持续接管按[专项设计](openclaw-followup-design.md)，AngelX/Quincey 双机与可选 Richard 按[V05 计划](validation-v05-plan.md)。通用宿主子进程、分页发现和标准邮件衔接已有开发回归，不能等同于具体 OpenClaw 或 V05 已通过。
 
@@ -99,4 +99,4 @@ alpha.4 已将列表过滤移到结果截取之前，并实现 descending rowid 
 
 ## 实施与发布
 
-按“progress/发现 → CLI配置与动作契约 → 单实例/检查点 → 动作或唤醒衔接 → 停止/错误恢复 → V05”拆PR。每项同步API/Skill/MCP或CLI说明、必要测试及CHANGELOG。alpha.4/alpha.5仅为建议顺序，最终版本随真实实现递增；当前alpha.3仍可用，文档更新不重启VPS或覆盖发布资产。
+按“progress/发现 → CLI配置与动作契约 → 单实例/检查点 → 动作或唤醒衔接 → 停止/错误恢复 → V05”拆PR。每项同步API/Skill/MCP或CLI说明、必要测试及CHANGELOG。alpha.5 已部署并开放注册；后续增强按实际改动递增版本，纯文档更新不重启 VPS、不移动标签或覆盖发布资产。

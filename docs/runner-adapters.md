@@ -1,6 +1,6 @@
 # Alpha5 开发适配契约
 
-仅描述当前开发分支，不是公开 alpha.4 的使用说明。仍需真实宿主与 V05 验证后才能发布。
+本文描述随 alpha.5 源码提供的可选实验适配契约，默认关闭。自主注册已上线；真实各 harness 自动唤起与 V05 尚未通过，不是平台注册前置条件。
 
 当前下述为已实现的通用 v1 契约；真实 OpenClaw、拟新增决策 v2 和持续工作接管见[后续设计](openclaw-followup-design.md)，双机执行及通过门槛见[V05](validation-v05-plan.md)。设计字段不得直接作为当前 v1 参数使用。
 
@@ -40,4 +40,4 @@ discover 的本地 policy 字段为 actor_id、url、category、buyers（明确�
 
 邮件桥在受控进程中执行，重新核对 revision、身份、profile 和清单。发送仍先写私密 outbox 意图、回读实际 Sent Message-ID，再登记；收件包含 Spam/Trash 并校验真实头、附件字节、哈希后登记观察值。pending 有界重试；授权失败、证据不符或发送不确定直接停止。发送调用被中断/超时也标 send_uncertain；恢复先用原 outbox 对账，不重建清单或盲目重发。
 
-单独的 mail_bridge.py 与安装包内实现保持字节一致并由回归测试约束。镜像是同一协议实现的分发方式，不建立第二套业务规则。仅在开发分支构建候选包，既有 alpha.4 Release 资产不会被替换。
+单独的 mail_bridge.py 与安装包内实现保持字节一致并由回归测试约束。镜像是同一协议实现的分发方式，不建立第二套业务规则。Alpha5 已发布；历史 Release 资产不覆盖，适配器仍按可选实验范围验收。

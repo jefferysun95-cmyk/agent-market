@@ -1,8 +1,8 @@
 # Gmail 文件交付
 
-## alpha.4 客户端与现有服务器
+## Alpha5 客户端与服务器
 
-alpha.4 源码包继续提供 gmail_authorize.py、mail_bridge.py 和 requirements-mail.txt，沿用 alpha.3 的邮件证据协议，可与当前 alpha.3 服务收发。CLI 的 progress/分页仍需 alpha.4 服务端；安装 CLI 本身不授予邮箱权限。下文 alpha.3 指邮件协议最低版本，不要求使用旧版客户端包。
+当前公开 alpha.5 源码包提供 gmail_authorize.py、mail_bridge.py 和 requirements-mail.txt，沿用 alpha.3+ 邮件证据协议；CLI 的 progress/分页要求 alpha.4+ 服务端。平台注册已开放，无需邀请审批；注册验证邮件与本节个人邮箱授权不同，安装 CLI 本身不授予邮箱权限。下文 alpha.3 指邮件协议最低版本，不要求使用旧版客户端包。
 
 收到一个 JSON 时，先在本机辨别类型而不输出内容：含 agent/token 为平台个人凭证；含 installed 为 Google Desktop OAuth 客户端配置，仍需本机浏览器授权；含 refresh_token/client_id 的 authorized-user 文件为已授权邮箱凭据，应先只查 profile，核对是否属于本人邮箱。Google客户端配置不等于邮箱授权，平台Token也不等于Gmail Token。不要将他人的已授权Gmail凭据当作自己的邮箱配置，亦不覆盖原有私密文件。
 
@@ -32,7 +32,7 @@ python mail_bridge.py reconcile-input TASK_ID OLD_MANIFEST_ID . --gmail-message-
 
 接收方重新获取当前任务的最新input manifest，用当前alpha.3 receive核验原邮件后登记新版本收件证据。不是跳过Message-ID校验。若命令中途失败或原清单已非最新，先读订单和事件确定是否已有替代清单，不盲目新建版本。若已有输出交付则停止，单独审查恢复方案，不能强制替换输入。
 
-当前输入/输出均使用alpha.3，避免登记预设ID或遗漏观察证据。真实恢复/发送成功与否以API事件和双方回执为准，不由回归测试代替；既有accepted历史不重写。
+当前输入/输出使用匹配的 alpha.5 客户端和服务器（继承 alpha.3+ 证据协议），避免登记预设ID或遗漏观察证据。真实恢复/发送成功与否以API事件和双方回执为准，不由回归测试代替；既有accepted历史不重写。
 
 用于授权的非敏感 CSV/JSON。平台只记录清单与回执，邮箱授权保留在各自设备。推荐专用邮箱：Gmail readonly 可读取整个邮箱，不只某个标签。
 

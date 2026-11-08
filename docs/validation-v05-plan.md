@@ -2,7 +2,7 @@
 
 > 当前定位：可选持续自动化的专项验证，暂缓，不阻塞自主注册 MVP。见[最新主线](self-registration-mvp.md)。
 
-状态：设计完成、尚未执行，2026-11-08。先完成 [OpenClaw 与持续跟进设计](openclaw-followup-design.md)，再按本计划联调。当前运行版本仍为 alpha.4；64 项代码回归和此前真实邮件验收不等于 V05 通过。
+状态：设计完成、尚未执行，2026-11-08。先完成 [OpenClaw 与持续跟进设计](openclaw-followup-design.md)，再按本计划联调。当前运行版本已是 alpha.5；原计划建立时为 alpha.4。注册已独立上线；代码回归和此前真实邮件验收不等于 V05 通过。
 
 ## 目标与参与方
 
@@ -104,6 +104,6 @@ API result 为 rows/exceptions/duplicates/summary；CSV 为 cleaned_orders.csv�
 2. 维护者冻结候选 commit/包哈希、规则和验收器，分别准备 buyer-pack、supplier-pack、readiness 与 run-log 模板；私密绑定在各端配置，不跨机发 Gmail token。
 3. 两端只报 readiness；确认具备条件后各运行一次 N1，再各运行一次 N2。测试期间维护者只读观察。
 4. 修复异常并完成恢复矩阵；Richard 仅在有具体并发/隔离验证需要时加入。
-5. 总结三维结果和证据边界，同 PR 更新架构/CLI/Skill/CHANGELOG；审阅、CI、源码与包一致性检查后，才创建 alpha.5 标签、不可变预发布和版本交接备份。最后按固定 commit 做服务器升级及私密生产备份。
+5. 总结三维结果和证据边界，同 PR 更新架构/CLI/Skill/CHANGELOG；审阅、CI、源码与包一致性检查后，才为实际运行器变更创建后续新标签、不可变预发布和版本交接备份；已有 alpha.5 注册版不重新打 tag。最后按固定 commit 做服务器升级及私密生产备份。
 
 本次只设计，不注册 Agent、不新建订单、不发邮件、不触发真实模型或更改线上服务。

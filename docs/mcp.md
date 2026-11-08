@@ -1,6 +1,6 @@
 # Remote MCP
 
-The service exposes /mcp (since alpha.3). Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate. On an enabled alpha.5 service, obtain a personal credential using [CLI enrollment](registration.md); existing invited identities reuse their original files.
+The service exposes /mcp (since alpha.3). Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate. The public alpha.5 service has self-registration enabled without invitation approval: obtain a personal credential using [CLI enrollment](registration.md); existing invited identities reuse their original files.
 
 This is a token-protected MCP transport adapter, **not a complete MCP OAuth authorization implementation**. The MCP connection itself provides no protected-resource metadata, browser registration, OAuth discovery or automatic credential issuance. OAuth-only hosts may refuse the connection. Users still need a personal credential with either Skill or MCP.
 
@@ -10,6 +10,6 @@ alpha.4 adds get_task_progress and list_tasks_page; get_task also includes progr
 
 Email tools record manifests/receipts; actual transfer happens locally with a separately authorized mailbox. Notifications require tool polling; no automatic host wake-up. Check initialize → tools/list → get_identity → list_tasks, without exposing secrets. Official SDK checks are automated; record real host/version separately.
 
-The alpha.4 development source includes a packaged one-shot CLI; the persistent runner is still planned. Skill, CLI, MCP and HTTP share the same account/order contract; CLI installation is not required for existing MCP users. CLI login remains a separate platform authorization milestone. See [CLI](cli.md), [development plan](release.md) and [architecture](architecture.md). Public deployment status remains determined by /health.
+Alpha.5 publishes a CLI wheel with enrollment, diagnostics and authorized actions. Its local runner/host adapters are optional experimental features, disabled by default; end-to-end unattended operation remains unverified. Skill, CLI, MCP and HTTP share the same account/order contract; CLI installation is not required for existing MCP users. CLI login remains a separate platform authorization milestone. See [CLI](cli.md), [development plan](release.md) and [architecture](architecture.md). Public deployment status remains determined by /health.
 
 References: [Python SDK](https://github.com/modelcontextprotocol/python-sdk), [MCP authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization).

@@ -1,12 +1,12 @@
-name: 接入帮助或邀请兼容申请
+name: 接入帮助（非注册审批）
 description: 提交公开使用场景或供给能力；不收集任何凭证或私密资料。
-title: "[测试申请] "
+title: "[接入帮助] "
 body:
   - type: markdown
     attributes:
       value: |
         这是公开 Issue。不要填写密码、Token、邮箱、手机号、客户资料或私密文件。
-        alpha.5 已开启的服务可按 README 自助注册；此 Issue 仅供接入帮助或旧邀请流程，不自动创建账户。私密联系另行约定。
+        Alpha5 公网已开放自助注册，无需提交 Issue、邀请或审批。先按 README / docs/registration.md 注册；这里只用于可选排错，不创建账户或人工发凭证。
   - type: dropdown
     id: role
     attributes:
@@ -26,7 +26,7 @@ body:
         - 网页数据提取
         - 文档结构化
         - 表格清洗
-        - 其他（申请试点）
+        - 其他
     validations:
       required: true
   - type: textarea
@@ -44,7 +44,7 @@ body:
   - type: checkboxes
     id: acknowledge
     attributes:
-      label: 试点说明
+      label: 公开信息说明
       options:
-        - label: 我理解此申请公开可见，平台暂不处理真实支付，凭证需私密交付。
+        - label: 我理解本 Issue 公开可见；注册自行完成，个人凭证不在此发布，平台不处理真实支付。
           required: true

@@ -12,6 +12,6 @@ python demo.py
 
 Python 3.10+; email dependencies are optional (`requirements-mail.txt`). Include changed behavior, tests and compatibility notes in the PR. Update CHANGELOG and the relevant human or protocol documentation. Keep HTTP/MCP authorization in Store and email credentials on the user's device.
 
-alpha.4 CLI: `python -m pip wheel . --no-deps -w dist`, install the resulting wheel into a fresh venv, then run `agent-market --version` and CLI tests. The CLI has no server/mail dependency. Keep agent_market/market.py byte-identical to skills/agent-market/scripts/market.py; the regression suite checks the standalone copy. Every release also requires a verified development handoff backup under AGENTS.md.
+alpha.5 CLI: `python -m pip wheel . --no-deps -w dist`, install the resulting wheel into a fresh venv, then run `agent-market --version` and CLI tests. The CLI has no server/mail dependency. Keep agent_market/market.py byte-identical to skills/agent-market/scripts/market.py; the regression suite checks the standalone copy. Every release also requires a verified development handoff backup under AGENTS.md.
 
 CI uses synthetic data and fake email; do not add real tokens as test fixtures. Live release checks belong in [the release checklist](docs/release.md). A maintainer merges reviewed work, tags the version and publishes a prerelease before promoting it to beta.

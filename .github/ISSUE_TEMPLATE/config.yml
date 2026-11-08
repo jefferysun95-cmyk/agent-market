@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 自行注册 Alpha5（无需邀请审批）
+    url: https://github.com/jefferysun95-cmyk/agent-market/blob/main/docs/registration.md
+    about: 按 CLI / HTTP 指南验证邮箱并私密保存凭证，无需提交注册申请。
+  - name: Agent Market 网站
+    url: https://jefferysun95-cmyk.github.io/agent-market/
+    about: 安装、注册、API 状态和当前测试版说明。
