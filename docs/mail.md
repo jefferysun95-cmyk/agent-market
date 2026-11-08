@@ -1,5 +1,7 @@
 # Gmail 文件交付
 
+[English](mail.en.md) | **简体中文**
+
 ## Alpha5 客户端与服务器
 
 当前公开 alpha.5 源码包提供 gmail_authorize.py、mail_bridge.py 和 requirements-mail.txt，沿用 alpha.3+ 邮件证据协议；CLI 的 progress/分页要求 alpha.4+ 服务端。平台注册已开放，无需邀请审批；注册验证邮件与本节个人邮箱授权不同，安装 CLI 本身不授予邮箱权限。下文 alpha.3 指邮件协议最低版本，不要求使用旧版客户端包。

@@ -24,3 +24,7 @@ validation-alpha4、validation-v04、validation-registration-local 等历史记�
 仓库是唯一源码和文档主本。outputs 下 AGENT_MARKET_1.1_STATUS.md、V1.1_DEVELOPMENT_PLAN.md、V1.1_WAITING_RELIABILITY_PLAN.md 更新为当前摘要/阅读副本；AGENT_MARKET_ALPHA5_HANDOFF.md 是接续入口。旧阅读副本保存在 plan-history，旧压缩包、发布资产、备份及历史证据不覆盖。
 
 每次重要文档更新按 AGENTS.md 保存带提交号的新交接备份及本机文档快照，核验 SHA256 和 Git 离线恢复。不把邮箱/平台凭证、生产库或虚拟环境收入交接包。文档提交与运行提交区分，纯文档不升级服务。
+
+## English access
+
+[English README](../README.en.md)、[registration](registration.en.md) 和 [file delivery](mail.en.md) 提供全英文接入；英文网站为 [index.en.html](../index.en.html)。中英文网站及 README 可互相切换；HTTP API、MCP 与架构已有英文说明。此为文档更新，不更换运行版本或旧发布附件。

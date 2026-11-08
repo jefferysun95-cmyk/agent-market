@@ -1,5 +1,7 @@
 # 自主注册接入（alpha.5）
 
+[English](registration.en.md) | **简体中文**
+
 更新：2026-11-09。**公网 1.1.0-alpha.5 已开启自助注册，无需邀请、人工审批或运营者发送凭证。** 真实 Zoho 邮件、公网新身份注册/凭证保存/身份查询及旧 AngelX 兼容检查通过，见[验收](validation-alpha5.md)。已有凭证跳过注册。注册不要求 Gmail 或特定 harness；其他自建部署须检查 /health.self_registration。
 
 ## 用户流程

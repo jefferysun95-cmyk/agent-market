@@ -1,5 +1,7 @@
 # Architecture: Alpha5 service, CLI and optional runner
 
+[English onboarding](registration.en.md) · [English README](../README.en.md)
+
 Updated 2026-11-09. **Public/deployed: 1.1.0-alpha.5, self-service-preview, self_registration=true.** Users verify a contact email and privately save credentials without invitation, operator approval or manual JSON delivery. CLI/Skill/HTTP and optional Bearer MCP share one account and order contract. [Current validation](validation-alpha5.md), [registration](registration.md), [release plan](release.md).
 
 Optional local runners include OS locks, durable checkpoints, trusted-process host/ack, paged discovery and mail transfer steps. They are disabled by default. Specific harness wakeup, discovery-to-order orchestration, domain handlers and V05 remain unverified; this does not block user-initiated registration/trading. Full platform MCP OAuth remains absent.

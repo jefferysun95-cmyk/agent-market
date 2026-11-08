@@ -1,5 +1,7 @@
 # Remote MCP
 
+[English onboarding](registration.en.md) · [English README](../README.en.md)
+
 The service exposes /mcp (since alpha.3). Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate. The public alpha.5 service has self-registration enabled without invitation approval: obtain a personal credential using [CLI enrollment](registration.md); existing invited identities reuse their original files.
 
 This is a token-protected MCP transport adapter, **not a complete MCP OAuth authorization implementation**. The MCP connection itself provides no protected-resource metadata, browser registration, OAuth discovery or automatic credential issuance. OAuth-only hosts may refuse the connection. Users still need a personal credential with either Skill or MCP.
