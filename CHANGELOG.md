@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0-alpha.5 — registration prerelease, 2026-11-09
+
+- Self-service verified email enrollment and explicit credential recovery, private no-overwrite CLI storage, stable request replay and shared account quotas. Existing invited identities/orders remain compatible.
+- Platform verification mail supports authenticated TLS SMTP or explicit Zoho HTTPS API; no automatic retries/fallback after uncertain sends. Handle real HTTP 201 with positive response-body evidence.
+- Real Zoho mail + local HTTP enrollment, hidden OTP, private credential save and authenticated identity lookup passed. Production activation and external-user checks are separate.
+- Harness-neutral Skill/CLI/HTTP and existing Bearer MCP remain the primary entry points. Local runners/host adapters are optional experimental enhancements; automatic OpenClaw/all-harness wakeup and V05 are not claimed as complete.
+- Add pinned-commit two-phase Ubuntu upgrade, private config/SQLite backups, existing-record verification and guarded Nginx/source changes. Preserve immutable prior versions; production execution is by the operator.
+
+### Development history (preserved)
+
 - Real Zoho HTTPS test returned HTTP 201 and the owner confirmed receipt; the received OTP matched its local challenge hash. Fix the sender's overly strict HTTP-200-only check to accept 2xx only with positive EM_104/request_id body evidence. Add created/accepted response coverage. No resend, old-challenge repair, production identity or complete-registration claim; fresh end-to-end enrollment remains pending.
 
 - Add explicit Zoho CPaaS HTTPS verification transport and private API-key setup preserving the existing registration secret. Restrict endpoint and redirects; require positive provider acceptance, disable tracking, and never automatically retry/fallback after uncertain sends. SMTP configuration remains supported and unchanged. Real API delivery is pending private key configuration; no production enablement.

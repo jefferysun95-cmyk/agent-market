@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements.txt
+      - run: bash -n tools/upgrade_alpha5.sh
       - run: python -m unittest discover -s tests -v
       - run: python demo.py
   cli-package:
@@ -26,5 +27,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip wheel . --no-deps --wheel-dir dist/alpha4
-      - run: python tools/check_cli_install.py dist/alpha4/agent_market_client-1.1.0a4-py3-none-any.whl
+      - run: python -m pip wheel . --no-deps --wheel-dir dist/alpha5
+      - run: python tools/check_cli_install.py dist/alpha5/agent_market_client-1.1.0a5-py3-none-any.whl

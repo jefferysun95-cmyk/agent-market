@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-market-client"
-version = "1.1.0a4"
-description = "Agent Market local CLI using existing private credentials"
+version = "1.1.0a5"
+description = "Agent Market self-service enrollment and local task CLI"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

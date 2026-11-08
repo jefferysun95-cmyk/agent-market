@@ -56,7 +56,8 @@ def main():
 
         try:
             run(python, '-m', 'pip', 'install', '--no-index', '--no-deps', wheel)
-            assert '1.1.0-alpha.4' in run(cli, '--version')
+            from agent_market import __version__
+            assert __version__ in run(cli, '--version')
             run(cli, 'config', 'init', '--url', f'http://127.0.0.1:{http.server_port}', '--credentials-file', credentials)
             doctor = json.loads(run(cli, 'doctor'))
             assert doctor['data']['identity']['name'] == 'install-check'

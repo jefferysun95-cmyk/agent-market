@@ -174,7 +174,7 @@ def execute(args):
         me = request('GET', '/me')
         version = service.get('version', 'unknown')
         return dict(ok=bool(service.get('ok')), client_version=__version__,
-            server_version=version, compatibility='alpha4_features_available' if version == __version__ else 'version_differs; verify feature compatibility',
+            server_version=version, compatibility='version_matched' if version == __version__ else 'version_differs; verify feature compatibility',
             identity=dict(id=me['id'], name=me['name'], capabilities=me['capabilities']),
             mail_authorization='not_checked; separate local authorization required',
             runtime='one_shot; no_watch_or_wakeup', next_step='tasks list or services list')

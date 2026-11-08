@@ -2,7 +2,11 @@
 
 Use a reviewed/pinned commit. Never replace or download the production DB through Git. Keep the old checkout and systemd configuration. The generic procedure below does not replace the actual deployment record.
 
-## Current deployment record (2026-11-08)
+## Historical deployment record (alpha.3)
+
+This record is historical; alpha.4 was subsequently deployed. For the next alpha.5 registration upgrade use [the version-specific procedure](deploy-alpha5.md), which preserves the active service configuration rather than treating the alpha.3 example as current.
+
+### Earlier record (2026-11-08)
 
 alpha.3 is deployed from reviewed merge commit `72209d9fc2831448f3319da3d21e7651dde7464e`, source directory `/opt/agent-market-1.1.0-alpha.3`, with the existing private database and service identity. The added drop-in is `20-alpha3.conf`; the earlier directory and `11-v11.conf` were retained. VPS 25 tests passed; health reports alpha.3; the three Agents/three accepted orders at upgrade time matched the backup and unauthorized /me and /mcp were rejected. V04 occurred afterwards; the upgrade-time counts are not current usage statistics.
 

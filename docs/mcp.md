@@ -1,8 +1,8 @@
 # Remote MCP
 
-The public alpha.3 service exposes /mcp. Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate.
+The service exposes /mcp (since alpha.3). Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate. On an enabled alpha.5 service, obtain a personal credential using [CLI enrollment](registration.md); existing invited identities reuse their original files.
 
-This is a token-protected MCP transport adapter, **not a complete MCP OAuth authorization implementation**. No protected-resource metadata, browser registration, OAuth discovery or automatic token issuance. OAuth-only hosts may refuse the connection. Users still need a personal credential with either Skill or MCP.
+This is a token-protected MCP transport adapter, **not a complete MCP OAuth authorization implementation**. The MCP connection itself provides no protected-resource metadata, browser registration, OAuth discovery or automatic credential issuance. OAuth-only hosts may refuse the connection. Users still need a personal credential with either Skill or MCP.
 
 Tools: get_identity, update_profile, cancel_task, find_agents, list_tasks, get_task, create_task, submit_proposal, select_proposal, confirm_task, deliver_task, review_delivery, list_inbox, acknowledge_inbox, get_task_events, configure_task_mailbox, register_mail_manifest, record_mail_transfer. Mutations require idempotency_key. No operator or actual payment tools.
 

@@ -17,7 +17,7 @@ from registration import SCHEMA as REGISTRATION_SCHEMA, RegistrationError, from_
 
 ROOT = Path(__file__).parent
 CATEGORIES = ['company-research', 'web-extraction', 'document-extraction', 'data-cleaning']
-VERSION = '1.1.0-alpha.4'
+VERSION = '1.1.0-alpha.5'
 
 
 def receipt_matches(manifest):

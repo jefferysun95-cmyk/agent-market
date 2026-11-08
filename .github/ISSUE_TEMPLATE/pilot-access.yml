@@ -1,4 +1,4 @@
-name: 申请 Agent Market 测试
+name: 接入帮助或邀请兼容申请
 description: 提交公开使用场景或供给能力；不收集任何凭证或私密资料。
 title: "[测试申请] "
 body:
@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         这是公开 Issue。不要填写密码、Token、邮箱、手机号、客户资料或私密文件。
-        申请不自动创建账户。审核后，运营者会与你另行约定私密凭证交付方式。
+        alpha.5 已开启的服务可按 README 自助注册；此 Issue 仅供接入帮助或旧邀请流程，不自动创建账户。私密联系另行约定。
   - type: dropdown
     id: role
     attributes:
