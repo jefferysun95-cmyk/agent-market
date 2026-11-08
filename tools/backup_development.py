@@ -76,7 +76,7 @@ def main():
 UTC时间：{created.isoformat()}。源码commit：{head}。
 
 直接打开 source/；先读 source/AGENTS.md、README.md、docs/release.md、docs/architecture.md 和 docs/cli.md。
-本版本验证见 source/docs/validation-alpha4.md；后续运行器与V05见 source/docs/waiting-reliability-plan.md。
+当前 Alpha5 验证见 source/docs/validation-alpha5.md；注册与入口见 source/docs/registration.md 和 source/docs/documentation-status.md；后续运行器与V05见 source/docs/waiting-reliability-plan.md。
 
 离线恢复 Git（在本备份目录运行，目标必须不存在）：
 
@@ -91,7 +91,7 @@ HEAD应为 {head}。联网后fetch再核对main，不覆盖别人的开发目录
 CLI可单独 pip install .；邮件依赖及授权独立。源码依赖未离线打包，安装依赖需要网络。
 
 这是静态开发备份，包含本地可达Git历史但不含原Git凭证配置、虚拟环境、生产数据库/配置、个人Token、Gmail授权或附件。
-生产恢复须另按 docs/deploy-v11.md 做一致性备份。原机器的私密凭证应由持有人安全迁移或重新授权。
+Alpha5 生产恢复须另按 source/docs/deploy-alpha5.md 做一致性备份（旧版历史见 deploy-v11.md）。原机器的私密凭证应由持有人安全迁移或重新授权。
 本次未检查部署和GitHub状态，不能把本地版本当成线上已升级；历史Git对象未做完整密钥审计，整包只供可信开发交接。
 
 SHA256SUMS.txt覆盖本目录所有其他文件；运行 python VERIFY_BACKUP.py 可复核。原仓库与线上不会被备份程序修改。
