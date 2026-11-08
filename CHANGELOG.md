@@ -1,5 +1,7 @@
 # Changelog
 
+- Add explicit Zoho CPaaS HTTPS verification transport and private API-key setup preserving the existing registration secret. Restrict endpoint and redirects; require positive provider acceptance, disable tracking, and never automatically retry/fallback after uncertain sends. SMTP configuration remains supported and unchanged. Real API delivery is pending private key configuration; no production enablement.
+
 - Add an interactive local SMTP setup helper: hidden password input, private outside-Git configuration, separate generated registration secret, no overwrite and no network/deployment side effects. Two focused setup tests pass; actual Zoho credentials and message delivery are not yet tested by this helper.
 
 - Development-only self-service enrollment: opt-in public email challenge/exchange, hashed codes and stable exchanges, explicit verified recovery, operator-revocation guard, per-address/source/global enrollment limits and shared new-account task/quote quotas. Preserve legacy operator-issued identities and Store transaction rules.

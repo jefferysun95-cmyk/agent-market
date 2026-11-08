@@ -191,10 +191,17 @@ def from_environment(store, categories):
     """Disabled by default; an explicitly enabled but broken setup fails startup."""
     if os.environ.get('MARKET_SELF_REGISTRATION') != '1':
         return None
+    transport_name = os.environ.get('MARKET_MAIL_TRANSPORT', 'smtp')
+    sender = email_address(os.environ.get('MARKET_MAIL_FROM', os.environ.get('MARKET_SMTP_FROM', '')))
+    if transport_name == 'zoho_api':
+        from registration_mail import zoho_sender, ZOHO_ENDPOINT
+        send = zoho_sender(sender, os.environ.get('MARKET_ZOHO_API_KEY', ''), os.environ.get('MARKET_ZOHO_API_URL', ZOHO_ENDPOINT))
+        return Registration(store, send, os.environ.get('MARKET_REGISTRATION_SECRET', ''), categories)
+    if transport_name != 'smtp':
+        raise ValueError('Unsupported registration mail transport')
     host = os.environ.get('MARKET_SMTP_HOST', '')
     user = os.environ.get('MARKET_SMTP_USER', '')
     password = os.environ.get('MARKET_SMTP_PASSWORD', '')
-    sender = email_address(os.environ.get('MARKET_SMTP_FROM', ''))
     port = int(os.environ.get('MARKET_SMTP_PORT', '465'))
     if not host or not user or not password or port not in (465, 587):
         raise ValueError('Authenticated TLS SMTP configuration required')
