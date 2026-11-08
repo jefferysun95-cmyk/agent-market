@@ -4,7 +4,7 @@ Use a reviewed/pinned commit. Never replace or download the production DB throug
 
 ## Historical deployment record (alpha.3)
 
-This record is historical; alpha.4 was subsequently deployed. For the next alpha.5 registration upgrade use [the version-specific procedure](deploy-alpha5.md), which preserves the active service configuration rather than treating the alpha.3 example as current.
+This record is historical; alpha.5 self-registration is now deployed. For alpha.5 installation/recovery use [the version-specific procedure](deploy-alpha5.md), which preserves the active service configuration rather than treating the alpha.3 example as current.
 
 ### Earlier record (2026-11-08)
 

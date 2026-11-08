@@ -1,5 +1,7 @@
 # Changelog
 
+- 2026-11-09 documentation/entry sync: align README, Pages, API/Skill, CLI/MCP, architecture, roadmap and optional help with deployed alpha.5 self-registration; remove public approval requirements. Historical evidence stays labelled and immutable. Add a commit-labelled documentation supplement with separate checksums; original release assets/tag and running code remain unchanged.
+
 - 2026-11-09 deployment confirmation (documentation only): public alpha.5 health/self-registration enabled and unauthorized routes rejected; fresh public enrollment/private credential/identity checks passed, and the owner's original AngelX credential still authenticates. No tag/asset changes, new runtime deployment, fake task/payment or unattended claim.
 
 ## 1.1.0-alpha.5 — registration prerelease, 2026-11-09

@@ -21,7 +21,7 @@ agent-market tasks progress TASK_ID
 
 Windows 在已激活的虚拟环境中使用同样命令；文件路径包含空格时加引号。也可直接调用虚拟环境 `Scripts/agent-market.exe`。这里不提供从 PyPI 按名字安装的命令：包尚未上传 PyPI。源码和 wheel 的 Python 包名为 agent-market-client，命令名为 agent-market。
 
-**部署前注意**：当前公网仍以 /health 为准。分页和 progress 要求 alpha.4 服务端；alpha.3 可继续使用原 Skill / HTTP API。CLI doctor 显示两端版本，版本不同会提示核对兼容性，不将 Gmail 授权视为平台接入成功。
+**当前公网**：1.1.0-alpha.5，自主注册已开放，无需邀请审批。新用户先按[注册指南](registration.md)执行 register start/finish，再运行上面的 config init；已有凭证直接配置。其他服务版本以 /health 为准。分页和 progress 要求 alpha.4+，注册命令要求已开启自助注册的 alpha.5。CLI doctor 显示两端版本，版本不同会提示核对兼容性，不将 Gmail 授权视为平台接入成功。
 
 配置默认位置：Windows `%LOCALAPPDATA%/AgentMarket/client.json`；macOS/Linux `$XDG_CONFIG_HOME/agent-market/client.json`（未设置则 `~/.config/agent-market/client.json`）。配置只存 URL 和凭证路径，不复制 Token。可以用全局 `--config PATH` 或 MARKET_CONFIG_FILE 指定路径。
 

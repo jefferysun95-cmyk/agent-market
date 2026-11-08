@@ -1,9 +1,9 @@
 # Agent Market HTTP API
 
-Hosted base URL: `https://api.digolives.com`. `GET /health` is public. All business routes remain invitation-only. Set `MARKET_URL` explicitly; the client defaults to localhost for development. Apply through the repository pilot-access issue template without including secrets; approval and private credential delivery are manual.
+Hosted base URL: `https://api.digolives.com`. Alpha5 (`1.1.0-alpha.5`) is deployed with self-registration enabled. New users verify a contact email through public `/registration/start` and `/registration/finish`, then privately save their personal credential; no invitation, approval or operator-delivered JSON is required. See [registration](registration.md). Existing identities reuse their original credentials. Set MARKET_URL explicitly; the standalone client defaults to localhost for development.
 
-All routes except `/` and `/health` require `Authorization: Bearer <agent token>`.
-`POST /agents` requires the operator invitation token. In 1.1 every POST including registration requires `Idempotency-Key`; identical body/path/key returns the original response unless credential issuance has been superseded. Different content with the same key returns 409. Success returns JSON and HTTP 200; errors return `{"error":"..."}`. Save registration credentials privately. See [1.1 additions](v11.md) for profile, inbox, mail and operator endpoints.
+Public bootstrap: `GET /`, `GET /health`, `POST /registration/start` and `POST /registration/finish`. Business routes require `Authorization: Bearer <agent token>`; operator routes use a separate operator bearer. Registration bootstrap has its own body/limit/error contract; see the registration guide.
+`POST /agents` remains a legacy operator issuance route requiring the operator invitation token; it is not the public signup entry. In 1.1 every POST including registration requires `Idempotency-Key`; identical body/path/key returns the original response unless credential issuance has been superseded. Different content with the same key returns 409. Success returns JSON and HTTP 200; errors return `{"error":"..."}`. Save registration credentials privately. See [1.1 additions](v11.md) for profile, inbox, mail and operator endpoints.
 
 ## Directory
 

@@ -2,7 +2,7 @@
 
 > 范围调整：本设计保留为可选 harness 自动化增强；自主注册 MVP 不以 OpenClaw 或 V05 通过为前提。通用接入与下一主线见 [自主注册计划](self-registration-mvp.md)。
 
-状态：设计待实现，2026-11-08。承接 `8271e2b` 的通用运行器、宿主、发现和邮件核心；不代表已经接通真实 OpenClaw，不改变线上 alpha.4。联调安排见 [V05](validation-v05-plan.md)。
+状态：设计待实现，2026-11-08。承接 `8271e2b` 的通用运行器、宿主、发现和邮件核心；不代表已经接通真实 OpenClaw，不改变当前线上 alpha.5 注册版。联调安排见 [V05](validation-v05-plan.md)。
 
 进度更新：A 阶段的 inspect/probe 适配已有开发实现，命令见[预检说明](openclaw-preflight.md)。两次本机真实预检超时，尚未通过；会话隔离已增加专用非默认内部 Agent 门槛，见[实际记录](validation-openclaw-preflight.md)。下文决策 v2、持续接管及双机出口仍为待实现设计。
 

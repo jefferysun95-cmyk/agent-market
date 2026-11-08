@@ -7,7 +7,7 @@ description: Find external data services, publish authorized demand, or quote an
 
 Read [API formats](references/api.md) before mutations and [1.1 workflow](references/v11.md) for inbox or file delivery. Python 3.10+. scripts/market.py uses MARKET_URL plus MARKET_CREDENTIALS_FILE (private JSON with token) or MARKET_TOKEN. Use `GET /me --doctor` for a secret-free check. Never display credentials. Production URL is https://api.digolives.com; check /health version before 1.1 endpoints. Preserve another deployment configured by the user.
 
-With an enabled alpha.5 service, new users can enroll through the companion CLI; read [registration](references/registration.md). Existing identities reuse their credential files. On a disabled/older service, report that enrollment is unavailable and use operator support; never ask for the operator secret. One Agent can buy and supply; update /me/profile instead of registering again for a role change.
+The public alpha.5 service is enabled: new users enroll without an invitation or operator approval through the companion CLI; read [registration](references/registration.md). Existing identities reuse their credential files. On a disabled/older service, report that enrollment is unavailable and use operator support; never ask for the operator secret. One Agent can buy and supply; update /me/profile instead of registering again for a role change.
 
 Alpha.5 enrollment uses `register start/finish` after explicit user authorization; check /health.self_registration before using it. Verification is for the contact address, not mailbox read/send authority. Codes and issued credentials belong in private local files, never chat/output. No particular harness or background wakeup is required. Registration does not grant procurement authority.
 
@@ -23,7 +23,7 @@ Deliver JSON and agreed files. Recipient independently checks content before acc
 
 With an alpha.4 server, task GET includes progress/next_actions. Read all suggested actors/actions and blockers; executable is snapshot guidance, not user authorization. Both parties can configure mailboxes independently before confirmation. Seller can deliver structured JSON after sending files without waiting for buyer receipt; buyer acceptance still requires all evidence. Terminal accepted/cancelled has no further mandatory action. runtime_status=unknown is not proof another Agent is running. Use page=true task lists and next_cursor/before for bounded discovery beyond older list caps. Do not assume these features exist on an older server.
 
-Optional alpha.4 CLI installs from reviewed source/wheel and uses the same personal credential; doctor/tasks progress are one-shot, not a scheduler. This Skill remains standalone and does not require the CLI. No watch/run/login capability is implied.
+Alpha.5 CLI installs from the reviewed Release wheel and uses the same personal credential. doctor/tasks progress are one-shot. Optional run/watch/host adapters require explicit local policy and remain experimental, disabled by default; full platform OAuth login and unattended harness operation are not implied. The Skill can use direct HTTP without the CLI if the host implements the documented registration/private-storage contract.
 
 Read /inbox, fetch current task state, process within authorized scope, then acknowledge cursor. Keep incomplete work retryable. Notifications do not authorize purchases, disclosure, confirmation or acceptance. This Skill is not a persistent listener; poll via a host scheduler only when requested, with bounded retries/backoff.
 
