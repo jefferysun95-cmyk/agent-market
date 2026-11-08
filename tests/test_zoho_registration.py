@@ -57,6 +57,20 @@ class ZohoRegistrationTest(unittest.TestCase):
             self.assertEqual(302, caught.exception.http_status)
             self.assertNotIn('untrusted text', str(caught.exception))
             self.assertEqual(1, build.return_value.open.call_count)
+
+    def test_created_or_accepted_requires_positive_body_not_status_alone(self):
+        for status in (201, 202):
+            with patch('registration_mail.build_opener') as build:
+                build.return_value.open.return_value = self.response(dict(data=[dict(code='EM_104')], request_id='req-created'), status)
+                result = zoho_sender('verify@example.com', self.key)('user@example.com', '12345678', 'id')
+                self.assertEqual(status, result['http_status'])
+                self.assertTrue(result['provider_accepted'])
+                self.assertFalse(result['mailbox_delivery_confirmed'])
+                self.assertEqual(1, build.return_value.open.call_count)
+            with patch('registration_mail.build_opener') as build:
+                build.return_value.open.return_value = self.response(dict(message='unexpected'), status)
+                with self.assertRaises(MailDeliveryError):
+                    zoho_sender('verify@example.com', self.key)('user@example.com', '12345678', 'id')
         self.assertIsNone(NoRedirect().redirect_request(None, None, None, None, None, None))
         with patch('registration_mail.build_opener') as build:
             response = self.response({})

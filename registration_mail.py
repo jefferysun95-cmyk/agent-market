@@ -40,7 +40,7 @@ def zoho_sender(sender, api_key, endpoint=ZOHO_ENDPOINT):
             status = error.code
             error.close()
             raise MailDeliveryError('zoho_request_not_accepted', status) from None
-        if len(raw) > 65536 or status != 200:
+        if len(raw) > 65536 or not 200 <= status < 300:
             raise MailDeliveryError('zoho_response_unconfirmed', status)
         try:
             result = json.loads(raw)
@@ -52,6 +52,6 @@ def zoho_sender(sender, api_key, endpoint=ZOHO_ENDPOINT):
                 or not isinstance(result.get('request_id'), str)
                 or not re.fullmatch(r'[A-Za-z0-9._:-]{1,300}', result['request_id'])):
             raise MailDeliveryError('zoho_response_unconfirmed', status)
-        return {'transport': 'zoho_api', 'provider_accepted': True, 'request_id': result['request_id'],
+        return {'transport': 'zoho_api', 'http_status': status, 'provider_accepted': True, 'request_id': result['request_id'],
                 'mailbox_delivery_confirmed': False}
     return send

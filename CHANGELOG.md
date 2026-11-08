@@ -1,5 +1,7 @@
 # Changelog
 
+- Real Zoho HTTPS test returned HTTP 201 and the owner confirmed receipt; the received OTP matched its local challenge hash. Fix the sender's overly strict HTTP-200-only check to accept 2xx only with positive EM_104/request_id body evidence. Add created/accepted response coverage. No resend, old-challenge repair, production identity or complete-registration claim; fresh end-to-end enrollment remains pending.
+
 - Add explicit Zoho CPaaS HTTPS verification transport and private API-key setup preserving the existing registration secret. Restrict endpoint and redirects; require positive provider acceptance, disable tracking, and never automatically retry/fallback after uncertain sends. SMTP configuration remains supported and unchanged. Real API delivery is pending private key configuration; no production enablement.
 
 - Add an interactive local SMTP setup helper: hidden password input, private outside-Git configuration, separate generated registration secret, no overwrite and no network/deployment side effects. Two focused setup tests pass; actual Zoho credentials and message delivery are not yet tested by this helper.

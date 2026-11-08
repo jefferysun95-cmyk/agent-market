@@ -64,7 +64,7 @@ agent-market doctor
 
 配置项：`MARKET_MAIL_TRANSPORT=zoho_api`、`MARKET_MAIL_FROM`、`MARKET_ZOHO_API_KEY`、`MARKET_ZOHO_API_URL=https://cpaas.zoho.com/v1.1/email`，以及原有稳定的 `MARKET_REGISTRATION_SECRET` 和显式启用项。域名为 **cpaas**，不是 cpass；该实现只允许已核对的上述 .com HTTPS 地址，其他地区地址需另行支持，禁止任意 URL 和重定向，避免泄露认证头。API Key 使用 `Zoho-enczapikey` 前缀认证，不假定 SMTP 密码等于 API Key。证书验证保持开启。
 
-接口仅在 HTTP 200、单收件结果 code=EM_104 且返回 request_id 时认定服务商接收请求；这不是收件箱投递证明。响应异常、超时或拒绝均停止，不自动重试。关闭打开/点击跟踪。官方契约：[认证](https://www.zoho.com/cpaas/help/api/api-authentication.html)、[发信](https://www.zoho.com/cpaas/help/api/email-sending.html)。真实 HTTPS 邮件测试须等持有人私密保存 API Key 后另行执行。
+接口仅在 HTTP 2xx、单收件结果 code=EM_104 且返回 request_id 时认定服务商接收请求；这不是收件箱投递证明。实际服务已观察到 201，不能只接受文档示例的 200；2xx 状态本身也不够，仍须核对响应体。响应异常、超时或拒绝均停止，不自动重试。关闭打开/点击跟踪。官方契约：[认证](https://www.zoho.com/cpaas/help/api/api-authentication.html)、[发信](https://www.zoho.com/cpaas/help/api/email-sending.html)。首封真实 API 邮件已由持有人确认收到并核对验证码哈希；旧代码对 201 的误判已修正，完整注册仍须新的一轮端到端验收，不补改旧挑战状态。
 
 维护者可在本机终端运行 `python tools/configure_registration_mail.py`，按提示填写 Zoho Agent 的 SMTP 连接参数，密码隐藏输入。默认保存到 Windows `%LOCALAPPDATA%/AgentMarket/registration-test-mail.json`（其他系统为私密配置目录）；文件写入前设置私密权限，已有文件不覆盖、不重新生成密钥。该工具只保存配置，不连接 SMTP、不发送邮件、不让正在运行的服务读取文件，也不启用线上注册。不要把该 JSON 或其中密钥贴进聊天、Issue 或提交仓库。接入真实发信须另做一次获授权的测试，确认实际收件，不能把“保存成功”记为“投递成功”。
 
