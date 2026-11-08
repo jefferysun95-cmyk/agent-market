@@ -1,5 +1,7 @@
 # Changelog
 
+- 2026-11-09 deployment confirmation (documentation only): public alpha.5 health/self-registration enabled and unauthorized routes rejected; fresh public enrollment/private credential/identity checks passed, and the owner's original AngelX credential still authenticates. No tag/asset changes, new runtime deployment, fake task/payment or unattended claim.
+
 ## 1.1.0-alpha.5 — registration prerelease, 2026-11-09
 
 - Self-service verified email enrollment and explicit credential recovery, private no-overwrite CLI storage, stable request replay and shared account quotas. Existing invited identities/orders remain compatible.

@@ -25,3 +25,13 @@ MCP 沿用个人 Bearer 而非完整平台 OAuth；文件任务的个人邮箱�
 ## 部署与剩余实测
 
 用户选择在现有 SSH 窗口执行[升级步骤](deploy-alpha5.md)。在激活成功及读取公网 health 之前，不能把 GitHub 发布等同于线上升级。仍须公网新用户注册/旧凭证检查；更广泛 harness、独立新用户和生产回滚演练继续跟进。平台保持单服务和 SQLite。
+
+### 实际上线确认（2026-11-09）
+
+运营者报告已完成 prepare、私密配置上传和 activate。维护者独立读取公网：health.ok=true、version=1.1.0-alpha.5、mode=self-service-preview、self_registration=true；无凭证 GET /me 和 POST /mcp 均返回 401。部署所用固定提交/标签仍为 ccea7b2d4e648f69b5313081fab3c7cad0323897 / v1.1.0-alpha.5，本文档后续更新不移动该标签或改变线上代码。
+
+持有人随后在自己的电脑执行外部公网新注册，使用全新测试身份 Alpha5PublicCheck，在终端隐藏输入生产服务发送的新验证码。维护者只读核对私密 report.json：status=passed、public_registration=true、credentials_saved=true、identity_check=true、server_version=1.1.0-alpha.5、token_displayed=false、tasks_created=false。该次注册使用公网 API，而非先前回环服务，不复用本地测试凭证。没有发布虚构任务或付款。
+
+维护者使用本机原 AngelX 凭证只读调用公网 GET /me，认证成功且身份与升级前 ID 匹配；没有使用 Quincey/Richard 的凭证、改写旧身份或旧订单。旧数据库指纹检查由运营者的激活脚本负责，本次没有直接读取服务器数据库或猜测备份路径/当前账户数量。
+
+结论：Alpha5 自主注册 MVP 已完成上线和首次公网注册验收。范围仍是用户主动启动的注册测试版；自动唤起保持显式可选实验，更广泛独立用户、交易复购与生产回滚演练继续跟进。API Key、验证码、个人 Token 和生产数据未写入本记录。
