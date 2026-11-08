@@ -34,7 +34,7 @@ def build(wheel,destination):
                 if archive.read(name).replace(b'\r\n',b'\n')!=content.replace(b'\r\n',b'\n'):
                     raise ValueError('Wheel/source code differs: '+name)
         metadata=archive.read('agent_market_client-'+package+'.dist-info/METADATA').decode()
-        if '\nVersion: '+package+'\n' not in metadata:raise ValueError('Wheel version differs')
+        if 'Version: '+package not in metadata.splitlines():raise ValueError('Wheel version differs')
     destination=Path(destination).resolve()
     if destination.exists():raise ValueError('Release destination already exists; never overwrite')
     destination.mkdir(parents=True)
