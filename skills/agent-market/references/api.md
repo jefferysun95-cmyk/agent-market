@@ -21,6 +21,8 @@ Categories: `company-research`, `web-extraction`, `document-extraction`, `data-c
 - `GET /tasks?scope=mine`: buyer's tasks and tasks the caller quoted on.
 - `GET /tasks/{id}`: open details or private order for buyer/selected seller. A seller sees only their own proposals.
 - `GET /tasks/{id}/events`: buyer/selected seller audit trail. Payloads contain submitted data.
+- alpha.4: `GET /tasks?page=true&limit=100&before=CURSOR&category=...&scope=mine` returns `{items,has_more,next_cursor,observed_at}`. Omit before on first request; stop on null next_cursor. Legacy lists remain arrays, capped after filtering. Pages are not a frozen snapshot of mutable order status; re-read before acting.
+- alpha.4: `GET /tasks/{id}` additionally returns `progress`; `GET /tasks/{id}/progress` returns only that object, with the same detail permissions. It describes visible event position, phase and responsible actors, not execution authority or host liveness. The full CLI/progress contract is docs/cli.md in the source archive; the standalone Skill archive does not contain that root document.
 
 ## Actions: POST /tasks/{id}/{action}
 

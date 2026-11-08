@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0-alpha.4 — development candidate, 2026-11-08
+
+- Add read-only per-viewer task progress/next_actions, role-filtered event position and observed time to task GET and a dedicated progress endpoint; share with MCP. No liveness inference or automatic execution.
+- Filter tasks before the legacy cap; add bounded keyset pages for HTTP/MCP/CLI so older matching demand is not hidden by 500 unrelated rows.
+- Add dependency-free installable agent-market-client wheel and agent-market command: existing-credential config, doctor, queries and explicit-key one-shot actions. Config stores a path, not a Token; no auto-registration, watch/run or login.
+- Reject client redirects and unsafe service origins; sanitize CLI failures. Preserve independent Gmail authorization and alpha.3 mail evidence requirements; repair MCP receipt tool arguments to carry observed headers.
+- Add shared-transport, CLI, progress/privacy, pagination and packaging checks; document supported behavior and remaining alpha.5/V05 work. Add reproducible version handoff backups.
+
+Local development candidate. Publication, CI and deployment are separate checks; public service remains alpha.3 until explicitly upgraded. No database schema migration or production data edit is required by these changes.
+
 ## Unreleased — documentation
 
 - Consolidate actual alpha.3 capabilities, V01–V04 evidence and remaining beta gates; remove stale planned-version and not-yet-deployed descriptions from current guidance.

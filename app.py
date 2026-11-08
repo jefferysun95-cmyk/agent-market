@@ -58,6 +58,21 @@ def get_task(task_id: str) -> dict:
 
 
 @mcp.tool()
+def get_task_progress(task_id: str) -> dict:
+    """Read next responsible actors and blockers. Guidance is not execution authority or host liveness."""
+    return invoke('GET',f'/tasks/{task_id}/progress')
+
+
+@mcp.tool()
+def list_tasks_page(category: str='', mine: bool=False, before: str='', limit: int=100) -> dict:
+    """Read a bounded task page. Pass next_cursor as before; re-read each task before acting."""
+    from urllib.parse import urlencode
+    query=dict(page='true',category=category,scope='mine' if mine else 'open',limit=limit)
+    if before:query['before']=before
+    return invoke('GET','/tasks?'+urlencode(query))
+
+
+@mcp.tool()
 def create_task(title: str, category: str, brief: str, acceptance: str, budget: str,
                 deadline: str, idempotency_key: str) -> dict:
     """Publish demand only with user authorization. Open briefs are visible to registered Agents."""
@@ -133,9 +148,11 @@ def register_mail_manifest(task_id: str, kind: str, files: list[dict], idempoten
 
 @mcp.tool()
 def record_mail_transfer(task_id: str, manifest_id: str, received: bool,
-                         files: list[dict], message_id: str, idempotency_key: str) -> dict:
+                         files: list[dict], message_id: str, idempotency_key: str,
+                         observed_message_id: str='', observed_from: str='', observed_to: str='') -> dict:
     """Record actual send or recipient hash verification. Never infer receipt from sending success."""
-    body={'manifest_id':manifest_id,'files':files} if received else {'manifest_id':manifest_id,'message_id':message_id}
+    body=dict(manifest_id=manifest_id,files=files,observed_message_id=observed_message_id,
+              observed_from=observed_from,observed_to=observed_to) if received else {'manifest_id':manifest_id,'message_id':message_id}
     return invoke('POST',f'/tasks/{task_id}/mail-{"received" if received else "sent"}',body,idempotency_key)
 
 

@@ -66,6 +66,12 @@ class MCPTest(unittest.TestCase):
                         task=json.loads(result.content[0].text)
                         response=await asyncio.to_thread(httpx.get,self.url+'/tasks/'+task['id'],headers={'Authorization':'Bearer '+token})
                         self.assertEqual('SDK synthetic task',response.json()['title'])
+                        progress=await session.call_tool('get_task_progress',{'task_id':task['id']})
+                        self.assertFalse(progress.isError)
+                        self.assertEqual(response.json()['progress']['phase'],json.loads(progress.content[0].text)['phase'])
+                        page=await session.call_tool('list_tasks_page',{'mine':True,'limit':1})
+                        self.assertFalse(page.isError)
+                        self.assertIn(task['id'],[t['id'] for t in json.loads(page.content[0].text)['items']])
         async def run():await asyncio.gather(*(scenario(t,n) for t,n in zip(self.tokens,['buyer','seller'])))
         asyncio.run(run())
 
@@ -77,3 +83,36 @@ class MCPTest(unittest.TestCase):
         self.assertEqual(413,httpx.post(self.url+'/mcp',headers=headers,content=b'x'*1000001).status_code)
         self.assertEqual(413,httpx.post(self.url+'/tasks',headers=headers,content=b'x'*1000001).status_code)
         self.assertEqual(400,httpx.post(self.url+'/tasks',headers=headers,json=[]).status_code)
+
+    def test_mcp_receipt_preserves_observed_headers(self):
+        import httpx
+        from mcp import ClientSession
+        from mcp.client.streamable_http import streamable_http_client
+        buyer, seller = self.tokens
+        sequence = iter(range(20))
+        def post(token, path, body):
+            r = httpx.post(self.url + path, json=body, headers={
+                'Authorization': 'Bearer ' + token, 'Idempotency-Key': 'mcp-mail-' + str(next(sequence))})
+            r.raise_for_status()
+            return r.json()
+        task = post(buyer, '/tasks', dict(title='Mail adapter', category='data-cleaning', brief='synthetic',
+            acceptance='bytes', budget='0', deadline='2030-01-01'))
+        path = '/tasks/' + task['id']
+        quote = post(seller, path + '/proposals', dict(price='0', terms='bytes', deadline='2030-01-01'))
+        post(buyer, path + '/select', dict(proposal_id=quote['proposals'][0]['id']))
+        post(buyer, path + '/mail-config', dict(address='buyer@example.com'))
+        post(seller, path + '/mail-config', dict(address='seller@example.com'))
+        post(seller, path + '/confirm', dict(revision=1))
+        files = [dict(name='rows.csv', size=3, sha256='a'*64)]
+        manifest = post(seller, path + '/mail-manifests', dict(kind='delivery', files=files))
+        post(seller, path + '/mail-sent', dict(manifest_id=manifest['id'], message_id='<observed@example.com>'))
+        async def run():
+            async with httpx.AsyncClient(headers={'Authorization': 'Bearer ' + buyer}) as client, streamable_http_client(self.url+'/mcp', http_client=client) as (read, write, _):
+                async with ClientSession(read, write) as session:
+                    await session.initialize()
+                    result = await session.call_tool('record_mail_transfer', dict(task_id=task['id'], manifest_id=manifest['id'],
+                        received=True, files=files, message_id='', idempotency_key='mcp-observed-receipt',
+                        observed_message_id='<observed@example.com>', observed_from='seller@example.com', observed_to='buyer@example.com'))
+                    self.assertFalse(result.isError, str(result))
+                    self.assertEqual('<observed@example.com>', json.loads(result.content[0].text)['receipt']['observed_message_id'])
+        asyncio.run(run())

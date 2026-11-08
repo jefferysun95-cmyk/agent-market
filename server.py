@@ -16,7 +16,7 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).parent
 CATEGORIES = ['company-research', 'web-extraction', 'document-extraction', 'data-cleaning']
-VERSION = '1.1.0-alpha.3'
+VERSION = '1.1.0-alpha.4'
 
 
 def receipt_matches(manifest):
@@ -200,7 +200,18 @@ class Store:
         if method == 'GET' and path == '/tasks':
             # Public task board contains summaries only. Inputs belong in private order detail.
             result = []
-            for row in db.execute('SELECT * FROM tasks ORDER BY rowid DESC LIMIT 500'):
+            paged = query.get('page', ['false'])[0] == 'true'
+            try:
+                before = int(query.get('before', ['9223372036854775807'])[0])
+                limit = int(query.get('limit', ['100'])[0]) if paged else 500
+            except ValueError:
+                raise Problem(400, 'Invalid task cursor or limit')
+            if before < 1 or (paged and not 1 <= limit <= 100):
+                raise Problem(400, 'Invalid task cursor or limit')
+            cursors = []
+            # Filter before capping results. Descending rowid is stable for inserts;
+            # callers must still re-read mutable order state before executing.
+            for row in db.execute('SELECT rowid AS cursor,* FROM tasks WHERE rowid<? ORDER BY rowid DESC', (before,)):
                 t = json.loads(row['body'])
                 mine = actor == t['buyer'] or any(p['seller'] == actor for p in t['proposals'])
                 if query.get('scope', ['open'])[0] == 'mine' and not mine:
@@ -211,7 +222,14 @@ class Store:
                     continue
                 result.append({k: t[k] for k in ['id', 'title', 'category', 'budget', 'deadline', 'buyer']}
                               | {'status': row['status']})
-            return result
+                cursors.append(row['cursor'])
+                if len(result) > limit:
+                    break
+            if paged:
+                return {'items': result[:limit], 'has_more': len(result) > limit,
+                        'next_cursor': str(cursors[limit-1]) if len(result) > limit else None,
+                        'observed_at': stamp()}
+            return result[:limit]
         bits = path.strip('/').split('/')
         if len(bits) >= 2 and bits[0] == 'tasks':
             row = db.execute('SELECT * FROM tasks WHERE id=?', (bits[1],)).fetchone()
@@ -222,7 +240,7 @@ class Store:
             selected = next((p for p in t['proposals'] if p['id'] == t['selected']), None)
             seller = selected and selected['seller'] == actor
             participant = buyer or seller
-            if method == 'GET' and len(bits) == 2:
+            if method == 'GET' and (len(bits) == 2 or len(bits) == 3 and bits[2] == 'progress'):
                 if state != 'open' and not participant:
                     raise Problem(403, 'Private order')
                 view = dict(t, status=state)
@@ -231,6 +249,15 @@ class Store:
                 if state == 'open':
                     # Open brief must contain only information intended for all registered agents.
                     view.pop('payment', None)
+                from progress import describe
+                # Same visibility as /events: competitors' quote activity and
+                # private mail events cannot leak through diagnostic metadata.
+                event = db.execute('SELECT id,created_at FROM events WHERE task_id=? '
+                    'AND (? OR (actor IN (?,?) AND action NOT LIKE ?)) ORDER BY id DESC LIMIT 1',
+                    (t['id'], buyer, actor, t['buyer'], 'mail-%')).fetchone()
+                view['progress'] = describe(view, actor, event)
+                if len(bits) == 3:
+                    return view['progress']
                 return view
             if method == 'GET' and len(bits) == 3 and bits[2] == 'events':
                 if not participant:

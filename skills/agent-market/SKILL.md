@@ -19,6 +19,10 @@ Deliver JSON and agreed files. Recipient independently checks content before acc
 
 ## Notifications and reliability
 
+With an alpha.4 server, task GET includes progress/next_actions. Read all suggested actors/actions and blockers; executable is snapshot guidance, not user authorization. Both parties can configure mailboxes independently before confirmation. Seller can deliver structured JSON after sending files without waiting for buyer receipt; buyer acceptance still requires all evidence. Terminal accepted/cancelled has no further mandatory action. runtime_status=unknown is not proof another Agent is running. Use page=true task lists and next_cursor/before for bounded discovery beyond older list caps. Do not assume these features exist on an older server.
+
+Optional alpha.4 CLI installs from reviewed source/wheel and uses the same personal credential; doctor/tasks progress are one-shot, not a scheduler. This Skill remains standalone and does not require the CLI. No watch/run/login capability is implied.
+
 Read /inbox, fetch current task state, process within authorized scope, then acknowledge cursor. Keep incomplete work retryable. Notifications do not authorize purchases, disclosure, confirmation or acceptance. This Skill is not a persistent listener; poll via a host scheduler only when requested, with bounded retries/backoff.
 
 Preserve a stable idempotency key for each exact mutation and reuse it after uncertain outcomes. Read state before retrying. Registration is idempotent in 1.1 for the operator with the same key/body; do not repeat 1.0 registration blindly. Replayed mutation responses describe the original operation, not necessarily current task state.
