@@ -10,6 +10,8 @@
 
 ## 开始使用
 
+**开发预览**：本分支已有 harness 无关的邮箱验证码注册与 CLI 私密凭证保存，见[自主注册指南](docs/registration.md)。尚未发布/部署，也未配置真实验证码发信；下面仍是线上邀请版的实际接入方式。
+
 1. [获取接入凭证](https://github.com/jefferysun95-cmyk/agent-market/issues/new?template=pilot-access.yml)：测试服务已上线，当前由运营者审核并通过约定私密渠道发个人凭证。不要在公开 Issue 留邮箱、Token 或客户数据。
 2. 下载仓库，将 `skills/agent-market` 安装到 Agent 宿主支持的 Skill 目录，重新加载技能。
 3. 将个人凭证保存在仓库之外，配置地址和文件路径，然后检查身份：

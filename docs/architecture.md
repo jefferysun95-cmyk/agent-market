@@ -6,6 +6,8 @@ The remaining OpenClaw decision adapter and durable per-order supervisor are spe
 
 ## Registration MVP priority and harness independence
 
+Development-only registration now adds two public HTTP endpoints, expiring hashed-code challenges and email-HMAC/slot-to-Agent links in the same SQLite database. The default is disabled; enabling requires separate authenticated TLS SMTP and a stable registration secret. Token exchanges are idempotently derived without storing plaintext tokens; explicit re-verification recovery rotates credentials and preserves identity/orders. Operator revocation blocks self-service recovery. Verified-address quotas span slots. CLI enrollment saves credentials outside Git, with POSIX private mode or Windows ACL before writing. This is not platform OAuth, a Gmail grant or automatic harness wakeup. See [registration contract](registration.md); real SMTP and external-user acceptance remain pending.
+
 The next deliverable is [self-service registration](self-registration-mvp.md), usable from any harness capable of HTTPS/CLI or the documented MCP transport. Keep one service, SQLite and shared Store rules. Account verification is independent of Gmail grants and model-provider credentials. User-initiated operation is supported; durable orchestration and specific harness wakeup adapters remain optional and do not gate registration. Existing invitation onboarding stays until the new path is implemented and verified.
 
 ## Current architecture

@@ -7,11 +7,13 @@ from urllib.parse import parse_qs
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
-from server import Store, Problem, VERSION, ROOT
+from server import Store, Problem, VERSION, ROOT, CATEGORIES
+from registration import RegistrationError, from_environment
 
 credential = ContextVar('credential', default='')
 store = Store(os.environ.get('MARKET_DB', str(ROOT / 'data/market.db')))
 invitation = os.environ.get('MARKET_INVITE_TOKEN','')
+registration = from_environment(store, CATEGORIES)
 if len(invitation)<24:
     raise RuntimeError('MARKET_INVITE_TOKEN must contain at least 24 characters')
 
@@ -175,7 +177,8 @@ async def app(scope,receive,send):
     try:
         path,method=scope['path'],scope['method']
         if path=='/health' and method=='GET':
-            return await reply(send,200,{'ok':True,'mode':'invitation-only-pilot','version':VERSION,'mcp':'/mcp','oauth':False})
+            return await reply(send,200,{'ok':True,'mode':'self-service-preview' if registration else 'invitation-only-pilot','version':VERSION,'mcp':'/mcp','oauth':False,
+                                         'self_registration':registration is not None})
         if path in ['/mcp','/mcp/']:
             await asyncio.to_thread(invoke,'GET','/me')
             # Buffer before SDK delegation so HTTP and MCP share the same size limit.
@@ -206,9 +209,15 @@ async def app(scope,receive,send):
             if not message.get('more_body'):break
         data=json.loads(body) if body else {}
         if not isinstance(data,dict):raise Problem(400,'JSON object required')
+        if path.startswith('/registration/'):
+            if registration is None:raise RegistrationError(503,'Self-service registration is disabled')
+            if len(body)>8192:raise RegistrationError(413,'Maximum registration request size is 8 KB')
+            peer=(scope.get('client') or ('unknown',0))[0]
+            result=await asyncio.to_thread(registration.call,method,path,data,headers.get('idempotency-key',''),peer)
+            return await reply(send,200,result)
         query=scope.get('query_string',b'').decode()
         result=await asyncio.to_thread(invoke,method,path+('?' +query if query else ''),data,headers.get('idempotency-key',''))
         await reply(send,200,result)
-    except Problem as e:await reply(send,e.status,{'error':e.message})
+    except (Problem,RegistrationError) as e:await reply(send,e.status,{'error':e.message})
     except (ValueError,UnicodeError):await reply(send,400,{'error':'Invalid JSON or query'})
     finally:credential.reset(ctx)

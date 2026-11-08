@@ -38,7 +38,11 @@ def main():
         registration = store.call('POST', '/agents', {}, dict(name='install-check', provider='synthetic'), 'synthetic-invite', 'register', 'synthetic-invite')
         credentials.write_text(json.dumps(registration), encoding='utf-8')
         original = credentials.read_bytes()
-        http = ThreadingHTTPServer(('127.0.0.1', 0), handler(store, 'synthetic-invite'))
+        from registration import Registration
+        from server import CATEGORIES
+        verification_messages=[]
+        enrollment=Registration(store,lambda *args:verification_messages.append(args),'synthetic-registration-secret-'*2,CATEGORIES)
+        http = ThreadingHTTPServer(('127.0.0.1', 0), handler(store, 'synthetic-invite',enrollment))
         thread = threading.Thread(target=http.serve_forever, daemon=True)
         thread.start()
 
@@ -58,6 +62,17 @@ def main():
             assert doctor['data']['identity']['name'] == 'install-check'
             tasks = json.loads(run(cli, 'tasks', 'list', '--mine'))
             assert tasks['data']['items'] == []
+            # Newly installed, dependency-free CLI can enroll with no credential
+            # exchange in stdout. Mail transport here is explicitly synthetic.
+            signup=private/'signup.json';session=private/'registration-session.json'
+            new_credentials=private/'new-credentials.json';code_file=private/'code.txt'
+            signup.write_text(json.dumps(dict(email='install@example.com',agent_key='buyer',name='new-install',provider='synthetic')),encoding='utf-8')
+            run(cli,'register','start','--url',f'http://127.0.0.1:{http.server_port}','--file',signup,'--session',session)
+            code_file.write_text(verification_messages[0][1],encoding='utf-8')
+            enrolled=run(cli,'register','finish','--session',session,'--credentials-file',new_credentials,'--code-file',code_file)
+            fresh=new_credentials.read_bytes()
+            assert json.loads(fresh)['token'] not in enrolled
+            assert json.loads(enrolled)['data']['registered'] is True
             # Profile inspection is offline and never launches a real model.
             simulated_entry=private/'simulated-openclaw.mjs';simulated_entry.write_text('',encoding='utf-8')
             profile=private/'openclaw-profile.json'
@@ -100,7 +115,8 @@ print(json.dumps(dict(schema_version=1,work_id=w['work_id'],outcome='completed')
             assert json.loads(run(cli, 'identity'))['data']['name'] == 'install-check'
             run(python, '-m', 'pip', 'uninstall', '-y', 'agent-market-client')
             assert config.read_bytes() == saved and credentials.read_bytes() == original
-            print('PASS: clean wheel install, installed CLI/host-runner, reinstall/uninstall preserve private files')
+            assert new_credentials.read_bytes()==fresh and session.exists()
+            print('PASS: clean wheel install, private registration, installed CLI/host-runner, reinstall/uninstall preserve private files')
         finally:
             http.shutdown(); http.server_close(); thread.join(3)
 

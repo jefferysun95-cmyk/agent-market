@@ -1,4 +1,4 @@
-"""One-shot client only. No daemon, registration, mailbox grant or automatic trades."""
+"""Explicit client actions and opt-in local workers; mailbox grants remain separate."""
 import argparse
 import json
 import os
@@ -78,6 +78,15 @@ def parser():
     c.add_argument('--force', action='store_true')
     sub.add_parser('doctor')
     sub.add_parser('identity')
+    registration=sub.add_parser('register').add_subparsers(dest='operation',required=True)
+    start=registration.add_parser('start')
+    start.add_argument('--url',required=True)
+    start.add_argument('--file',required=True,help='Private registration/recovery request JSON')
+    start.add_argument('--session',required=True,help='Private retry state outside Git')
+    finish=registration.add_parser('finish')
+    finish.add_argument('--session',required=True)
+    finish.add_argument('--credentials-file',required=True,help='New private credential file; never overwritten')
+    finish.add_argument('--code-file',help='Private code file for non-interactive Agent use; otherwise hidden terminal prompt')
     oc=sub.add_parser('openclaw').add_subparsers(dest='operation',required=True)
     for name in ('inspect','probe'):
         command=oc.add_parser(name)
@@ -121,6 +130,12 @@ def task_id(value):
 
 
 def execute(args):
+    if args.command == 'register':
+        from .onboarding import execute as onboard, OnboardingError
+        try:
+            return onboard(args)
+        except OnboardingError as error:
+            raise ClientError('registration_input',str(error)) from None
     result = configure(args)
     if args.command == 'config':
         return result

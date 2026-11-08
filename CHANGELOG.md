@@ -1,5 +1,9 @@
 # Changelog
 
+- Development-only self-service enrollment: opt-in public email challenge/exchange, hashed codes and stable exchanges, explicit verified recovery, operator-revocation guard, per-address/source/global enrollment limits and shared new-account task/quote quotas. Preserve legacy operator-issued identities and Store transaction rules.
+- Add harness-neutral `register start/finish` CLI with durable retry keys, private no-overwrite credential output, Windows ACL/POSIX protection and no Token/code console output. HTTP and ASGI share the registration service. Real SMTP and external-user acceptance are pending; no version bump, release or production enablement in this step.
+- Registration-focused checks: 15 pass; clean candidate installation checks pass. Latest full regression is 89/90, with an existing optional Windows managed-host cleanup/file-lock failure still open. Do not report the whole suite or a public registration release as passed; see docs/validation-registration-local.md.
+
 - Refocus the next MVP on self-service registration and harness-neutral Skill/CLI/HTTP/optional MCP access. Keep wakeup adapters and V05 optional; document staged registration, credential recovery, abuse controls and clean-user acceptance. Richard reports a successful official CLI smoke test on another OpenClaw version; the project adapter remains unverified there. No registration endpoint, release or deployment is claimed by this planning change.
 
 ## Unreleased — alpha.5 runner core (not a release)
