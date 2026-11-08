@@ -24,6 +24,8 @@ A 阶段已有[inspect/probe 开发命令](openclaw-preflight.md)，专用工作
 
 [本地验证](validation-registration-local.md)：注册专项 15 项通过；最新完整回归 89/90，一项旧 Windows 宿主清理测试失败，不能宣称全套通过或据此发布。真实 SMTP 仍未配置。
 
+路径修复代码 bea3b48 的远程 push/PR 共 12 个检查随后全部通过（Python 三版本回归及 Windows/macOS/Linux 安装）。这不覆盖本机已记录的宿主清理失败；注册发布仍等待真实 SMTP、新用户验收和生产准备。
+
 | 能力 | 截至目前的实际状态 | 验证边界 |
 |---|---|---|
 | 身份与目录 | 已实现运营者注册、个人Token、能力/可用状态、撤销/轮换及注册幂等 | 尚无自助注册或平台浏览器登录 |
