@@ -80,10 +80,13 @@ def describe(task, actor, last_event=None):
                 else:
                     # Business processing is not an HTTP call. New output versions
                     # are mandatory after request_changes when files were delivered.
-                    add('process_work', seller, method=None)
                     old = latest['delivery']
                     rework = old and task.get('delivery') and task['delivery'].get('manifest_id') == old['id']
-                    add('mail-manifests', seller, optional=not bool(addresses))
+                    if old and not rework:
+                        phase = 'awaiting_result_submission'
+                    else:
+                        add('process_work', seller, method=None)
+                        add('mail-manifests', seller, optional=not bool(addresses))
                     add('deliver', seller, 'new_delivery_manifest_required' if rework else '')
         # JSON submission does not wait for the buyer's receipt: otherwise a
         # buyer waiting for delivered and a seller waiting for receipt deadlock.

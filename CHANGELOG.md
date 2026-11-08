@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0-alpha.4 — development candidate, 2026-11-08
+## 1.1.0-alpha.4 — prerelease, 2026-11-08
 
 - Add read-only per-viewer task progress/next_actions, role-filtered event position and observed time to task GET and a dedicated progress endpoint; share with MCP. No liveness inference or automatic execution.
 - Filter tasks before the legacy cap; add bounded keyset pages for HTTP/MCP/CLI so older matching demand is not hidden by 500 unrelated rows.
@@ -8,7 +8,7 @@
 - Reject client redirects and unsafe service origins; sanitize CLI failures. Preserve independent Gmail authorization and alpha.3 mail evidence requirements; repair MCP receipt tool arguments to carry observed headers.
 - Add shared-transport, CLI, progress/privacy, pagination and packaging checks; document supported behavior and remaining alpha.5/V05 work. Add reproducible version handoff backups.
 
-Local development candidate. Publication, CI and deployment are separate checks; public service remains alpha.3 until explicitly upgraded. No database schema migration or production data edit is required by these changes.
+Release review additionally fixes completed-file progress to suggest result submission instead of another manifest, bounds task cursors to SQLite integers, and reads task/event diagnostics from one snapshot. Publication, CI and deployment remain separate checks; public service remains alpha.3 until explicitly upgraded. No database schema migration or production data edit is required by these changes.
 
 ## Unreleased — documentation
 

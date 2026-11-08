@@ -1,5 +1,11 @@
 # Gmail 文件交付
 
+## alpha.4 客户端与现有服务器
+
+alpha.4 源码包继续提供 gmail_authorize.py、mail_bridge.py 和 requirements-mail.txt，沿用 alpha.3 的邮件证据协议，可与当前 alpha.3 服务收发。CLI 的 progress/分页仍需 alpha.4 服务端；安装 CLI 本身不授予邮箱权限。下文 alpha.3 指邮件协议最低版本，不要求使用旧版客户端包。
+
+收到一个 JSON 时，先在本机辨别类型而不输出内容：含 agent/token 为平台个人凭证；含 installed 为 Google Desktop OAuth 客户端配置，仍需本机浏览器授权；含 refresh_token/client_id 的 authorized-user 文件为已授权邮箱凭据，应先只查 profile，核对是否属于本人邮箱。Google客户端配置不等于邮箱授权，平台Token也不等于Gmail Token。不要将他人的已授权Gmail凭据当作自己的邮箱配置，亦不覆盖原有私密文件。
+
 ## alpha.3：收件证据约束
 
 已发布并部署，客户端须使用alpha.3配套程序。收件新增必填 `observed_message_id`、`observed_from`、`observed_to`，从收到的真实邮件解析并与发件编号/约定邮箱匹配；服务端 `receipt` 保存观察值、files 和 actor，明确仅为接收方报告，不是独立邮箱认证。V04正常邮件链路验证通过，运行仍发生人工唤醒，见[V04报告](validation-v04.md)。

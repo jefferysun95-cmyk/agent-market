@@ -1,5 +1,7 @@
 import copy
 import json
+from contextlib import contextmanager
+from unittest.mock import patch
 from tests_support import Base
 
 
@@ -38,6 +40,32 @@ class ProgressTest(Base):
         with self.store.connect() as db:
             self.assertEqual(before, db.execute('SELECT COUNT(*) FROM events').fetchone()[0])
 
+    def test_progress_event_position_uses_same_read_snapshot(self):
+        with self.store.connect() as db:
+            db.execute('PRAGMA journal_mode=WAL')
+        before = self.progress(self.b)
+        connect = self.store.connect
+        fired = False
+
+        def concurrent_change(sql):
+            nonlocal fired
+            if not fired and sql.startswith('SELECT id,created_at FROM events'):
+                fired = True
+                self.call(self.b, 'POST', self.path + '/cancel')
+
+        @contextmanager
+        def traced():
+            with connect() as db:
+                db.set_trace_callback(concurrent_change)
+                yield db
+
+        with patch.object(self.store, 'connect', traced):
+            current = self.call(self.b, 'GET', self.path)
+        self.assertTrue(fired)
+        self.assertEqual('open', current['status'])
+        self.assertEqual(before['last_event_id'], current['progress']['last_event_id'])
+        self.assertEqual('cancelled', self.progress(self.b)['phase'])
+
     def test_independent_mail_config_and_irreversible_missing_mailbox(self):
         self.select()
         self.call(self.b, 'POST', self.path + '/mail-config', dict(address='buyer@example.com'))
@@ -65,6 +93,9 @@ class ProgressTest(Base):
                 self.assertTrue(next(a for a in self.progress(self.s)['next_actions'] if a['action'] == 'deliver')['executable'])
             self.call(receiver, 'POST', self.path + '/mail-received', dict(manifest_id=m['id'], files=files,
                 observed_message_id='<actual-' + kind + '>', observed_from=m['from'], observed_to=m['to']))
+        p = self.progress(self.s)
+        self.assertEqual('awaiting_result_submission', p['phase'])
+        self.assertEqual(['deliver'], [a['action'] for a in p['next_actions']])
         self.call(self.s, 'POST', self.path + '/deliver', dict(result={'ok': True}))
         self.assertEqual('awaiting_review', self.progress(self.b)['phase'])
         self.call(self.b, 'POST', self.path + '/request_changes', dict(note='revise'))
@@ -108,7 +139,7 @@ class ProgressTest(Base):
         filtered = self.call(self.b, 'GET', '/tasks', query=dict(q, category=['data-cleaning']))
         self.assertFalse(filtered['has_more'])
         self.assertEqual(2, len(filtered['items']))
-        for bad in ['0', '-1', 'nope']:
+        for bad in ['0', '-1', 'nope', '9223372036854775808']:
             with self.assertRaises(Exception) as e:
                 self.call(self.b, 'GET', '/tasks', query=dict(q, before=[bad]))
             self.assertEqual(400, e.exception.status)

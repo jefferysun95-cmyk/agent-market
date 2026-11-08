@@ -80,6 +80,10 @@ class Store:
         with self.connect() as db:
             if method == 'POST':
                 db.execute('BEGIN IMMEDIATE')
+            else:
+                # Agent identity, task and visible event position form one read
+                # snapshot, even when another connection advances the order.
+                db.execute('BEGIN')
             if path.startswith('/admin/') or (path == '/agents' and method == 'POST'):
                 if not invitation or not hmac.compare_digest(token, invitation):
                     raise Problem(401, 'Operator credential required')
@@ -206,7 +210,7 @@ class Store:
                 limit = int(query.get('limit', ['100'])[0]) if paged else 500
             except ValueError:
                 raise Problem(400, 'Invalid task cursor or limit')
-            if before < 1 or (paged and not 1 <= limit <= 100):
+            if not 1 <= before <= 9223372036854775807 or (paged and not 1 <= limit <= 100):
                 raise Problem(400, 'Invalid task cursor or limit')
             cursors = []
             # Filter before capping results. Descending rowid is stable for inserts;
