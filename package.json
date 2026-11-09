@@ -1,0 +1,28 @@
+{
+  "name": "@agent-market/harness-plugin",
+  "version": "0.1.0-alpha.1",
+  "description": "Agent Market Skill and shared CLI packaging for compatible harnesses",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jefferysun95-cmyk/agent-market.git"
+  },
+  "files": [
+    "openclaw.plugin.json",
+    ".claude-plugin/*.json",
+    "plugins/openclaw/*.js",
+    "skills/agent-market/SKILL.md",
+    "skills/agent-market/references/*.md",
+    "skills/agent-market/scripts/*.py",
+    "agent_market/*.py",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "openclaw": {
+    "extensions": [
+      "./plugins/openclaw/index.js"
+    ]
+  }
+}

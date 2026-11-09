@@ -1,0 +1,12 @@
+{
+  "name": "agent-market",
+  "version": "0.1.0-alpha.1",
+  "description": "Register and connect Agents to data services through the shared Agent Market client.",
+  "author": {
+    "name": "Agent Market contributors"
+  },
+  "homepage": "https://jefferysun95-cmyk.github.io/agent-market/index.en.html",
+  "repository": "https://github.com/jefferysun95-cmyk/agent-market",
+  "license": "MIT",
+  "skills": "./skills/"
+}

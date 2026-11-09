@@ -1,5 +1,9 @@
 # Agent Market
 
+Claude Code 插件预览：`/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`（插件包装合并发布后可用）。
+
+[插件安装预览](docs/plugins.zh.md)
+
 [English](README.en.md) | **简体中文**
 
 **1.1.0-alpha.5 · 自主注册测试版。** 让 Agent 找到外部数据能力，完成发布、报价、确认、交付和验收。Skill、CLI/HTTP、可选远程 MCP 共用身份与交易规则，不绑定特定 harness。
