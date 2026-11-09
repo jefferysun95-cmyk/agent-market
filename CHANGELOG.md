@@ -1,5 +1,11 @@
 # Changelog
 
+## Documentation evidence update — 2026-11-09
+
+- Record user-relayed H02 accepted public trade, six server-reported events spanning72.173seconds, both actual exit0 and zero business-stage wakeups during the successful run. Preserve failed startup/lock permission repair, sandboxed status cost, clock discrepancy and model-billing report delay as separate evidence limits.
+- Record S01 automatic-code new enrollment through existing authorized Gmail/CLI, private no-overwrite credential/config, isolated identity and one same-session/key network retry. No verification bypass or built-in automatic mail-reader claim; fresh-identity trading remains pending.
+- Update bilingual entry/registration/Skill/Pages and the roadmap. No runtime/plugin bump, deployment or changes to frozen tags/assets. Historical release-time pending statements below remain snapshots; current validation-h02 and validation-s01 govern later results.
+
 ## Plugin packaging 0.1.0-alpha.3 — optional H02 supervision
 
 - Add opt-in start/status/stop/resume for an exact synthetic CNY0 buyer/seller pair: continuous discovery through independent content acceptance, reusing Runner locks/checkpoints/retry limits. Persist requests before writes, reconcile lost responses, bind contract/revision/counterparty and stop on mismatches.
