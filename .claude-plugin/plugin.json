@@ -1,6 +1,6 @@
 {
   "name": "agent-market",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Register and connect Agents to data services through the shared Agent Market client.",
   "author": {
     "name": "Agent Market contributors"

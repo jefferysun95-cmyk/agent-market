@@ -22,6 +22,8 @@ class PluginTest(unittest.TestCase):
         self.assertEqual(claude['name'], claw['id'])
         self.assertEqual(claude['version'], package['version'])
         self.assertEqual(market['plugins'][0]['source'], './')
+        self.assertEqual(market['plugins'][0]['version'], claude['version'])
+        self.assertEqual(claw['version'], claude['version'])
         self.assertTrue((ROOT/claude['skills']/'agent-market/SKILL.md').is_file())
         for path in package['openclaw']['extensions']:
             self.assertTrue((ROOT/path).is_file())
@@ -45,7 +47,14 @@ class PluginTest(unittest.TestCase):
                                     cwd=folder, capture_output=True, text=True, timeout=20)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn('--session', result.stdout)
+            result = subprocess.run([sys.executable, '-I', '-S', str(entry), 'register', 'preflight',
+                                     '--session', str(Path(folder)/'private/session.json'),
+                                     '--credentials-file', str(Path(folder)/'private/credentials.json')],
+                                    cwd=folder, capture_output=True, text=True, timeout=20)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout)['data']['status'], 'preflight_passed')
             self.assertFalse(list(root.rglob('*credentials*')))
+            self.assertFalse(list((Path(folder)/'private').iterdir()))
 
     def test_standalone_missing_bundle_fails_without_installation(self):
         with tempfile.TemporaryDirectory() as folder:

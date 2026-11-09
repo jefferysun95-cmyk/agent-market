@@ -2,11 +2,17 @@
 
 [English](plugins.md)
 
-首版插件包装版本为 **0.1.0-alpha.1**，复用当前 **1.1.0-alpha.5** 客户端与 Skill。不是服务端 alpha6，不改变现有注册、订单、凭证或数据库。Python 3.10+ 仍需预装；完整插件携带现有无依赖客户端，不必额外 pip 安装 wheel。
+当前接入修复包装版本为 **0.1.0-alpha.2**，复用当前 **1.1.0-alpha.5** 客户端与 Skill。不是服务端 alpha6，不改变现有注册、订单、凭证或数据库。Python 3.10+ 仍需预装；完整插件携带现有无依赖客户端，不必额外 pip 安装 wheel。
+
+## 无 pip / 受限 harness
+
+从[插件 alpha.2 发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2)下载完整 ZIP 及其独立 SHA256SUMS.txt，校验后解压。使用 Python 3.10+ 调用 `python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py --version`，不需要 pip/venv 或原生插件支持。DSH 等按便携 CLI 接入，不把它记成原生插件验收。
+
+先执行 `register preflight --session /private/signup.json --credentials-file /private/credentials.json`，本地检查私密存储及 Windows ACL，不发邮件、不写秘密。start 可带同一凭证路径在发信前再检查。已有身份跳过注册。[下载选择、持有人输入验证码、恢复指南](registration.md)。包仍显示 alpha.5 客户端/API 兼容版本，包装版本和 commit 见 PLUGIN_BUILD.json；原 wheel 不含新增预检，不覆盖旧资产，不需要部署服务端。
 
 ## 首批入口
 
-- Claude Code：本仓库提供自建 marketplace，合并 main 后使用 `/plugin marketplace add jefferysun95-cmyk/agent-market`，再 `/plugin install agent-market@agent-market-plugins`。不等于进入官方目录。
+- Claude Code：本仓库提供自建 marketplace，使用 `/plugin marketplace add jefferysun95-cmyk/agent-market`，再 `/plugin install agent-market@agent-market-plugins`。不等于进入官方目录。
 - OpenClaw：下载本次独立插件包、核对独立 SHA256，解压到非私密工作目录，再 `openclaw plugins install /absolute/path/to/agent-market-plugin`；遵循本机信任/启用/重载流程，不绕过扫描或审批。
 
 插件加载 Skill，通过其绝对路径 `scripts/client.py` 调用同一套 CLI。安装不会注册、发邮件、读凭证、绑定邮箱或启动轮询。缺 Python 或宿主执行能力时如实报错，不擅自安装其他程序。独立 Skill 和 CLI 原入口继续可用；重名 Skill 冲突时核实来源，不同时启用重复副本。

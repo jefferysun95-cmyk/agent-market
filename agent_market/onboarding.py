@@ -49,6 +49,43 @@ def create_private(path):
         raise
 
 
+def preflight(session, credentials=None):
+    """Check private storage locally before requesting a short-lived email code."""
+    session = private_path(session)
+    target = private_path(credentials) if credentials else None
+    if target is not None and (target == session or target.exists()):
+        raise OnboardingError('Use a new credential filename; existing files are never overwritten.')
+    if session.exists() and not session.is_file():
+        raise OnboardingError('Session path must be a private file.')
+    # Probe the same directories and ACL operation as issuance, never the user's
+    # actual files. A later issuance still reserves its output with O_EXCL.
+    directories = {session.parent}
+    if target is not None:
+        directories.add(target.parent)
+    for directory in sorted(directories):
+        probe = directory / ('.agent-market-preflight-' + secrets.token_hex(12))
+        fd = None
+        created = False
+        try:
+            fd = create_private(probe)
+            created = True
+        except (OSError, OnboardingError):
+            raise OnboardingError(
+                'Private storage preflight failed. No verification email was requested. '
+                'Choose a permitted private directory outside Git, or ask your harness '
+                'to allow file creation and Windows ACL setup there; then retry. '
+                'Do not disable permission checks.') from None
+        finally:
+            if fd is not None:
+                os.close(fd)
+            if created:
+                probe.unlink()
+    return dict(status='preflight_passed', network_requests=0,
+                credential_issuance=False, secrets_written=False,
+                session_file=str(session), credentials_file=str(target) if target else None,
+                next_step='Storage checked only; authorize register start to request a code.')
+
+
 def save_private(path, value, replace=False):
     if not replace:
         fd = create_private(path)
@@ -80,7 +117,10 @@ def public_request(url, endpoint, body, key):
 
 def execute(args):
     session_path = private_path(args.session)
+    if args.operation == 'preflight':
+        return preflight(session_path, args.credentials_file)
     if args.operation == 'start':
+        preflight(session_path, getattr(args, 'credentials_file', None))
         url = validate_base(args.url)
         body = json.loads(Path(args.file).expanduser().read_text(encoding='utf-8-sig'))
         if not isinstance(body, dict):
@@ -108,6 +148,7 @@ def execute(args):
     target = private_path(args.credentials_file)
     if target == session_path or target.exists():
         raise OnboardingError('Use a new credential filename; existing files are never overwritten.')
+    preflight(session_path, target)
     if args.code_file:
         code_path = private_path(args.code_file)
         if code_path.stat().st_size > 128:

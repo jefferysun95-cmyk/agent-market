@@ -32,7 +32,8 @@ def main():
     if target == ROOT or target in ROOT.parents or '.git' in target.parts:
         raise SystemExit('Choose a new output directory.')
     target.mkdir(parents=True, exist_ok=False)
-    archive = target / ('agent-market-plugin-0.1.0-alpha.1-'+head[:7]+'.zip')
+    plugin_version = json.loads(git('show', head+':package.json'))['version']
+    archive = target / ('agent-market-plugin-'+plugin_version+'-'+head[:7]+'.zip')
     hashes = {}
     with zipfile.ZipFile(archive, 'x', zipfile.ZIP_DEFLATED) as z:
         for name in selected_files():
@@ -42,7 +43,7 @@ def main():
             z.writestr('agent-market-plugin/'+name, data)
             hashes[name] = hashlib.sha256(data).hexdigest()
         z.writestr('agent-market-plugin/PLUGIN_BUILD.json', json.dumps(dict(
-            plugin_version='0.1.0-alpha.1', service_client_version='1.1.0-alpha.5',
+            plugin_version=plugin_version, service_client_version='1.1.0-alpha.5',
             source_commit=head, files=hashes, private_credentials=False), indent=2))
     with zipfile.ZipFile(archive) as z:
         for name, expected in hashes.items():

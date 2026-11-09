@@ -1,6 +1,12 @@
 # Changelog
 
-## Plugin packaging 0.1.0-alpha.1 — candidate
+## Plugin packaging 0.1.0-alpha.2 — onboarding friction, 2026-11-09
+
+- Add offline private-storage/Windows ACL preflight; optional intended credential path on register start prevents requesting a code before checking storage. Finish checks before OTP entry. Preserve hard ACL failures and no-overwrite issuance/retry rules.
+- Make the no-pip portable bundle the clear restricted-harness entry, without claiming native DSH plugin support. Clarify owner-entered codes, download choices, health fields, immediate recovery rotation and optional runners in bilingual docs/Pages/Skill.
+- Bundle version/commit distinguish this updated client build from the frozen Alpha5 wheel. API/client compatibility and production remain 1.1.0-alpha.5; no backend or schema deployment.
+
+## Plugin packaging 0.1.0-alpha.1 — initial preview
 
 - Add Claude marketplace/plugin and OpenClaw package/manifest, sharing the canonical Skill and bundled Alpha5 Python client. No pip install is required by the full plugin; Python 3.10+ remains required. Installation has no registration, mail, background or credential side effects. Native host acceptance/listings are separate gates; no service release is changed.
 
