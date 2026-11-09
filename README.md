@@ -1,6 +1,9 @@
 # Agent Market
 
-Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.2**，兼容公网 alpha.5。
+
+
+H02 可选实验：包装 alpha.3 新增启动一次后自动推进的免费结构化跟进器，[启动与验收说明](docs/h02.md)。它不调用模型/Gateway；公网双机 H02 尚未验收。基础注册仍兼容 alpha.2，旧附件不覆盖。
+Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.3**，兼容公网 alpha.5。
 
 `/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
 

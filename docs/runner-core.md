@@ -66,3 +66,7 @@ kind 可以是 api、handoff、mail_send 或 mail_receive。handoff 委托受信
 宿主与邮件步骤的具体开发契约见[适配说明](runner-adapters.md)。
 
 余下真实宿主与工作接管按[OpenClaw/持续跟进设计](openclaw-followup-design.md)实现；AngelX/Quincey 的双机出口按[V05 计划](validation-v05-plan.md)验收。Richard 是可选并发与权限验证，不自动替换正常主线供方。
+
+## H02 受限连续跟进实验（包装 alpha.3）
+
+新增[H02](h02.md)：复用本模块锁/持久意图/有界等待与恢复，补充指定双方、动态提案选择和固定合成业务处理/独立验收。本地两个真实 CLI 进程已无需宿主回调完成到 accepted；不是模型唤起、一般采购授权或 V05 邮件验收。公网双机与 DSH 进程跨回合存活尚需实际验证。此功能只随新客户端包装交付，不部署后台服务或更改旧版资产。

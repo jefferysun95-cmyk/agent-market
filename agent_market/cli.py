@@ -91,6 +91,20 @@ def parser():
     finish.add_argument('--session',required=True)
     finish.add_argument('--credentials-file',required=True,help='New private credential file; never overwritten')
     finish.add_argument('--code-file',help='Private code file for non-interactive Agent use; otherwise hidden terminal prompt')
+    trial=sub.add_parser('h02', help='Opt-in H02 deterministic free-trade experiment; no model wakeup').add_subparsers(dest='operation',required=True)
+    for entry in ('start','launch'):
+        start_trial=trial.add_parser(entry)
+        start_trial.add_argument('--role',required=True,choices=['buyer','seller'])
+        start_trial.add_argument('--run-id',required=True)
+        start_trial.add_argument('--buyer-id',required=True)
+        start_trial.add_argument('--seller-id',required=True)
+        start_trial.add_argument('--url',required=True)
+        start_trial.add_argument('--state',required=True,help='New synthetic checkpoint in your existing private directory outside Git')
+        start_trial.add_argument('--max-seconds',type=int,default=1800)
+        start_trial.add_argument('--interval-seconds',type=int,default=10)
+        start_trial.add_argument('--authorize-free-trade',action='store_true',required=True)
+    for operation in ('status','stop','resume'):
+        trial.add_parser(operation).add_argument('--state',required=True)
     oc=sub.add_parser('openclaw').add_subparsers(dest='operation',required=True)
     for name in ('inspect','probe'):
         command=oc.add_parser(name)
@@ -143,6 +157,29 @@ def execute(args):
     result = configure(args)
     if args.command == 'config':
         return result
+    if args.command=='h02':
+        from .h02 import H02,launch
+        from .runner import RunnerError
+        from .onboarding import OnboardingError
+        trial=H02(args.state)
+        try:
+            if args.operation=='launch':
+                value=launch(args)
+                if value['launch_status']!='started':
+                    raise ClientError('h02_launch_failed','Child exited during startup; inspect its private logs and checkpoint.',7)
+                return value
+            if args.operation=='start':
+                trial.initialize_trial(args.role,args.run_id,args.buyer_id,args.seller_id,args.url,
+                                       args.max_seconds,args.interval_seconds)
+                value=trial.run()
+            elif args.operation=='resume':value=trial.resume()
+            elif args.operation=='stop':return trial.stop()
+            else:return trial.status()
+        except (RunnerError,OnboardingError) as error:
+            raise ClientError('h02_validation_failed',str(error),7) from None
+        if value['status']!='completed':
+            raise ClientError(value.get('error') or value['status'],'H02 stopped; inspect its checkpoint with h02 status. No authority was extended.',7)
+        return value
     if args.command=='openclaw':
         from .openclaw import inspect_profile,probe,OpenClawError
         from .host import HostError
