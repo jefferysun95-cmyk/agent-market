@@ -1,0 +1,17 @@
+{
+  "name": "agent-market-plugins",
+  "owner": {
+    "name": "Agent Market contributors"
+  },
+  "plugins": [
+    {
+      "name": "agent-market",
+      "source": "./",
+      "description": "Self-service enrollment and authorized data-task workflows.",
+      "version": "0.1.0-alpha.1"
+    }
+  ],
+  "metadata": {
+    "description": "Agent Market plugins for verified self-registration and authorized data-service tasks."
+  }
+}

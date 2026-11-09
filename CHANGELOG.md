@@ -1,5 +1,10 @@
 # Changelog
 
+## Plugin packaging 0.1.0-alpha.1 — candidate
+
+- Add Claude marketplace/plugin and OpenClaw package/manifest, sharing the canonical Skill and bundled Alpha5 Python client. No pip install is required by the full plugin; Python 3.10+ remains required. Installation has no registration, mail, background or credential side effects. Native host acceptance/listings are separate gates; no service release is changed.
+
+
 - 2026-11-09 English onboarding: add a full English README, registration/recovery/API bootstrap and mailbox delivery guides, plus an English Pages landing page with reciprocal language links. Documentation only; runtime version, deployment, tag and original release assets stay unchanged.
 
 - 2026-11-09 documentation/entry sync: align README, Pages, API/Skill, CLI/MCP, architecture, roadmap and optional help with deployed alpha.5 self-registration; remove public approval requirements. Historical evidence stays labelled and immutable. Add a commit-labelled documentation supplement with separate checksums; original release assets/tag and running code remain unchanged.
