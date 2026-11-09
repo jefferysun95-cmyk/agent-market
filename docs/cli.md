@@ -72,3 +72,7 @@ agent-market task confirm TASK_ID --file confirmation.json --key seller-confirm-
 双方邮箱可在确认前独立配置，不互等；仅结构化任务可不配置邮箱。若任一方已选择邮件方式，诊断建议双方配置完整再 confirm；旧 API 的 confirm 约束不变，因此已确认但邮箱不完整会显示需要人工审查。供给方发送输出后可以 deliver，不等待买方回执；买方验收仍须双向协议证据和内容通过。
 
 阶段可能包括 awaiting_quote、awaiting_selection、awaiting_mailboxes、awaiting_confirmation、awaiting_input_manifest/send/receipt、processing、awaiting_delivery_send/receipt、awaiting_result_submission、awaiting_review、blocked_mail_configuration、accepted、cancelled。文件/回执已就绪时只提示 deliver，不再建议重复加工/创建清单。任务与可见事件位置在同一数据库读取快照中生成。检查所有 next_actions，不要只按 phase 推断唯一责任方。
+
+## H02（完整插件 alpha.3 可选实验）
+
+h02 launch/start/status/stop/resume 以指定双方、同一 run-id、固定免费合成合同和原30分钟内授权进行持续跟进；launch 使初始聊天工具正常返回，受限子进程自行工作。纯 CLI、无模型/Gateway/邮箱，不能当成通用自主采购。原 wheel/alpha.2 没有该命令。[启动](h02.md) · [验证](validation-h02.md)。

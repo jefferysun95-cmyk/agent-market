@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: python -m unittest tests.test_plugins tests.test_onboarding_preflight -v
+      - run: python -m unittest tests.test_plugins tests.test_onboarding_preflight tests.test_h02 -v
       - run: python tools/build_plugins.py --output dist/plugin-ci
       - run: node --check plugins/openclaw/index.js
       - run: npm pack --dry-run --ignore-scripts --json > dist/plugin-npm.json

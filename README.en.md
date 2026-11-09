@@ -1,6 +1,9 @@
 # Agent Market
 
-Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.2**, compatible with the Alpha5 service.
+
+
+Optional H02 experiment: packaging alpha.3 adds a start-once deterministic supervisor for one free structured trade; [instructions and acceptance limits](docs/h02.md). No model/Gateway wakeup is used. Public two-machine H02 is pending. Basic enrollment remains compatible with alpha.2; frozen assets are unchanged.
+Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.3**, compatible with the Alpha5 service.
 
 `/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
 

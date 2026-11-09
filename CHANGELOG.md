@@ -1,5 +1,11 @@
 # Changelog
 
+## Plugin packaging 0.1.0-alpha.3 — optional H02 supervision
+
+- Add opt-in start/status/stop/resume for an exact synthetic CNY0 buyer/seller pair: continuous discovery through independent content acceptance, reusing Runner locks/checkpoints/retry limits. Persist requests before writes, reconcile lost responses, bind contract/revision/counterparty and stop on mismatches.
+- Seller computation and buyer reference are separate; no model/Gateway, email, payment or arbitrary task execution. Reuse existing credentials. Local two-CLI loopback flow passes without stage callbacks; public DSH/Richard H02 remains pending.
+- API/client compatibility and backend stay Alpha5; frozen wheel/plugin assets stay unchanged. Per-request timeout is configurable with the existing30-second default, and H02 caps it to10seconds/remaining authority; socket timeouts alone are not a process hard limit. The explicit launch observer captures actual child exit codes and enforces authority+20s startup/shutdown grace, managing only its own child.
+
 - 2026-11-09 H01 validation documentation: record the user-relayed accepted public structured trade between the self-registered DSH buyer and Richard, buyer-side independent checks, three manual stage wakeups and zero rework/payment. Update current English/Chinese status without claiming native plugin/MCP/unattended acceptance or changing runtime/package versions.
 
 - 2026-11-09 DSH retest documentation: record successful portable execution/existing identity queries and environment-blocked WRITE_DAC preflight separately. Clarify new-output-only preflight, read-only skip, explicit start option, actual installed Skill discovery and root renaming. Documentation only; no package/runtime bump or frozen-asset replacement.

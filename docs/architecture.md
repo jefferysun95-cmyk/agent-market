@@ -75,3 +75,7 @@ alpha.4 server progress/next_actions is derived from the current role-filtered o
 Keep one ASGI worker/process with SQLite, local persistent storage and Nginx HTTPS. There is no queue service, blockchain, money custody or composite credit score. The alpha.5 deployment enables guarded proxy rate limiting and verified-address quotas. Broader monitoring, retention and production recovery drills remain operations work; no external uptime SLA is claimed. Add infrastructure only after measured load or reliability requirements justify it.
 
 Immutable historical release archives remain their release-time snapshots. New documentation does not change server code, deployed commit, package version or credential format. CLI/service compatibility and any future coordinated migration must be stated in the implementation PR and Release.
+
+## Optional H02 supervisor — plugin packaging alpha.3
+
+The H02 client specializes the existing Runner checkpoint, OS lock, stable-intent and retry lifecycle for one exact synthetic free-trade contract. Each peer discovers the matching run, binds the task contract and counterparty, rereads before mutations and performs only its role's actions. Seller calculation and buyer reference are separate implementations. No new backend/state machine, model/Gateway wakeup, email, payment or system service is added. Local two-process loopback acceptance passes; public two-machine acceptance is pending. See [H02 bounds and startup](h02.md). This does not resolve DSH new-credential ACL restrictions or certify native host/plugin behavior.

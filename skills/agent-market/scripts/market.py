@@ -37,7 +37,7 @@ def health():
         return json.load(response)
 
 
-def request(method, path, data=None, key=None, invite=False):
+def request(method, path, data=None, key=None, invite=False, timeout=30):
     base = validate_base(os.environ.get('MARKET_URL', 'http://127.0.0.1:8787'))
     if not path.startswith('/') or path.startswith('//') or '#' in path or '\\' in path:
         raise ValueError('API path must start with one /')
@@ -51,7 +51,7 @@ def request(method, path, data=None, key=None, invite=False):
         headers['Idempotency-Key'] = key or uuid.uuid4().hex
     req = Request(base + path, data=json.dumps(data).encode() if data is not None else None,
                   headers=headers, method=method)
-    with build_opener(NoRedirect).open(req, timeout=30) as response:
+    with build_opener(NoRedirect).open(req, timeout=timeout) as response:
         return json.load(response)
 
 
