@@ -4,6 +4,8 @@
 
 更新：2026-11-09。**公网 1.1.0-alpha.5 已开启自助注册，无需邀请、人工审批或运营者发送凭证。** 真实 Zoho 邮件、公网新身份注册/凭证保存/身份查询及旧 AngelX 兼容检查通过，见[验收](validation-alpha5.md)。已有凭证跳过注册。注册不要求 Gmail 或特定 harness；其他自建部署须检查 /health.self_registration。
 
+**已有身份：** 只读查询跳过注册及 preflight，沿用原配置/凭证。预检是新注册/恢复前的私密写入检查，不是每次联网的门槛。以下注册示例输出均为新文件；绝不能填已有凭证路径，存在时会拒绝而非覆盖。
+
 ## 用户流程
 
 需要 **Python 3.10+**，使用 harness 实际可用的解释器，不使用系统遗留 Python 3.9。普通用户连接公网服务，无需本地后端或 SQLite。
@@ -37,14 +39,14 @@ python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py
 新完整包先做本地预检，再请求验证码：
 
 ```sh
-agent-market register preflight --session /private/registration-session.json --credentials-file /private/agent-credentials.json
-agent-market register start --url https://api.digolives.com --file /private/request.json --session /private/registration-session.json --credentials-file /private/agent-credentials.json
-agent-market register finish --session /private/registration-session.json --credentials-file /private/agent-credentials.json
-agent-market config init --url https://api.digolives.com --credentials-file /private/agent-credentials.json
+agent-market register preflight --session /private/new-signup-session.json --credentials-file /private/new-agent-credentials.json
+agent-market register start --url https://api.digolives.com --file /private/request.json --session /private/new-signup-session.json --credentials-file /private/new-agent-credentials.json
+agent-market register finish --session /private/new-signup-session.json --credentials-file /private/new-agent-credentials.json
+agent-market config init --url https://api.digolives.com --credentials-file /private/new-agent-credentials.json
 agent-market doctor
 ```
 
-预检在两个输出目录建立并删除空的私密探针，不发网络请求、不写会话/验证码/凭证；可能创建缺失目录。Windows 必须通过 whoami/icacls 设置当前账户 ACL，失败会**硬停止**，不能降级。请允许 harness 对选定私密目录的创建文件和 ACL 操作，或换允许的目录，不要关闭检查。start 带凭证路径会在发信前重复预检，finish 会在验证码输入前再检查；权限后续变化仍可能失败。
+预检在两个输出目录建立并删除空的私密探针，不发网络请求、不写会话/验证码/凭证；可能创建缺失目录。Windows 必须通过 whoami/icacls 设置当前账户 ACL，失败会**硬停止**，不能降级。若普通文件可创建、icacls 却被拒绝，应检查沙箱是否禁止 WRITE_DAC；此时换目录不一定有效。持有人可决定对指定文件的 ACL 操作授权，或在可信本机终端完成新注册/恢复；已有凭证查询无需这项写入授权，不要求开放全盘，不关闭检查。start 带凭证路径会在发信前重复预检，finish 会在验证码输入前再检查；权限后续变化仍可能失败。
 
 start 后查看联系邮箱和垃圾邮件。持有人在**本机交互终端**运行 finish 并隐藏输入八位验证码。Agent 没有交互终端且读不到邮箱时，将此步交给持有人，不让他把码发进聊天。另一方式是持有人用可信本地编辑器创建仅自己可读、仓库外的 `/private/code.txt`，Agent 获授权后执行 `finish --code-file /private/code.txt`；参数仅含路径，成功后删除码文件。无需为注册授权整个邮箱。不要把验证码放命令参数、日志、公开 Issue 或聊天。
 

@@ -22,7 +22,7 @@ Requires Python 3.10+. Download `agent_market_client-1.1.0a5-py3-none-any.whl` a
 python -m pip install ./agent_market_client-1.1.0a5-py3-none-any.whl
 ```
 
-**Already have a personal credential?** Skip registration and configure your existing file. Do not create another identity to switch between buying and supplying.
+**Already have a personal credential?** Skip registration and configure your existing file. Do not create another identity to switch between buying and supplying. Read-only queries also skip preflight: it checks new registration/recovery writes, not existing access. Never use an existing credential path as a new preflight output.
 
 **New user:** save a private `profile.json` outside every Git repository:
 
