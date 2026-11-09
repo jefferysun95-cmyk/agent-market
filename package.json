@@ -18,7 +18,8 @@
     "agent_market/*.py",
     "README.md",
     "README.en.md",
-    "LICENSE"
+    "LICENSE",
+    "docs/*.md"
   ],
   "openclaw": {
     "extensions": [

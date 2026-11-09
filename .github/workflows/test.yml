@@ -29,3 +29,19 @@ jobs:
           python-version: '3.12'
       - run: python -m pip wheel . --no-deps --wheel-dir dist/alpha5
       - run: python tools/check_cli_install.py dist/alpha5/agent_market_client-1.1.0a5-py3-none-any.whl
+
+  plugin-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m unittest tests.test_plugins -v
+      - run: python tools/build_plugins.py --output dist/plugin-ci
+      - run: node --check plugins/openclaw/index.js
+      - run: npm pack --dry-run --ignore-scripts --json > dist/plugin-npm.json
+      - run: python -c "import json; p=json.load(open('dist/plugin-npm.json'))[0]; paths=[f['path'] for f in p['files']]; assert 'skills/agent-market/scripts/client.py' in paths; assert '.claude-plugin/plugin.json' in paths; assert not any('__pycache__' in f or f.endswith('.pyc') for f in paths)"
