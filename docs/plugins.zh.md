@@ -45,3 +45,6 @@ Claude 的 marketplace 命令读取仓库根目录 `.claude-plugin/marketplace.j
 3. Cursor、Anthropic、OpenAI 目录分别适配与提交审核；Bearer MCP 不等于已完成平台 OAuth。
 
 本次状态和限制见[验证记录](validation-plugins.md)。英文安装步骤与官方格式来源见[英文指南](plugins.md)。后续任务明确为：安装 → Skill 识别 → 自主注册 → 身份查询 → 免费任务。仅清单或模拟检查通过不能宣称真实宿主全流程通过；遇宿主问题及时报告，不阻塞已有 CLI/HTTP 接入。每次重要交付保留独立提交号备份，不覆盖旧包或标签。
+
+
+S01→S02：用户回传报告显示，同一新注册身份完成自动取码注册后，另经交易授权，与DSH完成固定免费任务，双方内容PASS/真实退出0、运行内0次阶段人工推进。初始邮箱权限/安装启动和最终只读收集另计，不是从零配置通用无人值守。[S02证据](validation-s02.md)。

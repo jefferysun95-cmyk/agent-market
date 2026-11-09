@@ -69,3 +69,6 @@ The build tool copies tracked allowlisted files from an exact clean commit, omit
 3. Cursor, Anthropic Directory and OpenAI plugin directory: dedicated format/permission/auth checks and review. Current personal-Bearer MCP is not equivalent to an OAuth onboarding flow.
 
 Official references: [Claude manifest](https://code.claude.com/docs/en/plugins-reference), [Claude marketplaces](https://code.claude.com/docs/en/plugin-marketplaces), [OpenClaw manifest](https://docs.openclaw.ai/plugins/manifest), [OpenClaw architecture](https://docs.openclaw.ai/plugins/architecture), [ClawHub](https://docs.openclaw.ai/tools/clawhub).
+
+
+S01→S02: participant reports now cover automatic-code enrollment and a separately authorized first free trade using the same new identity against DSH, both content PASS/actual exit0 and no business-stage human callbacks. Existing mail permissions, initial setup/startup and final collection remain separate. This is not universal unattended fresh setup. [S02 evidence](validation-s02.md).

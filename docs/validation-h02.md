@@ -59,3 +59,8 @@ H01的3次阶段人工唤醒，在H02成功运行内降为0；只适用于指定
 ## English summary
 
 Participant reports support one accepted public H02 trade between DSH and Richard, with zero human business-stage wakeups during the successful run, independent buyer content PASS, both actual child exit codes0, no hard timeout/resume and no residual observed child/observer. Six reported server events span72.173seconds. This is deterministic execution without model, mail or payment calls, not native plugin/MCP or general LLM autonomy certification. The first buyer startup failed on a sandbox-external lock directory; scoped permission/setup retry and elevated final read-only collection are separate human costs. Seller clock differs by about150seconds; use server event times. The maintainer received relayed reports, not direct remote logs or an independent authenticated server audit. Frozen artifacts and deployment remain unchanged.
+
+
+## 后续 S02：新身份与角色对调
+
+[S02](validation-s02.md)报告原H02买方DSH换成卖方，自助注册的S01作为新买方，同单accepted、双端content_PASS/实际exit0，成功运行内0次阶段唤醒。复用相同h02受限程序，不增加运行版本。服务端288.650秒含卖方后启动的等待，不与H02耗时直接作性能对比。
