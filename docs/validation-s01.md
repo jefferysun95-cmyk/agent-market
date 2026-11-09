@@ -44,3 +44,8 @@ H02已验证的旧身份交易与S01新身份注册是两个用例，不能合�
 ## English summary
 
 S01 is a user-relayed OpenClaw report of one new identity enrolled through public Alpha5: existing authorized Gmail access retrieved the exact challenge email, the code stayed in a restricted temporary file, finish issued a private credential, and isolated identity/task queries passed. No human code relay occurred after initial authorization. Initial start failed, then one same-session/key retry succeeded; the maintainer did not independently certify request non-delivery or mail counts. Mail/OAuth and local permissions already existed. This tests host orchestration using the existing CLI --code-file interface, not a new automatic mail feature, native-plugin acceptance, bypassed verification or full new-user trading lifecycle. No secrets, address or private paths are published.
+
+
+## 后续已完成：同一身份 S02 首笔交易
+
+上述“新身份交易待验收”为S01结束时点。随后[S02](validation-s02.md)中同一S01身份作为买方完成独立授权的固定免费交易，DSH卖方、双方content_PASS/真实exit0、运行内0次人工阶段推进。新配置未被Richard原身份覆盖。注册和交易的初次授权/启动仍分开，不宣称从零配置完全无人介入。

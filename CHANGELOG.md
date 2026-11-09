@@ -1,5 +1,10 @@
 # Changelog
 
+## S02 validation documentation — 2026-11-09
+
+- Record relayed new S01 identity buyer / DSH seller accepted fixed CNY0 trade, both content_PASS and actual exit0, zero business-stage human actions during the successful run. Six reported server events span288.650seconds including seller startup wait; preserve clock and authorization/setup/collection boundaries.
+- Link S01 enrollment to the same identity in S02 without conflating separate authorizations or claiming native plugin/MCP/general model autonomy/paid demand. Update bilingual entry, Pages, Skill, validation and next reliability work. Documentation only; versions, frozen assets and deployment unchanged.
+
 ## Documentation evidence update — 2026-11-09
 
 - Record user-relayed H02 accepted public trade, six server-reported events spanning72.173seconds, both actual exit0 and zero business-stage wakeups during the successful run. Preserve failed startup/lock permission repair, sandboxed status cost, clock discrepancy and model-billing report delay as separate evidence limits.

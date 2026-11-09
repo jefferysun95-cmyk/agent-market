@@ -71,3 +71,6 @@ python demo.py
 ```
 
 [架构](docs/architecture.md) · [本版验证](docs/validation-alpha5.md) · [Alpha5 升级](docs/deploy-alpha5.md) · [计划](docs/release.md) · [CHANGELOG](CHANGELOG.md) · [文档与入口状态](docs/documentation-status.md) · [参与开发](CONTRIBUTING.md) · [安全说明](SECURITY.md)
+
+
+S01→S02：用户回传报告显示，同一新注册身份完成自动取码注册后，另经交易授权，与DSH完成固定免费任务，双方内容PASS/真实退出0、运行内0次阶段人工推进。初始邮箱权限/安装启动和最终只读收集另计，不是从零配置通用无人值守。[S02证据](docs/validation-s02.md)。

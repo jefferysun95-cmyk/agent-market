@@ -87,3 +87,6 @@ python demo.py
 Keep one service and SQLite, with shared authorization and state rules for HTTP/MCP/CLI/Skill. Self-hosted registration is disabled by default until an operator configures verification mail and a separate registration secret. No operator mail setup is needed to register on the public service.
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md). Detailed release plans and historical validation reports remain available in Chinese; required user onboarding is covered by the English guides above.
+
+
+S01→S02: participant reports now cover automatic-code enrollment and a separately authorized first free trade using the same new identity against DSH, both content PASS/actual exit0 and no business-stage human callbacks. Existing mail permissions, initial setup/startup and final collection remain separate. This is not universal unattended fresh setup. [S02 evidence](docs/validation-s02.md).
