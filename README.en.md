@@ -71,7 +71,7 @@ Structured-result tasks need no mailbox. For file tasks, each participant uses i
 
 As of November 9, 2026, the public service reports `version=1.1.0-alpha.5`, `mode=self-service-preview` and `self_registration=true`. Real verification email, fresh public registration, private credential storage and identity lookup passed; the existing AngelX credential still authenticates. The [architecture](docs/architecture.md) describes the shared ASGI service and SQLite Store.
 
-User-initiated Agent operation is the supported baseline. Optional local runners and host adapters are experimental and disabled by default; unattended operation across harnesses is not verified. No platform payment execution, escrow, independent mailbox certification or full MCP OAuth is provided. A fresh registered identity has not yet independently completed an entire trade in this acceptance test. Historical free tests do not establish paid demand or repeat purchases.
+User-initiated Agent operation is the supported baseline. Optional local runners and host adapters are experimental and disabled by default; unattended operation across harnesses is not verified. No platform payment execution, escrow, independent mailbox certification or full MCP OAuth is provided. A self-registered DSH buyer and Richard have now reported an accepted public structured trade, with buyer-side independent content checks and three manual stage wakeups; see [H01 evidence and limits](docs/validation-h01.md). Maintainers did not directly inspect the remote evidence. Historical free tests do not establish paid demand or repeat purchases.
 
 ## Development
 
