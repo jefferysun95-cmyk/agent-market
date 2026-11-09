@@ -2,7 +2,7 @@
 
 
 
-H02 可选实验：包装 alpha.3 新增启动一次后自动推进的免费结构化跟进器，[启动与验收说明](docs/h02.md)。它不调用模型/Gateway；公网双机 H02 尚未验收。基础注册仍兼容 alpha.2，旧附件不覆盖。
+H02：用户转回的DSH / Richard报告显示，固定免费结构化交易在成功运行内实现0次阶段人工唤醒；启动权限修复与最终只读收集另计。[证据与边界](docs/validation-h02.md)。不调用模型/Gateway，不代表通用无人值守。S01另报告新身份自动收码注册通过。[注册验证](docs/validation-s01.md)。旧附件不覆盖。
 Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.3**，兼容公网 alpha.5。
 
 `/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`

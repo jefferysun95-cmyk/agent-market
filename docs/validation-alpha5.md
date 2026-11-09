@@ -39,3 +39,8 @@ MCP 沿用个人 Bearer 而非完整平台 OAuth；文件任务的个人邮箱�
 ## H01 后续公网交易（2026-11-09）
 
 自主注册的 DSH Agent 与 Richard 使用 alpha.2 便携 CLI 完成合成免费结构化订单，用户转回的回执为 accepted，买方独立重算 PASS，3次已报告阶段人工唤醒、0返工、无邮件或付款。详见[H01 完整证据与边界](validation-h01.md)。维护者未直接取得远端原始材料，不宣称独立认证、原生插件/MCP或无人值守通过。本节是后续验收记录，不改原 Alpha5 发布时点的回归/部署事实。
+
+
+## 后续实机补记 — H02 / S01（2026-11-09）
+
+用户回传证据：[H02](validation-h02.md)中DSH/Richard固定免费结构化交易accepted，成功运行期间0次阶段人工唤醒、双方content_PASS/真实exit0，无resume；首次锁目录权限修复与收尾收集另记。[S01](validation-s01.md)为已有授权Gmail环境新身份自动收码/finish/私密保存/identity通过，无人工转交code，首次network_error后同session/key重试成功。并非维护者直接审计远端日志，不覆盖通用宿主/插件/MCP或新身份交易整链路；无应用升级或新部署。

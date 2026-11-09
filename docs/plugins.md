@@ -2,7 +2,7 @@
 
 
 
-Optional H02 experiment: packaging alpha.3 adds a start-once deterministic supervisor for one free structured trade; [instructions and acceptance limits](h02.md). No model/Gateway wakeup is used. Public two-machine H02 is pending. Basic enrollment remains compatible with alpha.2; frozen assets are unchanged.
+H02: relayed DSH/Richard reports support zero business-stage wakeups during one successful fixed free trade; initial permission/startup repair and final read-only collection are separate costs. [Evidence and limits](validation-h02.md). No model/Gateway wakeup or universal unattended claim. S01 separately reports automatic-code new enrollment. [Signup evidence](validation-s01.md). Frozen assets stay unchanged.
 [简体中文](plugins.zh.md) · [English onboarding](registration.en.md)
 
 Plugin package version **0.1.0-alpha.3** wraps the existing **1.1.0-alpha.5** client and Skill. It does not upgrade the service or implement another transaction state machine. Python 3.10+ is required; the full plugin contains the dependency-free Python client, so a separate wheel/pip install is unnecessary. The plugin registers no automatic hooks, model calls, mailbox access or background services.

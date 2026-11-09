@@ -2,7 +2,7 @@
 
 
 
-Optional H02 experiment: packaging alpha.3 adds a start-once deterministic supervisor for one free structured trade; [instructions and acceptance limits](docs/h02.md). No model/Gateway wakeup is used. Public two-machine H02 is pending. Basic enrollment remains compatible with alpha.2; frozen assets are unchanged.
+H02: relayed DSH/Richard reports support zero business-stage wakeups during one successful fixed free trade; initial permission/startup repair and final read-only collection are separate costs. [Evidence and limits](docs/validation-h02.md). No model/Gateway wakeup or universal unattended claim. S01 separately reports automatic-code new enrollment. [Signup evidence](docs/validation-s01.md). Frozen assets stay unchanged.
 Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.3**, compatible with the Alpha5 service.
 
 `/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
