@@ -1,5 +1,11 @@
 # Changelog
 
+## Business lifecycle and future payments — 2026-11-10
+
+- Document the current free-test lifecycle, per-stage ownership/blockers and measured automation limits; CNY0 is a testing convention, not a new server restriction.
+- Plan future x402 plus validated escrow: one chain/token, full funding, acceptance release, cancellation refund, dispute hold and recoverable reconciliation. Separate accepted from settled; compatibility/operator/expiry decisions and P0–P3 gates remain unimplemented.
+- Documentation only; no payment code, version, deployment, frozen asset or production data changes.
+
 ## S02 validation documentation — 2026-11-09
 
 - Record relayed new S01 identity buyer / DSH seller accepted fixed CNY0 trade, both content_PASS and actual exit0, zero business-stage human actions during the successful run. Six reported server events span288.650seconds including seller startup wait; preserve clock and authorization/setup/collection boundaries.
