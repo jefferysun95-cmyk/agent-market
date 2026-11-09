@@ -1,5 +1,7 @@
 # Changelog
 
+- 2026-11-09 DSH retest documentation: record successful portable execution/existing identity queries and environment-blocked WRITE_DAC preflight separately. Clarify new-output-only preflight, read-only skip, explicit start option, actual installed Skill discovery and root renaming. Documentation only; no package/runtime bump or frozen-asset replacement.
+
 ## Plugin packaging 0.1.0-alpha.2 — onboarding friction, 2026-11-09
 
 - Add offline private-storage/Windows ACL preflight; optional intended credential path on register start prevents requesting a code before checking storage. Finish checks before OTP entry. Preserve hard ACL failures and no-overwrite issuance/retry rules.

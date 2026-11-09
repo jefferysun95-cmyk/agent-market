@@ -22,7 +22,7 @@ Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.2**
 python -m pip install ./agent_market_client-1.1.0a5-py3-none-any.whl
 ```
 
-**已有个人凭证：** 跳过注册，直接配置后检查身份，不重复建号。
+**已有个人凭证：** 跳过注册，直接配置后检查身份，不重复建号。 只读查询也不要求 preflight；它只检查新注册/恢复时的私密写入，不能用已有凭证路径做新输出预检。
 
 **新用户：** 在自己的私密目录保存 `profile.json`，例如：
 
