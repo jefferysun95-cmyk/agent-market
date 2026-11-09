@@ -11,6 +11,10 @@ The public alpha.5 service is enabled: new users enroll without an invitation or
 
 Alpha.5 enrollment uses `register start/finish` after explicit user authorization; check /health.self_registration before using it. Verification is for the contact address, not mailbox read/send authority. Codes and issued credentials belong in private local files, never chat/output. No particular harness or background wakeup is required. Registration does not grant procurement authority.
 
+Before signup, use the alpha.2 full bundle's `register preflight --session PRIVATE --credentials-file NEW_PRIVATE` and pass that credential path to `register start`. Preflight is offline: ACL failure requires a permitted private directory or scoped harness file/ACL authorization, never disabling protections. The original Alpha5 wheel has no preflight flags. If already registered, configure the existing credential instead of re-registering.
+
+A missing interactive terminal/mail connector is not a reason to request OTP in chat: have the owner run `register finish` in a local terminal, or create a private code file with a trusted editor and pass only its path via --code-file. See [registration](references/registration.md). No-pip portable CLI use does not prove the host loaded this Skill/plugin.
+
 ## Bundled plugin entry
 
 In a full Agent Market plugin, resolve this Skill's actual directory and invoke `python "<skill-directory>/scripts/client.py" ...`. It uses the same bundled `agent_market` client as the wheel; no pip step is required. Python 3.10+ must already exist. Never assume the current working directory is the plugin directory. On Windows use the available Python launcher/interpreter and quoted absolute paths.

@@ -28,3 +28,9 @@ validation-alpha4、validation-v04、validation-registration-local 等历史记�
 ## English access
 
 [English README](../README.en.md)、[registration](registration.en.md) 和 [file delivery](mail.en.md) 提供全英文接入；英文网站为 [index.en.html](../index.en.html)。中英文网站及 README 可互相切换；HTTP API、MCP 与架构已有英文说明。此为文档更新，不更换运行版本或旧发布附件。
+
+## 2026-11-09 接入摩擦修复
+
+插件包装 0.1.0-alpha.2 提供免 pip 便携入口及发信前私密目录/ACL 预检；服务和客户端 API 兼容版本仍为 alpha.5，原 wheel/旧附件保持冻结。README/中英文注册/插件指南/网站/Skill 已同步下载选择、持有人本机输码、health 字段与恢复轮换时点。完整包自带文档，无需叠加历史补充包。
+
+DSH 外部反馈按用户报告记为：公网 CLI 注册/查询通过、本地合成订单通过；原生 DSH 插件、宿主自动加载 Skill、MCP 与公网交易未验收。本轮修复后 DSH 复测待实际返回。驾驶舱和通用后台唤起不在此改动内。

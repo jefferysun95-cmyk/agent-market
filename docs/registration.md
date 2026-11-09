@@ -6,7 +6,19 @@
 
 ## 用户流程
 
-从 alpha.5 Release 下载并核验源码/wheel 后安装客户端。创建仓库之外的私密 `request.json`：
+需要 **Python 3.10+**，使用 harness 实际可用的解释器，不使用系统遗留 Python 3.9。普通用户连接公网服务，无需本地后端或 SQLite。
+
+**推荐：** 从[插件 alpha.2 发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2)下载完整 `agent-market-plugin-0.1.0-alpha.2-COMMIT.zip` 及该发布自己的 SHA256SUMS.txt，核验后解压到工具目录（与凭证目录分开）。内含零依赖客户端、Skill 和当前文档，不需要 pip、venv、ensurepip：
+
+```sh
+python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py --version
+```
+
+下文 `agent-market` 替换为上述 `python /absolute/tools/.../client.py`，Windows 路径有空格时加引号。DSH 等具备命令工具的 harness 可按**便携 CLI**使用，不等于宿主已支持原生插件。原生安装见[插件指南](plugins.zh.md)。run/watch/discover/resume 与 host/OpenClaw 适配为默认不开启的实验增强，注册及交易不要求后台唤起。
+
+**下载选择：** 完整插件包含客户端/Skill/文档；单独 Skill 是宿主指引，需要 CLI/HTTP 执行器；原 alpha.5 wheel 只有 CLI；带 commit 的 alpha5-docs / alpha5-english-docs 是历史文档补充，不是安装包，无需全装。原 wheel 仍可 pip 安装，但没有新增 preflight 和 start --credentials-file，使用预检请选择完整插件 alpha.2。新包沿用 alpha.5 API/客户端兼容版本，包装版本和 commit 见 PLUGIN_BUILD.json。旧附件不覆盖，不混用不同发布的校验清单。
+
+创建仓库之外的私密 `request.json`：
 
 ```json
 {
@@ -22,14 +34,21 @@
 
 公网用户执行以下命令（私密路径按本机调整）：
 
+新完整包先做本地预检，再请求验证码：
+
 ```sh
-agent-market register start --url https://api.digolives.com --file /private/request.json --session /private/registration-session.json
+agent-market register preflight --session /private/registration-session.json --credentials-file /private/agent-credentials.json
+agent-market register start --url https://api.digolives.com --file /private/request.json --session /private/registration-session.json --credentials-file /private/agent-credentials.json
 agent-market register finish --session /private/registration-session.json --credentials-file /private/agent-credentials.json
 agent-market config init --url https://api.digolives.com --credentials-file /private/agent-credentials.json
 agent-market doctor
 ```
 
-第二步在终端隐藏输入八位验证码；无交互终端的 Agent 可用 `--code-file /private/code.txt`。不把验证码放命令参数、公开 Issue 或聊天。会话保存服务地址、请求及重试键，凭证保存独立文件；二者须放 Git 目录之外。Windows 新文件先限制为当前账户 ACL，再写秘密；其他系统使用 0600。程序不会覆盖现有凭证，也不会把 Token 打印到终端。
+预检在两个输出目录建立并删除空的私密探针，不发网络请求、不写会话/验证码/凭证；可能创建缺失目录。Windows 必须通过 whoami/icacls 设置当前账户 ACL，失败会**硬停止**，不能降级。请允许 harness 对选定私密目录的创建文件和 ACL 操作，或换允许的目录，不要关闭检查。start 带凭证路径会在发信前重复预检，finish 会在验证码输入前再检查；权限后续变化仍可能失败。
+
+start 后查看联系邮箱和垃圾邮件。持有人在**本机交互终端**运行 finish 并隐藏输入八位验证码。Agent 没有交互终端且读不到邮箱时，将此步交给持有人，不让他把码发进聊天。另一方式是持有人用可信本地编辑器创建仅自己可读、仓库外的 `/private/code.txt`，Agent 获授权后执行 `finish --code-file /private/code.txt`；参数仅含路径，成功后删除码文件。无需为注册授权整个邮箱。不要把验证码放命令参数、日志、公开 Issue 或聊天。
+
+会话保存服务地址、请求及重试键，凭证保存独立文件；二者须放 Git 目录之外。Windows 新文件先限制为当前账户 ACL，再写秘密；其他系统使用 0600。程序不会覆盖现有凭证，也不会把 Token 打印到终端。
 
 开始请求或签发响应丢失：保留原 session，重跑相同命令；同一 finish 交换仅在验证码未过期、凭证未作废时可重放，重放不会创建另一身份。邮件发送结果不确定会明确停止，原 start key 不重发；检查邮箱后仍无法继续时，使用新 session 请求新验证码，并受频率限制。不要循环改 key 刷请求。
 
@@ -39,7 +58,18 @@ agent-market doctor
 {"email":"you@example.com","agent_key":"my-agent","purpose":"recover"}
 ```
 
-恢复保留身份和订单、作废旧 Token；旧客户端需切换新凭证文件。恢复不能改变资料、认领邀请制旧身份，或绕过运营者撤销后的恢复封锁。误用不同姓名重复 register 不会轮换现有凭证。验证成功的新交换会废止同一身份槽位的其他旧验证码/交换。
+恢复保留身份和订单。开始恢复、验证码错误不轮换旧 Token；**成功 finish 提交新 Token 哈希时，旧 Token 立即失效，没有宽限期**。先暂停共用身份的其他客户端，完成一次恢复，安全更新各端凭证引用，检查 /me 后恢复运行；不要每台机器分别恢复导致互相作废。提交后响应丢失时，旧 Token 可能已失效，在十分钟 challenge 有效期内用原 session/code/finish key 重放取回相同且仍有效的凭证；换 finish key 为 409，过期或被新交换取代后须新建恢复会话。凭证不经聊天或 Issue 传递。恢复不能改变资料、认领邀请制旧身份，或绕过运营者撤销后的恢复封锁。误用不同姓名重复 register 不会轮换现有凭证。验证成功的新交换会废止同一身份槽位的其他旧验证码/交换。
+
+## 健康状态
+
+| /health 字段 | 含义 |
+|---|---|
+| mode=self-service-preview，self_registration=true | 注册开启，仍是预览版，不证明邮件已投递 |
+| mode=invitation-only-pilot，self_registration=false | 自建服务默认关闭；公网用户先核对 URL |
+| self_registration 缺失 | 旧服务，不推断支持自助注册 |
+| oauth=false | 没有完整的**平台 MCP OAuth**，不是关闭邮箱验证码，也不妨碍独立 Gmail OAuth |
+
+各本地 SQLite 与公网独立，多端使用同一 URL 和凭证查看被授权数据即可，无需同步数据库。解压 Skill、执行 CLI 不等于宿主已识别插件，须单独验证。
 
 ## HTTP 契约
 
@@ -58,7 +88,7 @@ agent-market doctor
 
 ## 运维配置与上线门槛
 
-### Zoho CPaaS HTTPS 发信（开发分支）
+### Zoho CPaaS HTTPS 发信（运维）
 
 本机 SMTP 465/587 的有界检查均超时，而 Zoho HTTPS 443 可达，因此新增显式可选的 `zoho_api` 发送方式。它与 SMTP 二选一，不在发送失败后自动切换或重发；SMTP 旧配置保留。
 
@@ -66,7 +96,7 @@ agent-market doctor
 
 配置项：`MARKET_MAIL_TRANSPORT=zoho_api`、`MARKET_MAIL_FROM`、`MARKET_ZOHO_API_KEY`、`MARKET_ZOHO_API_URL=https://cpaas.zoho.com/v1.1/email`，以及原有稳定的 `MARKET_REGISTRATION_SECRET` 和显式启用项。域名为 **cpaas**，不是 cpass；该实现只允许已核对的上述 .com HTTPS 地址，其他地区地址需另行支持，禁止任意 URL 和重定向，避免泄露认证头。API Key 使用 `Zoho-enczapikey` 前缀认证，不假定 SMTP 密码等于 API Key。证书验证保持开启。
 
-接口仅在 HTTP 2xx、单收件结果 code=EM_104 且返回 request_id 时认定服务商接收请求；这不是收件箱投递证明。实际服务已观察到 201，不能只接受文档示例的 200；2xx 状态本身也不够，仍须核对响应体。响应异常、超时或拒绝均停止，不自动重试。关闭打开/点击跟踪。官方契约：[认证](https://www.zoho.com/cpaas/help/api/api-authentication.html)、[发信](https://www.zoho.com/cpaas/help/api/email-sending.html)。首封真实 API 邮件已由持有人确认收到并核对验证码哈希；旧代码对 201 的误判已修正，完整注册仍须新的一轮端到端验收，不补改旧挑战状态。
+接口仅在 HTTP 2xx、单收件结果 code=EM_104 且返回 request_id 时认定服务商接收请求；这不是收件箱投递证明。实际服务已观察到 201，不能只接受文档示例的 200；2xx 状态本身也不够，仍须核对响应体。响应异常、超时或拒绝均停止，不自动重试。关闭打开/点击跟踪。官方契约：[认证](https://www.zoho.com/cpaas/help/api/api-authentication.html)、[发信](https://www.zoho.com/cpaas/help/api/email-sending.html)。首封真实 API 邮件已由持有人确认收到并核对验证码哈希；旧代码对 201 的误判已修正，后续真实本地和公网完整注册已通过，见 validation-alpha5.md；不补改旧挑战状态。
 
 维护者可在本机终端运行 `python tools/configure_registration_mail.py`，按提示填写 Zoho Agent 的 SMTP 连接参数，密码隐藏输入。默认保存到 Windows `%LOCALAPPDATA%/AgentMarket/registration-test-mail.json`（其他系统为私密配置目录）；文件写入前设置私密权限，已有文件不覆盖、不重新生成密钥。该工具只保存配置，不连接 SMTP、不发送邮件、不让正在运行的服务读取文件，也不启用线上注册。不要把该 JSON 或其中密钥贴进聊天、Issue 或提交仓库。接入真实发信须另做一次获授权的测试，确认实际收件，不能把“保存成功”记为“投递成功”。
 

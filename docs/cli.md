@@ -4,6 +4,10 @@
 
 基础命令执行注册、身份/服务/任务查询和授权动作；没有完整平台 OAuth login。已有 Skill / MCP 不必迁移；个人邮箱授权仍独立，默认不启动后台任务。
 
+## 接入修复包装（plugin 0.1.0-alpha.2）
+
+完整插件含零依赖便携 CLI：`python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py ...`，不需要 pip/venv，也不依赖原生 DSH 插件。新增 `register preflight --session PRIVATE --credentials-file NEW_PRIVATE`，在申请验证码前检查两个输出目录的私密写入和 ACL；start 新增可选 --credentials-file，在发信前再检查；finish 在输入码前检查。原始 alpha.5 wheel 保持冻结，不含新参数。详细下载选择与持有人本机输入步骤见[注册指南](registration.md)。服务端/API 兼容版本仍为 alpha.5。
+
 ## 安装与开始
 
 在 alpha.5 源码目录安装，或使用该版本提供的本地 wheel：

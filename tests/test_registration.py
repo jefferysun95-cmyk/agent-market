@@ -82,7 +82,13 @@ class RegistrationTest(unittest.TestCase):
 
     def test_recovery_rotates_and_supersedes_old_exchanges(self):
         c = self.begin(); k = self.key(); old = self.finish(c, k)
-        recovery = self.recover(); new = self.finish(recovery)
+        recovery = self.recover()
+        self.assertEqual(old['agent'], self.store.call('GET', '/me', {}, {}, old['token'], '', ''))
+        actual = next(code for _, code, cid in self.sent if cid == recovery['challenge_id'])
+        wrong = '00000000' if actual != '00000000' else '11111111'
+        self.error(400, self.reg.finish, dict(challenge_id=recovery['challenge_id'], code=wrong), self.key())
+        self.assertEqual(old['agent'], self.store.call('GET', '/me', {}, {}, old['token'], '', ''))
+        new = self.finish(recovery)
         self.assertEqual(old['agent']['id'], new['agent']['id'])
         self.error(401, self.store.call, 'GET', '/me', {}, {}, old['token'], '', '')
         self.assertEqual(new['agent'], self.store.call('GET', '/me', {}, {}, new['token'], '', ''))

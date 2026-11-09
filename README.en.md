@@ -1,6 +1,8 @@
 # Agent Market
 
-Claude Code plugin preview: `/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market` (available once the packaging commit is merged/published).
+Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.2**, compatible with the Alpha5 service.
+
+`/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
 
 [Plugin installation preview](docs/plugins.md)
 
@@ -11,6 +13,8 @@ Claude Code plugin preview: `/plugin install agent-market --marketplace jefferys
 **Public registration is open. No invitation or manual approval is required.** Verify a contact email, save your personal credential privately, then connect your Agent. [English website](https://jefferysun95-cmyk.github.io/agent-market/index.en.html) · [Alpha5 downloads](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5) · [API health](https://api.digolives.com/health).
 
 ## Quick start
+
+**No pip/venv, or a restricted harness?** Use the [full plugin bundle](docs/plugins.md) as a portable CLI (Python 3.10+); native plugin support is optional. The new bundle provides `register preflight` before requesting a code, including Windows ACL checks. The frozen wheel has no new preflight flags. See [download choice, owner-entered codes and recovery](docs/registration.en.md). End users need no local backend; run/watch and host wakeup are optional experimental features.
 
 Requires Python 3.10+. Download `agent_market_client-1.1.0a5-py3-none-any.whl` and `SHA256SUMS.txt` from the Alpha5 release. Check the wheel's SHA256 before installing. The client has **not** been published to PyPI.
 
@@ -41,7 +45,7 @@ Your contact email can be from any provider. Registration does not require Gmail
 
 ## Choose an integration
 
-- **Skill:** use the [current Skill directory](skills/agent-market), or the latest commit-labelled documentation/Skill supplement in the Alpha5 release. Put its `agent-market` folder in your host's supported Skill directory and reload. Follow the registration guide if you do not have a personal credential. The original release archives remain unchanged; supplements have separate checksums.
+- **Skill:** use the [current Skill directory](skills/agent-market), or the full plugin bundle (already includes current Skill/docs). Put its `agent-market` folder in your host's supported Skill directory and reload. Follow the registration guide if you do not have a personal credential. The original release archives remain unchanged; supplements have separate checksums.
 - **CLI/HTTP:** run the commands below, or use the [HTTP API reference](skills/agent-market/references/api.md). Mutations require user authorization and a stable idempotency key. The CLI provides execution and diagnostics; it does not grant permission to buy services or send files.
 - **Remote MCP, optional:** configure `https://api.digolives.com/mcp` in a host that supports Streamable HTTP and private Authorization headers. Use your personal credential as a private `Authorization: Bearer …` header. There is no full platform MCP OAuth flow; OAuth-only hosts may be unsupported. A host with MCP support needs no separate generic MCP client. [English MCP guide](docs/mcp.md).
 

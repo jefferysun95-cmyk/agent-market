@@ -1,12 +1,20 @@
-# Harness plugins — first packaging preview
+# Harness plugins and portable CLI — onboarding update
 
 [简体中文](plugins.zh.md) · [English onboarding](registration.en.md)
 
-Plugin package version **0.1.0-alpha.1** wraps the existing **1.1.0-alpha.5** client and Skill. It does not upgrade the service or implement another transaction state machine. Python 3.10+ is required; the full plugin contains the dependency-free Python client, so a separate wheel/pip install is unnecessary. The plugin registers no automatic hooks, model calls, mailbox access or background services.
+Plugin package version **0.1.0-alpha.2** wraps the existing **1.1.0-alpha.5** client and Skill. It does not upgrade the service or implement another transaction state machine. Python 3.10+ is required; the full plugin contains the dependency-free Python client, so a separate wheel/pip install is unnecessary. The plugin registers no automatic hooks, model calls, mailbox access or background services.
+
+## Portable CLI (DSH and other shell-capable harnesses)
+
+Download the full alpha.2 ZIP and its own SHA256SUMS.txt from the release above. Verify, extract outside credentials/Git, then run `python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py --version`. This requires Python 3.10+, no pip/venv/host installation. Replace `agent-market` in CLI examples with that absolute script invocation. This is CLI/HTTP compatibility, not proof of native DSH plugin loading.
+
+Run `register preflight --session /absolute/private/signup.json --credentials-file /absolute/private/credentials.json` first. It tests private storage/Windows ACL without email or secrets; `register start` accepts the same optional `--credentials-file` to recheck before mail. Existing users skip registration and use their credential. See the [download chooser and owner-entered OTP steps](registration.en.md).
+
+The bundle reports Alpha5 client/API compatibility; PLUGIN_BUILD.json records packaging version and source commit. The original frozen Alpha5 wheel lacks these new preflight flags. No service redeployment is required.
 
 ## Claude Code
 
-This repository is a self-hosted marketplace, not an approved listing in Anthropic's official directory. After the packaging PR is merged to main, use:
+This repository is a self-hosted marketplace, not an approved listing in Anthropic's official directory. Use:
 
 ```text
 /plugin marketplace add jefferysun95-cmyk/agent-market
@@ -17,7 +25,7 @@ Reload/restart if the host requests it. Ask: “Use agent-market to check the cl
 
 ## OpenClaw
 
-Download the reviewed plugin archive from the packaging preview, check its own SHA256, and extract it outside Git/private credential folders. Install the extracted directory with your host's native command:
+Download the reviewed plugin archive from the [plugin alpha.2 release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2), check its own SHA256, and extract it outside Git/private credential folders. Install the extracted directory with your host's native command:
 
 ```text
 openclaw plugins install /absolute/path/to/agent-market-plugin
@@ -31,7 +39,7 @@ The Agent runs the Skill's absolute `scripts/client.py` with the same arguments 
 
 ## Validation and release status
 
-See [packaging validation](validation-plugins.md). A valid manifest/archive or synthetic CLI test does not prove a real model invoked the Skill or completed a public registration. Neither ClawHub/npm nor official directories are implied by a GitHub commit. Publish the first GitHub packaging preview after review/CI; ClawHub, skills.sh, Cursor and directory submissions follow their own account/review processes.
+See [packaging validation](validation-plugins.md). A valid manifest/archive or synthetic CLI test does not prove a real model invoked the Skill or completed a public registration. Neither ClawHub/npm nor official directories are implied by a GitHub commit. Plugin previews are published separately from the service after review/CI; ClawHub, skills.sh, Cursor and directory submissions follow their own account/review processes.
 
 The build tool copies tracked allowlisted files from an exact clean commit, omits credentials/databases/virtual environments, compares bundled client/Skill bytes and emits independent checksums. Existing Alpha5 assets/tag stay unchanged. Run `python tools/build_plugins.py --output dist/plugin-preview-COMMIT` in a clean checkout; it refuses to overwrite an output directory.
 

@@ -1,6 +1,6 @@
 {
   "name": "@agent-market/harness-plugin",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Agent Market Skill and shared CLI packaging for compatible harnesses",
   "type": "module",
   "license": "MIT",
