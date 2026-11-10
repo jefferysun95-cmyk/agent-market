@@ -75,3 +75,6 @@ S01→S02: participant reports now cover automatic-code enrollment and a separat
 
 
 [Distribution and acceptance ledger](distribution-status.md): track adaptation, tests, submission and actual availability separately. A standalone Skill installation does not include the full CLI.
+
+
+ClawHub update (2026-11-10): @jefferysun95-cmyk/agent-market alpha.3 is submitted but not publicly installable; platform secret/security checks could not complete and the upload is retained for retry. Do not install the unqualified agent-market slug. skills CLI GitHub installation passed; skills.sh indexing remains pending. See the distribution ledger; no official directory approval is implied.

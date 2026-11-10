@@ -1,5 +1,10 @@
 # Changelog
 
+## Distribution submission receipts — 2026-11-10
+
+- Record clean native installed-copy loopback signup/query/free-trade acceptance without claiming model-driven public workflows.
+- Record owner-qualified ClawHub submission pending incomplete platform scans, not a public listing or proven secret finding; preserve exact version/source and avoid homonymous short-slug confusion. Record clean GitHub skills CLI install and skills.sh soft404 separately. No runtime, deployment or frozen release change.
+
 ## Distribution entry audit — 2026-11-10
 
 - Align current bilingual Pages, registration, Skill references and launch links with the immutable alpha.3 full bundle; correct Claude marketplace/install commands. Preserve historical version evidence.
