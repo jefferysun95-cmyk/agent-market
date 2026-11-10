@@ -29,3 +29,8 @@
 
 
 [中英文可复用提交文案](submission-profile.md)已准备，包含实际认证方式、安装边界与测试证据；不代替渠道要求的隐私政策、条款或原生验收，也不含任何个人凭证。
+
+
+## Registry状态更新 — 2026-11-10
+
+已完成发布者授权、官方validate、一次401拒绝后的查重/授权刷新及成功发布，并从官方API读回active精确版本。前表未发布门槛已完成，当前事实以[PUBLICATION.json](../registry/PUBLICATION.json)和[渠道台账](distribution-status.md)为准。其他目录仍分别待办，不因Registry登记而自动通过。

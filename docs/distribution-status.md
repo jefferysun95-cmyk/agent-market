@@ -151,3 +151,10 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 ## 后续渠道继续推进 — 2026-11-10
 
 用户确认Claude本机登录受地区限制，不再阻塞其他渠道。Registry远程候选元数据与官方schema校验已就绪；GitHub发布者授权待官方发布器就绪后由持有人完成。Cursor/OpenAI当前规范获取及专用适配仍待确认；Glama实际提交入口要求登录。各渠道均未因准备完成而记为已提交。详见[提交准备清单](directory-submission-readiness.md)。
+
+
+## MCP 官方 Registry 已登记并读回 — 2026-11-10
+
+正式名称 `io.github.jefferysun95-cmyk/agent-market`，版本 `1.1.0-alpha.5`。官方mcp-publisher1.8.9的validate通过；首次发布因发布者JWT过期返回401，查重确认无记录后重新完成同范围GitHub设备授权，紧接提交返回exit0/Successfully published。官方v0.1查询已读回精确名称/版本及原元数据，status=active/isLatest=true，publishedAt=2026-11-10T15:40:51.431621Z（UTC+8为23:40:51）。详见[公开回执](../registry/PUBLICATION.json)。
+
+登记包含Streamable HTTP端点和必填私密Authorization头，无实际个人Token；线上服务/认证/支付规则未改。它是Registry可发现登记，不是Claude/Cursor/OpenAI/Glama审核上架或新增宿主MCP验收。前文“候选/未登记”为历史阶段，本段及回执代表此时实际结果。

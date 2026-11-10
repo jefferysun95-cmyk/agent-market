@@ -1,11 +1,11 @@
-# MCP Registry publication candidate — not published
+# MCP Registry publication — active
 
-This remote-only metadata candidate reuses the existing Alpha5 service. It does not deploy a server, change authentication, distribute credentials or imply listing approval. Version1.1.0-alpha.5 identifies the candidate service version; no runtime or frozen Release change occurs.
+This remote-only published metadata reuses the existing Alpha5 service. It does not deploy a server, change authentication, distribute credentials or imply listing approval. Version1.1.0-alpha.5 identifies the candidate service version; no runtime or frozen Release change occurs.
 
 - Proposed namespace: `io.github.jefferysun95-cmyk/agent-market`.
 - Remote transport: Streamable HTTP at `https://api.digolives.com/mcp`.
 - Personal `Authorization` header is required and secret. Register with contact-email verification using [English onboarding](../docs/registration.en.md). Hosts must supply `Bearer <personal token>` privately; no actual token/default value belongs in metadata.
-- Namespace GitHub ownership login and publication are not complete. Schema validation is not publication, authentication verification or live MCP acceptance.
+- GitHub owner authorization and publication completed2026-11-10. The exact namespace/version was read back with status=active; see PUBLICATION.json. Schema validation alone remains distinct from publication and live MCP client acceptance.
 
 ## Local metadata validation
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Official MCP Registry publication — 2026-11-10
+
+- Publish io.github.jefferysun95-cmyk/agent-market@1.1.0-alpha.5 with official publisher1.8.9 and verify the exact public metadata/status=active by readback. Preserve the initial expired-JWT401 and bounded owner reauthorization; no Agent token, service/deployment or frozen artifact change. Registry discovery does not imply host-directory approval.
+
 ## Registry metadata and channel readiness — 2026-11-10
 
 - Prepare remote-only official Registry metadata with a required secret personal Authorization header, a checksummed official schema snapshot and offline validation. Record Claude regional login block, per-channel account/spec gates and Glama sign-in requirement. No listing, runtime, auth, deployment or frozen asset change.
