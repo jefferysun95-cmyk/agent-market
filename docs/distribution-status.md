@@ -146,3 +146,8 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 旧 managed Skill 已备份并移出扫描根，授权重启后宿主实际路径/哈希指向插件内置 Skill（source=openclaw-extra）。复用本轮新身份完成 N01 发布→Richard报价→选择→确认→交付→买方独立21项核验→accepted，CNY0/payment为空。该结果更新上文历史“来源冲突/首单待测”，详见[N01证据](validation-n01.md)。
 
 人工阶段转发不为零；Richard发生一次请求前UTF-16本地修复；accept进程退出码未捕获，记未知。不是无人值守、邮件或付款验证。Claude原生公网门槛仍待持有人登录后完成，官方目录/Registry尚未因本次测试自动提交。
+
+
+## 后续渠道继续推进 — 2026-11-10
+
+用户确认Claude本机登录受地区限制，不再阻塞其他渠道。Registry远程候选元数据与官方schema校验已就绪；GitHub发布者授权待官方发布器就绪后由持有人完成。Cursor/OpenAI当前规范获取及专用适配仍待确认；Glama实际提交入口要求登录。各渠道均未因准备完成而记为已提交。详见[提交准备清单](directory-submission-readiness.md)。

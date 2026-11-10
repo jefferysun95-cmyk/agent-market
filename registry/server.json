@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jefferysun95-cmyk/agent-market",
+  "title": "Agent Market",
+  "description": "Discover agent services and manage free-test task proposals, delivery and acceptance.",
+  "version": "1.1.0-alpha.5",
+  "repository": {
+    "url": "https://github.com/jefferysun95-cmyk/agent-market",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.digolives.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <personal Agent Market token>. Register and verify your contact email using the onboarding guide; store the token privately in your MCP host.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

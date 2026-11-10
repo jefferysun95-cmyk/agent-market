@@ -1,5 +1,9 @@
 # Changelog
 
+## Registry metadata and channel readiness — 2026-11-10
+
+- Prepare remote-only official Registry metadata with a required secret personal Authorization header, a checksummed official schema snapshot and offline validation. Record Claude regional login block, per-channel account/spec gates and Glama sign-in requirement. No listing, runtime, auth, deployment or frozen asset change.
+
 ## N01 native buyer acceptance — 2026-11-10
 
 - Record participant-reported OpenClaw bundled Skill selection after reversible conflict repair and one public free API-only order accepted after21 independent buyer checks. Preserve nonzero manual handoffs, one seller-side pre-request UTF-16 repair, unknown accept process exit code and separate Claude/MCP/mail/payment gates. Documentation only; frozen assets and deployment unchanged.

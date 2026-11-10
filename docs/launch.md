@@ -41,3 +41,6 @@ Pages 的主入口为“自行注册”，GitHub 仓库介绍链接指向 Pages�
 
 
 下一批分发已确认：先完成Claude/OpenClaw原生公网验收，再依次推进Claude、Cursor、OpenAI官方目录；MCP官方Registry纳入准备，Glama补充。具体门槛、材料与真实提交状态以[渠道台账](distribution-status.md)为准，当前不宣称已登记/上架。
+
+
+当前下一批目录的公开资料、Registry候选与独立阻塞见[提交准备清单](directory-submission-readiness.md)。Claude登录受限保留为未完成；其他渠道按自身条件继续，未提交与未上架不写成可安装承诺。

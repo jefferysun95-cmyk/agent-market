@@ -116,3 +116,8 @@ Alpha5按CNY0默认免费测试约定运行，不发生真实付款；这是运�
 ### N01 原生买方验收补记 — 2026-11-10
 
 用户转回[N01](validation-n01.md)：OpenClaw实际加载插件内Skill后，复用新注册身份完成公网CNY0纯API订单至accepted，买方独立21项通过。旧managed冲突已可回滚处理；人工阶段转发非零、卖方本地编码修复一次、accept退出码未知。OpenClaw原生买方门槛通过不代表Claude/MCP/邮件/无人值守/支付通过；下一步补Claude原生验收，继续既定渠道准备。
+
+
+### 独立推进各渠道 — 2026-11-10
+
+用户确认本机Claude登录受地区限制后，允许其他渠道继续，不再以Claude补测阻塞全部发布。已准备Registry远程元数据与官方schema离线校验；实际发布需要GitHub命名空间授权及发布读回。Cursor/OpenAI格式与账号、Glama登录分别记录，见[目录提交准备](directory-submission-readiness.md)。这不豁免各渠道自身的功能、隐私或鉴权审查，也不宣称新目录已经上架。
