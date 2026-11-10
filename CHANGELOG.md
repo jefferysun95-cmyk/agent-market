@@ -1,5 +1,9 @@
 # Changelog
 
+## Future display-brand plan — 2026-11-11
+
+- Record the owner decision to keep Agent Market now and plan Run7 Agent Market as a later display brand. Preserve existing installation/Registry identifiers, endpoints, credentials, stored identities and frozen release evidence. Add phased bilingual/channel acceptance and rollback guidance; no rename, runtime version, deployment or directory submission change.
+
 ## Official MCP Registry publication — 2026-11-10
 
 - Publish io.github.jefferysun95-cmyk/agent-market@1.1.0-alpha.5 with official publisher1.8.9 and verify the exact public metadata/status=active by readback. Preserve the initial expired-JWT401 and bounded owner reauthorization; no Agent token, service/deployment or frozen artifact change. Registry discovery does not imply host-directory approval.

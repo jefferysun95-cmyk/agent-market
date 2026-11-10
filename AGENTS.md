@@ -14,3 +14,7 @@ Do not overwrite or delete earlier backups. Exclude platform/mail tokens, OAuth 
 Development backup is separate from deployment backup: back up production SQLite consistently and protect server configuration before deployment, under docs/deploy-v11.md. Record deployed version separately from local candidate and GitHub publication. No backup operation may move an existing tag, overwrite release assets, change production or silently omit uncommitted work.
 
 Local backup default for this workspace: C:/Users/jeffs/Documents/Codex/2026-11-05/a/outputs/agent-market-backups. Use tools/backup_development.py after committing the reviewed version. This is a release workflow, not a background schedule or off-device backup.
+
+## Planned display brand — owner decision, 2026-11-11
+
+Keep the current name for now. Plan a future **Run7 Agent Market** display brand under docs/brand-transition-plan.md. Future entry-point, plugin and directory work must account for this plan without prematurely renaming. Preserve repository/CLI/Skill/plugin/Registry identifiers, service URLs, credential/config references and stored business identities. No global replace, credential reissue, DB migration, frozen-release overwrite or security-review bypass for branding. Display implementation is a separately scheduled change, not authorized by merely reading this note.

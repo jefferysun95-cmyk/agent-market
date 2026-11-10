@@ -158,3 +158,7 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 正式名称 `io.github.jefferysun95-cmyk/agent-market`，版本 `1.1.0-alpha.5`。官方mcp-publisher1.8.9的validate通过；首次发布因发布者JWT过期返回401，查重确认无记录后重新完成同范围GitHub设备授权，紧接提交返回exit0/Successfully published。官方v0.1查询已读回精确名称/版本及原元数据，status=active/isLatest=true，publishedAt=2026-11-10T15:40:51.431621Z（UTC+8为23:40:51）。详见[公开回执](../registry/PUBLICATION.json)。
 
 登记包含Streamable HTTP端点和必填私密Authorization头，无实际个人Token；线上服务/认证/支付规则未改。它是Registry可发现登记，不是Claude/Cursor/OpenAI/Glama审核上架或新增宿主MCP验收。前文“候选/未登记”为历史阶段，本段及回执代表此时实际结果。
+
+## Future display-brand policy — 2026-11-11
+
+The owner chose to keep Agent Market for now and plan **Run7 Agent Market** as the later display brand. This planning entry changes no listing or approval status. Keep current publisher-qualified installs and canonical Registry/Skill/plugin IDs; schedule display metadata edits per channel without reuploading the blocked ClawHub artifact or altering frozen releases. Track separate review outcomes under the [brand transition plan](brand-transition-plan.md).
