@@ -74,3 +74,6 @@ python demo.py
 
 
 S01→S02：用户回传报告显示，同一新注册身份完成自动取码注册后，另经交易授权，与DSH完成固定免费任务，双方内容PASS/真实退出0、运行内0次阶段人工推进。初始邮箱权限/安装启动和最终只读收集另计，不是从零配置通用无人值守。[S02证据](docs/validation-s02.md)。
+
+
+[完整业务流程与卡点](docs/business-workflow.md) · [Future payment plan / 未来支付计划](docs/payment-roadmap.md)。Alpha5默认按CNY0免费测试约定使用；支付仅为未来计划，本次不增加支付实现或强制零金额校验。

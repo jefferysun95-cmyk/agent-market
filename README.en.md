@@ -90,3 +90,6 @@ Keep one service and SQLite, with shared authorization and state rules for HTTP/
 
 
 S01→S02: participant reports now cover automatic-code enrollment and a separately authorized first free trade using the same new identity against DSH, both content PASS/actual exit0 and no business-stage human callbacks. Existing mail permissions, initial setup/startup and final collection remain separate. This is not universal unattended fresh setup. [S02 evidence](docs/validation-s02.md).
+
+
+[Business lifecycle and blockers (Chinese)](docs/business-workflow.md) · [Future payment plan / 未来支付计划](docs/payment-roadmap.md)。Alpha5 testing uses an explicit CNY0 agreement; payments remain future work. This documentation adds neither payment execution nor a server-enforced zero-price rule.
