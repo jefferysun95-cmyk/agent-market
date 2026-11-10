@@ -20,6 +20,8 @@
 | Cursor | Skill可作为后续入口；未专门适配原生目录 | 未进行Cursor实机验收 | 未提交 | 未上架 |
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
 | OpenAI相关目录 | 未完成具体产品目录/格式与鉴权评审 | 未验收 | 未提交 | 未上架；不能把普通Bearer MCP当OAuth目录集成 |
+| MCP 官方 Registry | 已纳入下一批准备；服务元数据、命名空间归属及发布格式待核对 | 未进行Registry发布/发现/连接验收 | 未提交 | 未登记；不等于各宿主官方目录收录 |
+| Glama | 补充分发渠道；材料与格式待核对 | 未验收 | 未提交 | 未收录 |
 
 ## 本轮集中入口核对
 
@@ -75,7 +77,7 @@ OpenClaw2026.4.11本轮使用专用OPENCLAW_STATE_DIR/OPENCLAW_CONFIG_PATH安装
 1. 集中核对入口、补台账并经PR/CI合并GitHub；当前main对应文档更新与冻结资产分开。
 2. Claude/OpenClaw逐个记录安装来源、实际加载Skill和客户端版本；真实宿主注册/查询/免费任务另行完成，不批量新建重复身份。
 3. ClawHub：明确发布者→公开Skill预检→真实提交→核对可见状态→干净目录安装复核。skills：GitHub源发现→隔离安装→页面/索引核实。未完成项保留待办。
-4. Cursor/Anthropic/OpenAI先核对具体目录与格式/鉴权、备齐材料和证据，再提交并保存编号/链接/日期；审核结果未到只记已提交。
+4. 先完成Claude Code与OpenClaw原生公网验收：宿主实际加载插件/Skill → 独立新身份注册 → 身份/服务查询 → 一笔免费任务；已存在的安装、CLI和回环证据不替代此门槛。随后按Claude（Anthropic）、Cursor、OpenAI官方目录逐项推进；MCP官方Registry加入同一批准备清单，Glama作为补充。先核对各自格式/鉴权、备齐材料和证据，再提交并保存编号/链接/日期；审核结果未到只记已提交。
 5. 每次实质渠道或重要文档交付独立commit备份、源码/Git bundle/SHA256/离线恢复；不替换既有Release。
 
 ## 官方参考（2026-11-10）
@@ -111,3 +113,22 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 官方skills1.7.6从GitHub main发现agent-market，随后在全新隔离项目用 `--skill agent-market --agent claude-code --copy --yes` 安装成功，实际落点为该项目 `.claude/skills/agent-market`；未修改全局Skill、未加载模型、未注册/发单、遥测关闭。安装结果是Skill目录，而不是完整CLI。skill内容hash为 `ec94eff8140a7c19ae2c35f8442befadf69bbd641059126928e1ae430264c7d2`。
 
 [skills.sh候选详情地址](https://skills.sh/jefferysun95-cmyk/agent-market/agent-market)返回HTTP200，但可见正文显示“404 / agent-market isn’t available in this repository”。不能将软404或一次GitHub安装写成目录已收录。官网说明索引/排名与安装统计有关；本轮不为排名重复安装/上传遥测，等待真实使用或官方明确的收录方式。无安装转化率/自然用户数结论。
+
+
+## 2026-11-10 后续核对：支持单、正常安装与原生公网门槛
+
+- ClawHub精确owner/version复查：clawscan=failed、trufflehog=failed、retrying=false、stage=checks_failed。此刻不能再承诺平台会自动重试，也不能从检查未完成推断已检出密钥或恶意代码。
+- 经用户明确授权，已向官方仓库提交公开支持 [Issue #4508](https://github.com/openclaw/clawhub/issues/4508)，请求重试现有检查或提供报告。仅公开项目、版本及发布编号，不附私人日志/凭证；等待维护者处理，未重新上传、绕过检查或变更版本。
+- 与此前关闭遥测的Claude隔离安装分开：skills1.7.6在新隔离项目对OpenClaw执行一次正常GitHub安装（copy/project），exit0，默认安装遥测未显式关闭，metadata标注publisher-validation。实际目录为项目skills/agent-market，内容hash仍为ec94eff8140a7c19ae2c35f8442befadf69bbd641059126928e1ae430264c7d2。这是维护者测试，不计自然用户；遥测服务是否接收事件未独立确认，不为排名重复安装。
+- 本次skills.sh页面网络复查失败；此前可见正文为软404。当前仍记“GitHub正常安装通过，目录收录未确认”，不把HTTP200或安装事件当作收录证明。
+- Claude Code当前未登录，用户选择稍后登录；原生模型公网验收待完成。OpenClaw一次只读readiness调用遇90秒外层超时，已退出且无该次遗留Node进程，未进行注册/邮件/订单；不能据此判定插件加载失败。改为当前能响应的原生聊天执行一次新注册与查询，随后另配唯一对手方免费任务，不再反复调试自动唤起。
+- 公开支持Issue提交不是渠道上架。Cursor、Anthropic、OpenAI官方目录尚未提交；继续遵守原生验收、各目录格式/权限/隐私材料核对后逐项申请的顺序。
+
+
+## 下一批准备清单（用户确认，2026-11-10）
+
+1. **先验收原生宿主**：OpenClaw优先，Claude Code待持有人登录后继续。保存真实来源、宿主版本、新注册/查询/免费任务证据及人工介入；超时或权限阻塞立即报告。
+2. **官方目录**：Claude → Cursor → OpenAI，逐项核对发布者账号、包格式、公开README/许可证、隐私/权限说明、实际安装与业务证据；缺项先补齐，不预记已提交。
+3. **MCP官方Registry并行准备材料**：核对当时的官方发布规范，选择并验证发布者命名空间，准备服务/包版本元数据、HTTPS端点或安装方式、Bearer鉴权说明及连接验证。Registry登记与宿主商店上架分开；若规则与现有远程MCP不兼容先报告，不为登记开放匿名业务接口或宣称完整OAuth已实现。准备工作可以先做，实际发布在原生验收后推进。
+4. **Glama补充**：复用已审核公开资料，核对提交条件与可访问性，再提交并记录回执；不抢占原生验收和官方目录的优先级。
+5. 每渠道继续分别记录“已适配、已测试、已提交、已上架/可用”。本次仅调整计划，未向上述新目录提交、未增加运行功能、未改线上配置或冻结发布资产。
