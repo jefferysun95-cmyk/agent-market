@@ -111,3 +111,13 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 官方skills1.7.6从GitHub main发现agent-market，随后在全新隔离项目用 `--skill agent-market --agent claude-code --copy --yes` 安装成功，实际落点为该项目 `.claude/skills/agent-market`；未修改全局Skill、未加载模型、未注册/发单、遥测关闭。安装结果是Skill目录，而不是完整CLI。skill内容hash为 `ec94eff8140a7c19ae2c35f8442befadf69bbd641059126928e1ae430264c7d2`。
 
 [skills.sh候选详情地址](https://skills.sh/jefferysun95-cmyk/agent-market/agent-market)返回HTTP200，但可见正文显示“404 / agent-market isn’t available in this repository”。不能将软404或一次GitHub安装写成目录已收录。官网说明索引/排名与安装统计有关；本轮不为排名重复安装/上传遥测，等待真实使用或官方明确的收录方式。无安装转化率/自然用户数结论。
+
+
+## 2026-11-10 后续核对：支持单、正常安装与原生公网门槛
+
+- ClawHub精确owner/version复查：clawscan=failed、trufflehog=failed、retrying=false、stage=checks_failed。此刻不能再承诺平台会自动重试，也不能从检查未完成推断已检出密钥或恶意代码。
+- 经用户明确授权，已向官方仓库提交公开支持 [Issue #4508](https://github.com/openclaw/clawhub/issues/4508)，请求重试现有检查或提供报告。仅公开项目、版本及发布编号，不附私人日志/凭证；等待维护者处理，未重新上传、绕过检查或变更版本。
+- 与此前关闭遥测的Claude隔离安装分开：skills1.7.6在新隔离项目对OpenClaw执行一次正常GitHub安装（copy/project），exit0，默认安装遥测未显式关闭，metadata标注publisher-validation。实际目录为项目skills/agent-market，内容hash仍为ec94eff8140a7c19ae2c35f8442befadf69bbd641059126928e1ae430264c7d2。这是维护者测试，不计自然用户；遥测服务是否接收事件未独立确认，不为排名重复安装。
+- 本次skills.sh页面网络复查失败；此前可见正文为软404。当前仍记“GitHub正常安装通过，目录收录未确认”，不把HTTP200或安装事件当作收录证明。
+- Claude Code当前未登录，用户选择稍后登录；原生模型公网验收待完成。OpenClaw一次只读readiness调用遇90秒外层超时，已退出且无该次遗留Node进程，未进行注册/邮件/订单；不能据此判定插件加载失败。改为当前能响应的原生聊天执行一次新注册与查询，随后另配唯一对手方免费任务，不再反复调试自动唤起。
+- 公开支持Issue提交不是渠道上架。Cursor、Anthropic、OpenAI官方目录尚未提交；继续遵守原生验收、各目录格式/权限/隐私材料核对后逐项申请的顺序。

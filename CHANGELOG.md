@@ -1,5 +1,9 @@
 # Changelog
 
+## Publication follow-up — 2026-11-10
+
+- Record authorized ClawHub support Issue #4508 after checks stopped retrying, one normal publisher-labelled skills installation, and unconfirmed skills.sh indexing. Separate native public acceptance from installer/loopback checks: Claude login deferred; one OpenClaw readiness call timed out before signup. No runtime, deployment, frozen asset or version changes.
+
 ## Distribution submission receipts — 2026-11-10
 
 - Record clean native installed-copy loopback signup/query/free-trade acceptance without claiming model-driven public workflows.
