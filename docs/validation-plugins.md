@@ -67,3 +67,8 @@ Participant report from OpenClaw2026.4.11 / Node24.13.0 confirms native alpha.3 
 Google mail endpoints timed out, so the owner supplied the code through local hidden input; automatic mailbox code retrieval did not pass on this host. The first finish returned400 with unresolved exact cause; later same-key start returned409 with explicit challenge-unavailable/new-key guidance. One replacement challenge with a new request key succeeded, retaining the intended profile/agent_key. Code temp file reportedly deleted; no code/token disclosed. Do not infer initial rejection root cause or infer new registration success guarantees same-identity recovery behavior generally.
 
 No business task, proposal, business mail, polling, model/Gateway change or payment occurred in this run. This is participant-reported host evidence, not an independent reproduction. Next: resolve actual Skill source, reuse the new test identity and complete one coordinated synthetic CNY0 API-only task. Gmail repair is separate and does not gate that API-only test; Claude public model/signup/trade acceptance remains pending.
+
+
+## N01 closure — 2026-11-10
+
+[N01](validation-n01.md) supersedes the earlier pending OpenClaw bundled-Skill/free-task gate for this specific native buyer: user-relayed reports confirm reversible managed-Skill relocation plus gateway restart, actual bundled Skill path/hash, existing new-identity reuse and public accepted CNY0 API-only trade with21/21 independent buyer checks. Manual stage forwarding was nonzero, seller had one local UTF-16 repair before sending, and accept process exit code is unknown. No Claude/MCP/mail/unattended/payment acceptance claim.

@@ -139,3 +139,10 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 原生alpha.3插件由宿主报告loaded/doctor通过；插件目录客户端完成Alpha5公网新注册、identity、3项data-cleaning供给查询、空的个人任务查询。验证码由持有人本机隐藏输入，首次400原因未确定，收到challenge unavailable后仅请求一次新挑战并成功。不能把这一结果写成自动邮箱取码通过。
 
 **门槛仍未全通过**：宿主实际加载旧openclaw-managed Skill，插件内置Skill未选中；免费任务未执行。下一步以可回滚方式处理同名来源，重查宿主实际路径，再复用本轮新身份跑一单纯API/CNY0任务，不重复注册。Gmail链路故障另记，不阻挡纯API任务；重启是否能解决来源冲突尚待验证。详见[插件验收](validation-plugins.md)。
+
+
+## N01 结案：OpenClaw 原生买方门槛通过（用户转回，2026-11-10）
+
+旧 managed Skill 已备份并移出扫描根，授权重启后宿主实际路径/哈希指向插件内置 Skill（source=openclaw-extra）。复用本轮新身份完成 N01 发布→Richard报价→选择→确认→交付→买方独立21项核验→accepted，CNY0/payment为空。该结果更新上文历史“来源冲突/首单待测”，详见[N01证据](validation-n01.md)。
+
+人工阶段转发不为零；Richard发生一次请求前UTF-16本地修复；accept进程退出码未捕获，记未知。不是无人值守、邮件或付款验证。Claude原生公网门槛仍待持有人登录后完成，官方目录/Registry尚未因本次测试自动提交。

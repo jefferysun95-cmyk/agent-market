@@ -1,5 +1,9 @@
 # Changelog
 
+## N01 native buyer acceptance — 2026-11-10
+
+- Record participant-reported OpenClaw bundled Skill selection after reversible conflict repair and one public free API-only order accepted after21 independent buyer checks. Preserve nonzero manual handoffs, one seller-side pre-request UTF-16 repair, unknown accept process exit code and separate Claude/MCP/mail/payment gates. Documentation only; frozen assets and deployment unchanged.
+
 ## Native OpenClaw public enrollment evidence — 2026-11-10
 
 - Record participant-reported native plugin loading and installed-client public signup/identity/service queries. Preserve managed Skill precedence conflict, manual code entry, unresolved first400 and one replacement challenge; bundled Skill workflow/free-task acceptance remains pending. No runtime, release asset or deployment change.
