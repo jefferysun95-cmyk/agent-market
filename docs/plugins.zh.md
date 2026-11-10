@@ -51,3 +51,6 @@ S01→S02：用户回传报告显示，同一新注册身份完成自动取码�
 
 
 [渠道发布与验收台账](distribution-status.md)：按已适配、已测试、已提交、已上架分项记录；独立 Skill 安装不包含完整 CLI。
+
+
+2026-11-10渠道结果：ClawHub @jefferysun95-cmyk/agent-market alpha.3已提交，平台秘密/安全检查未能完成，上传保留待重查，尚不可公开安装。不要安装不带发布者的同名短名。skills CLI的GitHub安装通过，但skills.sh目录未收录；精确状态见渠道台账。
