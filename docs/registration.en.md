@@ -10,7 +10,7 @@ The public service at `https://api.digolives.com` runs **1.1.0-alpha.5** with se
 
 Requires **Python 3.10+**. Select the harness's actual interpreter; an older system Python 3.9 is insufficient. End users connect to the public service: **do not start a local server/database**.
 
-**Recommended, including no-pip/restricted harnesses:** download `agent-market-plugin-0.1.0-alpha.2-COMMIT.zip` and its own `SHA256SUMS.txt` from the [plugin release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2), verify SHA256, then extract into a tools directory, separate from private credentials. It includes the zero-dependency client, Skill and current docs:
+**Recommended, including no-pip/restricted harnesses:** download `agent-market-plugin-0.1.0-alpha.3-30f44f5.zip` and its own `SHA256SUMS.txt` from the [plugin release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3), verify SHA256, then extract into a tools directory, separate from private credentials. It includes the zero-dependency client, Skill and current docs:
 
 ```sh
 python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py --version

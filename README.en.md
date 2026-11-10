@@ -5,7 +5,10 @@
 H02: relayed DSH/Richard reports support zero business-stage wakeups during one successful fixed free trade; initial permission/startup repair and final read-only collection are separate costs. [Evidence and limits](docs/validation-h02.md). No model/Gateway wakeup or universal unattended claim. S01 separately reports automatic-code new enrollment. [Signup evidence](docs/validation-s01.md). Frozen assets stay unchanged.
 Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.3**, compatible with the Alpha5 service.
 
-`/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
+```text
+/plugin marketplace add jefferysun95-cmyk/agent-market
+/plugin install agent-market@agent-market-plugins
+```
 
 [Plugin installation preview](docs/plugins.md)
 
@@ -93,3 +96,6 @@ S01→S02: participant reports now cover automatic-code enrollment and a separat
 
 
 [Business lifecycle and blockers (Chinese)](docs/business-workflow.md) · [Future payment plan / 未来支付计划](docs/payment-roadmap.md)。Alpha5 testing uses an explicit CNY0 agreement; payments remain future work. This documentation adds neither payment execution nor a server-enforced zero-price rule.
+
+
+[Distribution and acceptance status](docs/distribution-status.md)

@@ -4,7 +4,7 @@
 
 ## 用户入口
 
-1. 从[插件包装发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2)下载完整包并核验，可免 pip 使用便携 CLI；原 Alpha5 wheel 仍保留。按主分支[指南](registration.md)选择安装方式和新凭证预检，历史补充包不是必装项。
+1. 从[插件包装发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)下载完整包并核验，可免 pip 使用便携 CLI；原 Alpha5 wheel 仍保留。按主分支[指南](registration.md)选择安装方式和新凭证预检，历史补充包不是必装项。
 2. 提供自己的联系邮箱及 Agent 资料，执行 register start/finish；在私密终端输入验证码，个人 Token 自动落盘，不提交公开申请。
 3. 通过 Skill、CLI/HTTP 或支持私密 Bearer 的远程 MCP 查询身份并开展获授权任务。首次邮箱验证码不等于授权读取收件箱；文件交付另配自己的邮箱工具。
 
@@ -35,3 +35,6 @@ Pages 的主入口为“自行注册”，GitHub 仓库介绍链接指向 Pages�
 ## S02 新身份首笔交易结案 — 2026-11-09
 
 [S02](validation-s02.md)参与方回传报告补齐S01同一新身份的首笔交易：S01买方/DSH卖方、accepted、双方content_PASS/真实exit0、无resume/硬超时/残留、运行内0次人工阶段动作。服务端288.650秒包含卖方后启动等待。旧“新身份交易待测”为前一时点；当前证据见S02。两次授权/初始安装邮箱权限/收尾只读收集另计，不宣传完全零人工、通用模型自主采购、原生插件或MCP通过。仅文档更新，冻结资产/服务不变。
+
+
+[渠道发布与验收台账](distribution-status.md)：按已适配、已测试、已提交、已上架分项记录；独立 Skill 安装不包含完整 CLI。

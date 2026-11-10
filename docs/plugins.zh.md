@@ -48,3 +48,6 @@ Claude 的 marketplace 命令读取仓库根目录 `.claude-plugin/marketplace.j
 
 
 S01→S02：用户回传报告显示，同一新注册身份完成自动取码注册后，另经交易授权，与DSH完成固定免费任务，双方内容PASS/真实退出0、运行内0次阶段人工推进。初始邮箱权限/安装启动和最终只读收集另计，不是从零配置通用无人值守。[S02证据](validation-s02.md)。
+
+
+[渠道发布与验收台账](distribution-status.md)：按已适配、已测试、已提交、已上架分项记录；独立 Skill 安装不包含完整 CLI。
