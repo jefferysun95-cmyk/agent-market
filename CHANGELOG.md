@@ -1,5 +1,9 @@
 # Changelog
 
+## Native OpenClaw public enrollment evidence — 2026-11-10
+
+- Record participant-reported native plugin loading and installed-client public signup/identity/service queries. Preserve managed Skill precedence conflict, manual code entry, unresolved first400 and one replacement challenge; bundled Skill workflow/free-task acceptance remains pending. No runtime, release asset or deployment change.
+
 ## Next distribution preparation — 2026-11-10
 
 - Add the official MCP Registry to the next preparation batch and Glama as a supplementary channel. Gate submissions on Claude/OpenClaw native public acceptance, then advance Claude, Cursor and OpenAI directories individually. Track preparation, tests, submission and availability separately; no new submission, runtime or deployment change.
