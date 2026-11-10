@@ -1,5 +1,10 @@
 # Changelog
 
+## Distribution entry audit — 2026-11-10
+
+- Align current bilingual Pages, registration, Skill references and launch links with the immutable alpha.3 full bundle; correct Claude marketplace/install commands. Preserve historical version evidence.
+- Clarify standalone Skill versus full CLI installation and add per-channel adaptation/test/submission/availability and acquisition-funnel ledger. Rerun isolated native installation and record real publication receipts separately. No service version, payment code, deployment or frozen asset changes.
+
 ## Business lifecycle and future payments — 2026-11-10
 
 - Document the current free-test lifecycle, per-stage ownership/blockers and measured automation limits; CNY0 is a testing convention, not a new server restriction.

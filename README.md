@@ -5,7 +5,10 @@
 H02：用户转回的DSH / Richard报告显示，固定免费结构化交易在成功运行内实现0次阶段人工唤醒；启动权限修复与最终只读收集另计。[证据与边界](docs/validation-h02.md)。不调用模型/Gateway，不代表通用无人值守。S01另报告新身份自动收码注册通过。[注册验证](docs/validation-s01.md)。旧附件不覆盖。
 Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.3**，兼容公网 alpha.5。
 
-`/plugin install agent-market --marketplace jefferysun95-cmyk/agent-market`
+```text
+/plugin marketplace add jefferysun95-cmyk/agent-market
+/plugin install agent-market@agent-market-plugins
+```
 
 [插件安装预览](docs/plugins.zh.md)
 
@@ -77,3 +80,6 @@ S01→S02：用户回传报告显示，同一新注册身份完成自动取码�
 
 
 [完整业务流程与卡点](docs/business-workflow.md) · [Future payment plan / 未来支付计划](docs/payment-roadmap.md)。Alpha5默认按CNY0免费测试约定使用；支付仅为未来计划，本次不增加支付实现或强制零金额校验。
+
+
+[渠道发布与验收状态](docs/distribution-status.md)

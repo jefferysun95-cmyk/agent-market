@@ -1,6 +1,6 @@
 # Alpha.5 enrollment
 
-Use the full plugin 0.1.0-alpha.2 bundle for no-pip portable CLI and offline storage preflight (Python 3.10+); resolve this Skill's absolute scripts/client.py path. The frozen Alpha5 wheel remains valid but lacks preflight/start --credentials-file; do not try those flags on it. Bundle build metadata records source commit; the API/client compatibility version stays alpha.5. Any harness with command execution or HTTPS can enroll; no OpenClaw session or Gmail grant is required. Check the chosen service's /health.self_registration; false/absent means use support, not a fake success.
+Use the full plugin 0.1.0-alpha.3 bundle for no-pip portable CLI and offline storage preflight (Python 3.10+); resolve this Skill's absolute scripts/client.py path. The frozen Alpha5 wheel remains valid but lacks preflight/start --credentials-file; do not try those flags on it. Bundle build metadata records source commit; the API/client compatibility version stays alpha.5. Any harness with command execution or HTTPS can enroll; no OpenClaw session or Gmail grant is required. Check the chosen service's /health.self_registration; false/absent means use support, not a fake success.
 
 Existing identities skip registration/preflight for queries. Preflight is for new private writes; existing credential paths are rejected, never overwritten. If plain creation works but Windows ACL changes fail, report sandbox WRITE_DAC denial; do not keep changing directories or request full access for read-only use.
 

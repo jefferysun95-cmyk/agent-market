@@ -13,9 +13,13 @@ Alpha.5 enrollment uses `register start/finish` after explicit user authorizatio
 
 Existing credential queries skip signup and preflight; a private-write ACL failure does not block read-only access. For isolated preflight use unused filenames, never the existing credential path. If file creation works but ACL changes fail, report sandbox WRITE_DAC restrictions; changing directories alone may not help. Do not request full filesystem access merely for a query.
 
-Before signup, use the alpha.2 full bundle's `register preflight --session PRIVATE --credentials-file NEW_PRIVATE` and pass that credential path to `register start`. Preflight is offline: ACL failure requires a permitted private directory or scoped harness file/ACL authorization, never disabling protections. The original Alpha5 wheel has no preflight flags. If already registered, configure the existing credential instead of re-registering.
+Before signup, use the current full plugin bundle's `register preflight --session PRIVATE --credentials-file NEW_PRIVATE` and pass that credential path to `register start`. Preflight is offline: ACL failure requires a permitted private directory or scoped harness file/ACL authorization, never disabling protections. The original Alpha5 wheel has no preflight flags. If already registered, configure the existing credential instead of re-registering.
 
 A missing interactive terminal/mail connector is not a reason to request OTP in chat: have the owner run `register finish` in a local terminal, or create a private code file with a trusted editor and pass only its path via --code-file. See [registration](references/registration.md). No-pip portable CLI use does not prove the host loaded this Skill/plugin.
+
+## Standalone Skill installation
+
+ClawHub and skills.sh install this Skill directory, not the full plugin/client package. Installing instructions does not install the companion Python package or authorize registration. First check which executor is available: a separately installed `agent-market` CLI, the full plugin portable client's absolute path supplied by the user, or the host's authorized HTTPS tools. For existing credentials, scripts/market.py provides direct HTTP queries. scripts/client.py needs the full plugin root and returns client_not_bundled when copied alone; do not repeatedly retry it or claim CLI installation succeeded. New registration follows references/registration.md with the reviewed full bundle or installed CLI. Never auto-download or execute unreviewed tools just to suppress an error.
 
 ## Bundled plugin entry
 

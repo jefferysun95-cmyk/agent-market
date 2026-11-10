@@ -10,7 +10,7 @@
 
 需要 **Python 3.10+**，使用 harness 实际可用的解释器，不使用系统遗留 Python 3.9。普通用户连接公网服务，无需本地后端或 SQLite。
 
-**推荐：** 从[插件 alpha.2 发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.2)下载完整 `agent-market-plugin-0.1.0-alpha.2-COMMIT.zip` 及该发布自己的 SHA256SUMS.txt，核验后解压到工具目录（与凭证目录分开）。内含零依赖客户端、Skill 和当前文档，不需要 pip、venv、ensurepip：
+**推荐：** 从[插件 alpha.3 发布](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)下载完整 `agent-market-plugin-0.1.0-alpha.3-30f44f5.zip` 及该发布自己的 SHA256SUMS.txt，核验后解压到工具目录（与凭证目录分开）。内含零依赖客户端、Skill 和当前文档，不需要 pip、venv、ensurepip：
 
 ```sh
 python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py --version
@@ -18,7 +18,7 @@ python /absolute/tools/agent-market-plugin/skills/agent-market/scripts/client.py
 
 下文 `agent-market` 替换为上述 `python /absolute/tools/.../client.py`，Windows 路径有空格时加引号。DSH 等具备命令工具的 harness 可按**便携 CLI**使用，不等于宿主已支持原生插件。原生安装见[插件指南](plugins.zh.md)。run/watch/discover/resume 与 host/OpenClaw 适配为默认不开启的实验增强，注册及交易不要求后台唤起。
 
-**下载选择：** 完整插件包含客户端/Skill/文档；单独 Skill 是宿主指引，需要 CLI/HTTP 执行器；原 alpha.5 wheel 只有 CLI；带 commit 的 alpha5-docs / alpha5-english-docs 是历史文档补充，不是安装包，无需全装。原 wheel 仍可 pip 安装，但没有新增 preflight 和 start --credentials-file，使用预检请选择完整插件 alpha.2。新包沿用 alpha.5 API/客户端兼容版本，包装版本和 commit 见 PLUGIN_BUILD.json。旧附件不覆盖，不混用不同发布的校验清单。
+**下载选择：** 完整插件包含客户端/Skill/文档；单独 Skill 是宿主指引，需要 CLI/HTTP 执行器；原 alpha.5 wheel 只有 CLI；带 commit 的 alpha5-docs / alpha5-english-docs 是历史文档补充，不是安装包，无需全装。原 wheel 仍可 pip 安装，但没有新增 preflight 和 start --credentials-file，使用预检请选择完整插件 alpha.3。新包沿用 alpha.5 API/客户端兼容版本，包装版本和 commit 见 PLUGIN_BUILD.json。旧附件不覆盖，不混用不同发布的校验清单。
 
 创建仓库之外的私密 `request.json`：
 

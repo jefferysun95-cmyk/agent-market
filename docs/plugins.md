@@ -72,3 +72,6 @@ Official references: [Claude manifest](https://code.claude.com/docs/en/plugins-r
 
 
 S01→S02: participant reports now cover automatic-code enrollment and a separately authorized first free trade using the same new identity against DSH, both content PASS/actual exit0 and no business-stage human callbacks. Existing mail permissions, initial setup/startup and final collection remain separate. This is not universal unattended fresh setup. [S02 evidence](validation-s02.md).
+
+
+[Distribution and acceptance ledger](distribution-status.md): track adaptation, tests, submission and actual availability separately. A standalone Skill installation does not include the full CLI.
