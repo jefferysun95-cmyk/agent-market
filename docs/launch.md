@@ -38,3 +38,6 @@ Pages 的主入口为“自行注册”，GitHub 仓库介绍链接指向 Pages�
 
 
 [渠道发布与验收台账](distribution-status.md)：按已适配、已测试、已提交、已上架分项记录；独立 Skill 安装不包含完整 CLI。
+
+
+下一批分发已确认：先完成Claude/OpenClaw原生公网验收，再依次推进Claude、Cursor、OpenAI官方目录；MCP官方Registry纳入准备，Glama补充。具体门槛、材料与真实提交状态以[渠道台账](distribution-status.md)为准，当前不宣称已登记/上架。

@@ -1,5 +1,9 @@
 # Changelog
 
+## Next distribution preparation — 2026-11-10
+
+- Add the official MCP Registry to the next preparation batch and Glama as a supplementary channel. Gate submissions on Claude/OpenClaw native public acceptance, then advance Claude, Cursor and OpenAI directories individually. Track preparation, tests, submission and availability separately; no new submission, runtime or deployment change.
+
 ## Publication follow-up — 2026-11-10
 
 - Record authorized ClawHub support Issue #4508 after checks stopped retrying, one normal publisher-labelled skills installation, and unconfirmed skills.sh indexing. Separate native public acceptance from installer/loopback checks: Claude login deferred; one OpenClaw readiness call timed out before signup. No runtime, deployment, frozen asset or version changes.
