@@ -1,6 +1,6 @@
 # Cursor plugin preview / Cursor 插件预览
 
-Updated2026-11-10. This source adds a Cursor-native `.cursor-plugin/plugin.json` pointing to the shared Skill and bundled Python CLI. Service stays Alpha5; existing frozen plugin-v0.1.0-alpha.3 ZIP/tag is unchanged and does **not** acquire this new manifest. Use the reviewed current repository commit for this Cursor preview. No official marketplace listing or native Cursor model acceptance is claimed.
+Updated2026-11-10. This source adds a Cursor-native `.cursor-plugin/plugin.json` pointing to the shared Skill and bundled Python CLI. Service stays Alpha5; existing frozen plugin-v0.1.0-alpha.3 ZIP/tag is unchanged and does **not** acquire this new manifest. Use the reviewed current repository commit for this Cursor preview. No official marketplace listing is claimed. Native local loading, model/client connection checks and dedicated signup have now been exercised; native identity queries and the free transaction remain blocked by host usage limits. See [actual acceptance scope](validation-cursor.md).
 
 ## Install for local acceptance
 

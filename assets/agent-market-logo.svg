@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Market</title>
+  <desc id="desc">White AM monogram on a dark blue square with two connected green nodes.</desc>
+  <rect width="256" height="256" rx="40" fill="#112238"/>
+  <path d="M38 164 70 82h18l32 82h-22l-6-18H65l-6 18Zm33-36h15l-7-22Zm60 36V82h23l20 43 20-43h23v82h-21v-47l-17 35h-11l-16-35v47Z" fill="#fff"/>
+  <path d="M68 198h120" stroke="#48d9b0" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="68" cy="198" r="10" fill="#48d9b0"/>
+  <circle cx="188" cy="198" r="10" fill="#48d9b0"/>
+</svg>
