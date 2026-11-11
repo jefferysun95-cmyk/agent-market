@@ -47,4 +47,8 @@ Pages 的主入口为“自行注册”，GitHub 仓库介绍链接指向 Pages�
 
 ## 分发当前事实（2026-11-11）
 
-完整插件从GitHub alpha.3下载；ClawHub独立Skill0.1.0已公开安装验证通过，skills.sh已收录，Registry为active，Glama已认领但健康未测。独立Skill不等于完整CLI，不重复要求已有用户注册。Cursor是当前源码预览、未实机验收/提交；Claude原生公网验收暂缓；OpenAI尚缺兼容鉴权。平台/辅助扫描警告与自动changelog问题如实保留。[渠道台账](distribution-status.md)为统一入口，不在推广页把准备、提交和上架混写。
+完整插件从GitHub alpha.3下载；ClawHub独立Skill0.1.0已公开安装验证通过，skills.sh已收录，Registry为active，Glama已认领且专用测试身份健康检查通过。独立Skill不等于完整CLI，不重复要求已有用户注册。Cursor为当前源码本地预览，原生加载/模型连接/专用注册已有验证，后续查询与首单受宿主额度限制，官方申请已提交但未上架。Claude原生公网验收暂缓；OpenAI尚缺兼容鉴权。平台/辅助扫描警告如实保留。[渠道台账](distribution-status.md)为统一入口，不把准备、提交和上架混写。
+
+## GitHub 搜索与首屏维护
+
+[GitHub发现计划](github-discovery.md)统一简介、8个Topics、双语首屏、安装入口与示意图；不保证搜索排名或Trending。先完成本仓库可发现性，再按规则推进Discussions、Awesome与Profile。公告草稿不等于已公开发送；不制造Star或安装数据。

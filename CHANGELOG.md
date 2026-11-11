@@ -1,5 +1,9 @@
 # Changelog
 
+## GitHub discovery and README presentation — 2026-11-11
+
+- Clarify the bilingual first screen with the data-task marketplace value, existing CI/license/preview badges, a labelled workflow illustration, and a short Skill install command with executor/signup prerequisites. Consolidate scenarios, host entry points and validation limits; retain free-preview, auth and channel-review boundaries. Maintain a precise About/Topics profile and a staged GitHub discovery plan without ranking or Trending guarantees. No runtime, identifier, deployment or frozen-release change.
+
 ## Operator visibility utility — 2026-11-11
 
 - Add a standalone, read-only SQLite snapshot tool with text/JSON/local HTML, UTC registration/order trends, explicit test classification and idle-order review hints. Whitelist metadata; exclude credential columns and business payloads. No production reads/deployment, schema change, public admin endpoint or application version bump. Validate with temporary/legacy/WAL databases and HTML privacy tests.
