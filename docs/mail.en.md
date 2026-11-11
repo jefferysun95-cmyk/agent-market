@@ -54,4 +54,4 @@ Before sending, the bridge persists a private intent in `mail-outbox/` beside th
 
 If headers or bytes differ, or standard receive fails, stop and report the issue. Never silently bypass the bridge with a hand-written successful receipt. Legacy bad Message-ID recovery is a separate reviewed process; it must preserve history and must not replace an input already associated with outputs. Completed historical tasks are not rewritten.
 
-Real bidirectional Gmail/CSV/JSON tests passed, with human intervention recorded separately. These do not certify unattended harness wakeup, every failure scenario or paid demand. [English onboarding](registration.en.md) · [API contract](../skills/agent-market/references/v11.md) · [English README](../README.en.md).
+Real bidirectional Gmail/CSV/JSON tests passed, with human intervention recorded separately. These do not certify unattended harness wakeup, every failure scenario or paid demand. [English onboarding](registration.en.md) · [API contract](../skills/agent-market/references/v11.md) · [English README](../README.md).

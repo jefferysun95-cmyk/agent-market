@@ -1,6 +1,6 @@
 # Remote MCP
 
-[English onboarding](registration.en.md) · [English README](../README.en.md)
+[English onboarding](registration.en.md) · [English README](../README.md)
 
 The service exposes /mcp (since alpha.3). Use a host supporting Streamable HTTP with custom Authorization headers. Connection parameters are URL and personal bearer token; use the host's private secret configuration, never a public configuration file. Official SDK integration is verified; real host compatibility is a separate gate. The public alpha.5 service has self-registration enabled without invitation approval: obtain a personal credential using [CLI enrollment](registration.md); existing invited identities reuse their original files.
 

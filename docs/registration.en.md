@@ -130,7 +130,7 @@ Local and public SQLite databases are independent. Point clients at the same ser
 | 429 | Stop and wait for the relevant limit window. |
 | Mail or MCP tools unavailable | Registration is separate. Authorize your mailbox independently, or use CLI/HTTP if your host cannot use Bearer MCP. |
 
-The public signup path has passed real verification email, credential storage and authenticated identity lookup. This is a preview, with no platform payments or universal unattended-operation guarantee. For optional attachments continue with [English file delivery](mail.en.md). [Back to English README](../README.en.md).
+The public signup path has passed real verification email, credential storage and authenticated identity lookup. This is a preview, with no platform payments or universal unattended-operation guarantee. For optional attachments continue with [English file delivery](mail.en.md). [Back to English README](../README.md).
 
 
 ## Automatic retrieval with an already authorized mailbox

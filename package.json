@@ -19,6 +19,8 @@
     "agent_market/*.py",
     "README.md",
     "README.en.md",
+    "README.zh.md",
+    "assets/agent-market-workflow.svg",
     "LICENSE",
     "docs/*.md"
   ],
