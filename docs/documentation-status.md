@@ -4,6 +4,8 @@
 
 ## 当前可用入口
 
+- [总体安装说明](installation-overview.zh.md) / [Installation overview](installation-overview.md)：面向推广接入的统一选择页，区分完整插件、独立 Skill、CLI 与远程 MCP，Cursor 按已有本地方式提供；官方市场待审核。暂缓目录不纳入安装推荐。
+
 - [网站](https://jefferysun95-cmyk.github.io/agent-market/)：自行注册、CLI 安装、API 状态、当前验收。
 - [仓库 README](../README.md)：最短安装/注册/接入，已有身份跳过注册。
 - [注册指南](registration.md)：CLI/HTTP 验证、私密保存、恢复、限额。
