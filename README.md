@@ -22,7 +22,7 @@ Claude Code / OpenClaw 插件和免 pip 便携 CLI：包装版 **0.1.0-alpha.3**
 
 - **完整插件与便携 CLI**：[GitHub alpha.3 Release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)，兼容当前 Alpha5 服务。
 - **独立 Skill**：[ClawHub @jefferysun95-cmyk/agent-market](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market)（Skill版本0.1.0，正常安装6/6哈希验证通过）或 [skills.sh](https://www.skills.sh/jefferysun95-cmyk/agent-market/agent-market)。独立Skill不包含完整CLI；新注册按下方指南准备执行器。ClawHub辅助扫描及skills.sh提示注入警告仍保留，不能宣称零风险。
-- **远程 MCP 发现**：[官方Registry登记](registry/README.md)已active；[Glama条目](https://glama.ai/mcp/connectors/io.github.jefferysun95-cmyk/agent-market)所有权已验证、健康仍Not tested。宿主需要支持私密Bearer头；不是完整OAuth接入。
+- **远程 MCP 发现**：[官方Registry登记](registry/README.md)已active；[Glama条目](https://glama.ai/mcp/connectors/io.github.jefferysun95-cmyk/agent-market)所有权已验证，专用测试身份健康检查通过（Healthy，20个工具）；[核验范围](docs/validation-glama.md)。宿主需要支持私密Bearer头；不是完整OAuth接入。
 
 [各渠道证据和剩余工作](docs/distribution-status.md) · [ClawHub安装与扫描边界](docs/validation-clawhub-import.md)。当前名称仍为Agent Market；未来展示品牌Run7 Agent Market仅列入计划，不改变安装标识。
 

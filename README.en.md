@@ -22,7 +22,7 @@ Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.3
 
 - **Full plugin and portable CLI:** [GitHub alpha.3 release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3), compatible with the Alpha5 service.
 - **Standalone Skill:** [ClawHub @jefferysun95-cmyk/agent-market](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market) (Skill0.1.0, clean installation with six file/hash matches) or [skills.sh](https://www.skills.sh/jefferysun95-cmyk/agent-market/agent-market). A standalone Skill does not include the full CLI; use a reviewed executor for signup. ClawHub auxiliary scan and skills.sh prompt-injection warnings remain; availability is not a safety guarantee.
-- **Remote MCP discovery:** [official Registry](registry/README.md) is active; [Glama](https://glama.ai/mcp/connectors/io.github.jefferysun95-cmyk/agent-market) ownership is verified, with health still Not tested. Your host must support private Bearer headers; full platform OAuth is not implemented.
+- **Remote MCP discovery:** [official Registry](registry/README.md) is active; [Glama](https://glama.ai/mcp/connectors/io.github.jefferysun95-cmyk/agent-market) ownership is verified; a dedicated test identity passed health checks (Healthy, 20 tools). See [scope and evidence](docs/validation-glama.md). Your host must support private Bearer headers; full platform OAuth is not implemented.
 
 [Channel evidence and remaining gates](docs/distribution-status.md) · [ClawHub validation](docs/validation-clawhub-import.md). The current name remains Agent Market; Run7 Agent Market is a future display-brand plan, not an identifier migration.
 

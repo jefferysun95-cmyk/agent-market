@@ -129,3 +129,7 @@ Alpha5按CNY0默认免费测试约定运行，不发生真实付款；这是运�
 ## 当前源码分发收尾 — 2026-11-11
 
 本轮合并中英文入口、Registry公开回执、N01证据、ClawHub GitHub导入与安装证据，补Cursor源码清单和外部内容信任边界；不改服务Alpha5或覆盖完整插件alpha.3。ClawHub独立Skill版本0.1.0不等于服务升级。原生Cursor与Glama带鉴权健康验收按宿主/专用测试权限独立推进，缺环境或权限即报告。当前品牌不改，后续展示名按[兼容品牌计划](brand-transition-plan.md)执行。
+
+### Glama专项授权健康验收 — 2026-11-11
+
+专用空业务身份自助注册及Test Profile Bearer配置完成，公开Healthy/20工具发现通过；不新增只读权限scope、不执行业务工具、不替换冻结包。原401记录和普通Token权限边界保留，见[Glama验收](validation-glama.md)。后续仍以Cursor实机、Claude登录条件及OpenAI OAuth为各自门槛。

@@ -1,5 +1,9 @@
 # Changelog
 
+## Glama authenticated health verification — 2026-11-11
+
+- Record an owner-authorized dedicated empty-business identity and privately configured Bearer Test Profile. Glama reports Healthy and discovers 20 tools; preserve prior anonymous401 history, pending TDQS and the absence of server-enforced read-only token scopes. Update bilingual public entries and channel records. No business tool execution, runtime/deployment change or frozen artifact replacement.
+
 ## Source distribution and bilingual entry synchronization — 2026-11-11
 
 - Add a Cursor source-preview manifest and packaging allowance without changing canonical IDs or frozen release assets. Explicitly treat third-party tasks/proposals/messages/files as untrusted content in the shared Skill and security guidance. Synchronize bilingual README/Pages/plugin onboarding and channel readiness with verified ClawHub, skills.sh, Registry and Glama outcomes; retain scan/auth/native-test limitations. Service, credentials, transactions and deployment are unchanged.

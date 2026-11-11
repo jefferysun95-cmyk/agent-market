@@ -21,7 +21,7 @@
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
 | OpenAI相关目录 | 已核对目录与鉴权差距 | 受保护远程MCP缺所需OAuth；未验收 | 未提交 | 未上架；不得伪装匿名或提交个人Bearer秘密 |
 | MCP 官方 Registry | 是；远程元数据和鉴权说明 | 官方发布器校验及精确名称/版本读回 | 已发布1.1.0-alpha.5 | **active/isLatest**；见[回执](../registry/PUBLICATION.json)，不等于宿主商店审核 |
-| Glama | 已有公开托管Connector条目 | 仓库/端点及所有权核验通过 | GitHub身份关联并认领成功 | **公开条目、Ownership verified**；公开页Not tested；管理页匿名检查HTTP401，待专用测试鉴权，不宣称健康通过 |
+| Glama | 公开托管Connector、专用Bearer测试身份 | 所有权验证；2026-11-11 13:19:55 UTC+8检查Healthy，公开20工具 | 已认领并保存专用Test Profile | **公开、Healthy、20工具可发现**；仅初始化/元数据，不代表业务工具验收，见[证据](validation-glama.md) |
 
 ## 本轮集中入口核对
 
@@ -167,14 +167,18 @@ The owner chose to keep Agent Market for now and plan **Run7 Agent Market** as t
 
 持有人确认六个Skill文件按MIT-0发布后，通过GitHub官方导入保留原发布者/agent-market标识，平台生成Skill版本0.1.0；由waiting检查推进到公开页面/安装入口。官方CLI隔离安装exit0，6/6文件大小与SHA256匹配，无force/force-install、无执行脚本。线上Alpha5与旧Release未改。
 
-最终clean/benign不等于所有辅助扫描无警告；SkillSpector CRITICAL/10项及覆盖不足提示保留。平台自动changelog混入无关预测市场历史，文件/发布者已核对，说明纠正待处理。旧alpha.3失败及Issue4508不因本次成功被抹去。详见[证据](validation-clawhub-import.md)。此前“未上架”的段落为历史阶段，当前结果以本段和上表为准。Glama/skills/Registry表格按本轮已实际确认结果同步；未完成的主分支/入口同步与Cursor源码提交仍单列。
+最终clean/benign不等于所有辅助扫描无警告；SkillSpector CRITICAL/10项及覆盖不足提示保留。平台自动changelog混入无关预测市场历史，文件/发布者已核对，说明纠正待处理。旧alpha.3失败及Issue4508不因本次成功被抹去。详见[证据](validation-clawhub-import.md)。此前“未上架”的段落为历史阶段，当前结果以本段和上表为准。Glama/skills/Registry表格按本轮已实际确认结果同步；主分支/入口同步与Cursor源码已由PR #27合入961cbdb；Cursor实机验收仍未完成。
 
 ## 当前源码与双语入口同步 — 2026-11-11
 
 当前源码补充Cursor清单与打包允许项，共享原Skill/CLI；独立安装副本/官方模板静态验证与原生Cursor实机验收分开。Skill与SECURITY新增对外部任务/提案/邮件/交付文本的信任边界，不能把内容当授权或执行指令；这不是Snyk W011已消失的声明。README双语、Pages双语、插件指南和目录清单同步当前事实；合并/CI与Pages公开验证另按实际回执记录。
 
-## 2026-11-11 Glama 健康检查诊断
+## 2026-11-11 Glama 初始诊断（历史，13:19成功前）
 
 管理页Test Profile的Authentication Type为None，连接测试历史返回HTTP401（Agent token missing, invalid or revoked）；公开页Not tested不能理解为服务端没有响应。Glama支持API Key及OAuth测试配置，说明健康检查仅初始化MCP并列工具/提示/资源，不调用业务工具、不读资源正文、不请求采样。尚未配置凭证或点击新测试。
 
 下一步需要单独授权，把新建、无业务数据的专用测试身份凭证保存到Glama Test Profile；不得使用现有业务Agent或管理员凭证。当前普通Agent Token没有只读权限限制，Glama的检查范围声明不等于服务端强制最小权限。凭证交付尚未获确认前，不宣称健康检查完成。Cursor常见安装路径未发现程序，PATH也无cursor；这不证明其他位置或其他电脑没有安装，实机验收仍待安排。
+
+## 2026-11-11 13:19 Glama 健康与工具发现通过
+
+持有人专项授权的独立空业务身份已完成自助注册、私密保存与Test Profile Bearer配置。管理页success/Healthy（836ms），公开Status Healthy及20个工具可发现；此前401是None鉴权探测。TDQS仍在计算，未调用交易工具，不等于只读Token或业务首单验收。详见[范围与证据](validation-glama.md)。上方初始诊断为历史，当前结果以上表与本段为准。
