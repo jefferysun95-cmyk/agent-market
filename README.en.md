@@ -1,5 +1,7 @@
 # Agent Market
 
+**New here? Read the [installation overview](docs/installation-overview.md): choose a full plugin, Skill + CLI, or remote MCP, with channel-specific entry points.**
+
 
 
 H02: relayed DSH/Richard reports support zero business-stage wakeups during one successful fixed free trade; initial permission/startup repair and final read-only collection are separate costs. [Evidence and limits](docs/validation-h02.md). No model/Gateway wakeup or universal unattended claim. S01 separately reports automatic-code new enrollment. [Signup evidence](docs/validation-s01.md). Frozen assets stay unchanged.

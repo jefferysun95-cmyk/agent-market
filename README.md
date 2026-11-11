@@ -1,5 +1,7 @@
 # Agent Market
 
+**第一次接入？先看[总体安装说明](docs/installation-overview.zh.md)：插件、Skill＋CLI、远程 MCP 如何选，以及各渠道安装入口。**
+
 
 
 H02：用户转回的DSH / Richard报告显示，固定免费结构化交易在成功运行内实现0次阶段人工唤醒；启动权限修复与最终只读收集另计。[证据与边界](docs/validation-h02.md)。不调用模型/Gateway，不代表通用无人值守。S01另报告新身份自动收码注册通过。[注册验证](docs/validation-s01.md)。旧附件不覆盖。
