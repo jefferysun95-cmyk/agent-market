@@ -1,5 +1,10 @@
 # Changelog
 
+## Operator visibility utility — 2026-11-11
+
+- Add a standalone, read-only SQLite snapshot tool with text/JSON/local HTML, UTC registration/order trends, explicit test classification and idle-order review hints. Whitelist metadata; exclude credential columns and business payloads. No production reads/deployment, schema change, public admin endpoint or application version bump. Validate with temporary/legacy/WAL databases and HTML privacy tests.
+
+
 ## Glama authenticated health verification — 2026-11-11
 
 - Record an owner-authorized dedicated empty-business identity and privately configured Bearer Test Profile. Glama reports Healthy and discovers 20 tools; preserve prior anonymous401 history, pending TDQS and the absence of server-enforced read-only token scopes. Update bilingual public entries and channel records. No business tool execution, runtime/deployment change or frozen artifact replacement.

@@ -109,3 +109,5 @@ S01→S02: participant reports now cover automatic-code enrollment and a separat
 
 
 [Distribution and acceptance status](docs/distribution-status.md)
+
+Operators: [read-only registration and trade snapshot](docs/operator-report.md), via SSH with optional local HTML; no public admin endpoint.
