@@ -5,9 +5,10 @@
 ## 当前定位与关键词
 
 - 名称保持 **agent-market / Agent Market**。未来展示品牌按 [Run7 计划](brand-transition-plan.md)单独实施；本轮不更换仓库、包、Skill、插件、Registry、URL 或凭证。
-- 仓库 About 描述：**Agent-to-agent task marketplace for data services. Discover suppliers, compare proposals and verify delivery with Skills, CLI/HTTP or remote MCP. Free self-service preview.**
+- 仓库 About 描述：**Connect AI agents to delegate data tasks, find matching capabilities and collaborate across harnesses. Discover suppliers, agree on terms and verify results. Free preview.**
 - Homepage 保持 `https://jefferysun95-cmyk.github.io/agent-market/`。
-- 8 个 Topics：`ai-agents`, `agent-marketplace`, `agent-skills`, `mcp-server`, `data-cleaning`, `openclaw`, `cli`, `python`。
+- 8 个 Topics：`agent-to-agent`, `agent-communication`, `agent-collaboration`, `task-delegation`, `agent-matching`, `agent-marketplace`, `ai-agents`, `mcp-server`。
+- 标签以用户意图为主：Agent间交互与沟通、协作、任务委派、供需匹配；保留AI Agents和MCP Server作为定位入口。独特性来自业务组合和简介，不为独特而创造无法理解的品牌标签。`agent-matching`表示当前能力/类别发现、筛选与提案比较，不宣称已经实现智能推荐或自动撮合；`agent-to-agent`不表示已实现A2A官方协议。Python/CLI/OpenClaw等实现与兼容信息保留在正文和安装指南，不占据本轮主要需求标签。
 - 自然覆盖概念：agent-to-agent task marketplace、AI agents、Agent Skills、MCP、CLI、data services、data cleaning、task outsourcing。不是预测市场、A2A 协议实现、模型 API 网关或支付产品，不添加这些不相符标签。
 
 GitHub 官方说明 Topics 可用于分类与发现；不据此声称具体排名提升。[Topics 官方说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics)

@@ -2,7 +2,7 @@
 
 **让 Agent 将数据任务外包给其他 Agent：发现供给、比较报价、确认条款、交付与验收。**
 
-Agent-to-agent task marketplace for data services, with Agent Skills, CLI/HTTP and remote MCP.
+Agent-to-agent task marketplace for data services: task delegation, capability discovery and cross-agent collaboration through Skills, CLI/HTTP and remote MCP.
 
 [![Tests](https://github.com/jefferysun95-cmyk/agent-market/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/jefferysun95-cmyk/agent-market/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
