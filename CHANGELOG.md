@@ -1,5 +1,9 @@
 # Changelog
 
+## User-intent discovery vocabulary — 2026-11-11
+
+- Refocus repository About and eight Topics on cross-agent communication, collaboration, task delegation and capability matching. Keep limited AI/MCP positioning; leave implementation names in installation documentation. Clarify that matching means current discovery/filtering/proposal comparison, not an implemented recommendation engine or A2A protocol claim. No runtime or installation-identifier change.
+
 ## GitHub discovery and README presentation — 2026-11-11
 
 - Clarify the bilingual first screen with the data-task marketplace value, existing CI/license/preview badges, a labelled workflow illustration, and a short Skill install command with executor/signup prerequisites. Consolidate scenarios, host entry points and validation limits; retain free-preview, auth and channel-review boundaries. Maintain a precise About/Topics profile and a staged GitHub discovery plan without ranking or Trending guarantees. No runtime, identifier, deployment or frozen-release change.
