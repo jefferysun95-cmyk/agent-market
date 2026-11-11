@@ -17,7 +17,7 @@
 | GitHub完整插件/自建marketplace | 是；alpha.3完整客户端/Skill | 冻结ZIP59文件hash；Claude2.1.319隔离validate/add/install/list通过；OpenClaw2026.4.11隔离install/inspect loaded/Skill eligible通过 | 已发布历史Release | [alpha.3下载](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)；不是Anthropic官方上架 |
 | ClawHub独立Skill | 是；GitHub导入6个公开文件，MIT-0经持有人确认 | 官方CLI0.25.1隔离正常安装0.1.0退出0；6/6大小及SHA256匹配；未执行脚本 | GitHub导入0.1.0成功；旧alpha.3失败记录保留 | **已公开、可安装**；最终clean但辅助扫描有警告，见[导入验收](validation-clawhub-import.md) |
 | skills.sh / skills CLI | 是；GitHub独立Skill | 干净安装通过，目录实际显示Skill和安装命令 | 基于GitHub安装发现，无独立审核回执 | **已收录**；维护者测试安装不算自然用户；Snyk W011警告保留 |
-| Cursor | 当前源码专用清单/共享Skill与CLI | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
+| Cursor | 当前源码专用清单/共享Skill与CLI | 实机原生加载/模型调用/连接和专用注册完成；查询及首单受宿主额度阻断，见[证据](validation-cursor.md) | 表单已准备；发布者条款待确认，未提交 | 未上架；本地预览不在冻结ZIP内 |
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
 | OpenAI相关目录 | 已核对目录与鉴权差距 | 受保护远程MCP缺所需OAuth；未验收 | 未提交 | 未上架；不得伪装匿名或提交个人Bearer秘密 |
 | MCP 官方 Registry | 是；远程元数据和鉴权说明 | 官方发布器校验及精确名称/版本读回 | 已发布1.1.0-alpha.5 | **active/isLatest**；见[回执](../registry/PUBLICATION.json)，不等于宿主商店审核 |
