@@ -77,4 +77,7 @@ S01→S02: participant reports now cover automatic-code enrollment and a separat
 [Distribution and acceptance ledger](distribution-status.md): track adaptation, tests, submission and actual availability separately. A standalone Skill installation does not include the full CLI.
 
 
-ClawHub update (2026-11-10): @jefferysun95-cmyk/agent-market alpha.3 is submitted but not publicly installable; platform secret/security checks could not complete and the upload is retained for retry. Do not install the unqualified agent-market slug. skills CLI GitHub installation passed; skills.sh indexing remains pending. See the distribution ledger; no official directory approval is implied.
+ClawHub update (2026-11-11): standalone Skill0.1.0 is publicly listed and normally installable as @jefferysun95-cmyk/agent-market. Official CLI0.25.1 isolated install exited0 with six file/hash matches, without force or execution. The owner confirmed MIT-0 for the six imported Skill files; final clean/benign moderation retains auxiliary warnings and a platform-generated changelog discrepancy. See [validation](validation-clawhub-import.md). skills.sh is now listed and retains Snyk W011; publisher installation is not natural adoption. The older alpha.3 failed upload remains history. Do not use the unqualified homonymous slug. Neither entry supplies the full companion CLI.
+
+
+Cursor-specific current-source preview: [Cursor installation and acceptance](cursor.md). This is separate from the frozen alpha.3 release archive and is not a marketplace listing.

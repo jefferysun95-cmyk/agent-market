@@ -7,7 +7,7 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ALLOWED = ('.claude-plugin/', 'plugins/openclaw/', 'skills/agent-market/', 'agent_market/', 'docs/')
+ALLOWED = ('.claude-plugin/', '.cursor-plugin/', 'plugins/openclaw/', 'skills/agent-market/', 'agent_market/', 'docs/')
 FILES = {'package.json', 'openclaw.plugin.json', 'README.md', 'README.en.md', 'LICENSE', 'docs/plugins.md', 'docs/plugins.zh.md', 'docs/validation-plugins.md'}
 
 

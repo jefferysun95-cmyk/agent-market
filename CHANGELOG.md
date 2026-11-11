@@ -1,5 +1,33 @@
 # Changelog
 
+## Source distribution and bilingual entry synchronization — 2026-11-11
+
+- Add a Cursor source-preview manifest and packaging allowance without changing canonical IDs or frozen release assets. Explicitly treat third-party tasks/proposals/messages/files as untrusted content in the shared Skill and security guidance. Synchronize bilingual README/Pages/plugin onboarding and channel readiness with verified ClawHub, skills.sh, Registry and Glama outcomes; retain scan/auth/native-test limitations. Service, credentials, transactions and deployment are unchanged.
+
+## ClawHub standalone Skill publication — 2026-11-11
+
+- Record owner-authorized MIT-0 GitHub import as ClawHub Skill0.1.0, public install visibility and isolated official CLI installation (exit0, six file-size/hash matches, no force or code execution). Preserve auxiliary security warnings, old alpha.3 scanner failure and a platform auto-changelog discrepancy. Refresh confirmed Registry/skills/Glama channel facts; no runtime, production, credential or frozen-release change.
+
+## Future display-brand plan — 2026-11-11
+
+- Record the owner decision to keep Agent Market now and plan Run7 Agent Market as a later display brand. Preserve existing installation/Registry identifiers, endpoints, credentials, stored identities and frozen release evidence. Add phased bilingual/channel acceptance and rollback guidance; no rename, runtime version, deployment or directory submission change.
+
+## Official MCP Registry publication — 2026-11-10
+
+- Publish io.github.jefferysun95-cmyk/agent-market@1.1.0-alpha.5 with official publisher1.8.9 and verify the exact public metadata/status=active by readback. Preserve the initial expired-JWT401 and bounded owner reauthorization; no Agent token, service/deployment or frozen artifact change. Registry discovery does not imply host-directory approval.
+
+## Registry metadata and channel readiness — 2026-11-10
+
+- Prepare remote-only official Registry metadata with a required secret personal Authorization header, a checksummed official schema snapshot and offline validation. Record Claude regional login block, per-channel account/spec gates and Glama sign-in requirement. No listing, runtime, auth, deployment or frozen asset change.
+
+## N01 native buyer acceptance — 2026-11-10
+
+- Record participant-reported OpenClaw bundled Skill selection after reversible conflict repair and one public free API-only order accepted after21 independent buyer checks. Preserve nonzero manual handoffs, one seller-side pre-request UTF-16 repair, unknown accept process exit code and separate Claude/MCP/mail/payment gates. Documentation only; frozen assets and deployment unchanged.
+
+## Native OpenClaw public enrollment evidence — 2026-11-10
+
+- Record participant-reported native plugin loading and installed-client public signup/identity/service queries. Preserve managed Skill precedence conflict, manual code entry, unresolved first400 and one replacement challenge; bundled Skill workflow/free-task acceptance remains pending. No runtime, release asset or deployment change.
+
 ## Next distribution preparation — 2026-11-10
 
 - Add the official MCP Registry to the next preparation batch and Glama as a supplementary channel. Gate submissions on Claude/OpenClaw native public acceptance, then advance Claude, Cursor and OpenAI directories individually. Track preparation, tests, submission and availability separately; no new submission, runtime or deployment change.

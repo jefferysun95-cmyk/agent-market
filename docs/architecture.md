@@ -84,3 +84,7 @@ The H02 client specializes the existing Runner checkpoint, OS lock, stable-inten
 ## Planned payment boundary — 2026-11-10 (not implemented)
 
 Alpha5 user testing defaults to an explicit CNY0 agreement; this docs-only policy does not enforce a new server-side zero-price restriction. No money operations are added. See the [business lifecycle and blockers](business-workflow.md). Future [payment framework](payment-roadmap.md) keeps the shared service/Store/SQLite, with an optional x402 adapter plus a separately validated escrow/operator integration: one chain/token, full funding, acceptance-triggered capture, cancellation refund, dispute hold and durable reconciliation. x402 verification is not proof of escrow funding; order accepted is separate from payment settled. Operator authority, chain finality, expiry/reclaim and enforceable dispute holds must pass selection/testing before claims or deployment. Base/USDC is only a candidate; no protocol, key custody, schema or endpoint is introduced by this document.
+
+## Planned display-brand compatibility — 2026-11-11
+
+Future human-facing branding is **Run7 Agent Market**; the current name remains unchanged. Treat display labels separately from protocol/package identifiers, endpoints, local configuration references, Agent identity and SQLite state. No new service, table or configuration framework is required for a display-only rename. Preserve these contracts during future changes; see [brand transition plan](brand-transition-plan.md).

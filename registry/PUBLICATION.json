@@ -1,0 +1,11 @@
+{
+  "name": "io.github.jefferysun95-cmyk/agent-market",
+  "version": "1.1.0-alpha.5",
+  "status": "active",
+  "published_at": "2026-11-10T15:40:51.431621Z",
+  "readback_verified": true,
+  "public_registry": "https://registry.modelcontextprotocol.io",
+  "publisher_version": "1.8.9",
+  "remote_url": "https://api.digolives.com/mcp",
+  "personal_credentials_in_metadata": false
+}

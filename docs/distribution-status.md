@@ -1,6 +1,6 @@
 # 渠道发布与验收台账 / Distribution status
 
-更新：2026-11-10。本页区分安装入口、实际业务验收和第三方目录状态。服务/API保持1.1.0-alpha.5，冻结完整插件为0.1.0-alpha.3（来源30f44f5）；当前main的入口文档可更新，不覆盖旧ZIP/tag。
+更新：2026-11-11。本页区分安装入口、实际业务验收和第三方目录状态。服务/API保持1.1.0-alpha.5，冻结完整插件为0.1.0-alpha.3（来源30f44f5）；当前main的入口文档可更新，不覆盖旧ZIP/tag。
 
 ## 状态定义
 
@@ -15,13 +15,13 @@
 | 渠道 | 已适配 | 已测试 | 已提交 | 已上架/可用 |
 |---|---|---|---|---|
 | GitHub完整插件/自建marketplace | 是；alpha.3完整客户端/Skill | 冻结ZIP59文件hash；Claude2.1.319隔离validate/add/install/list通过；OpenClaw2026.4.11隔离install/inspect loaded/Skill eligible通过 | 已发布历史Release | [alpha.3下载](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)；不是Anthropic官方上架 |
-| ClawHub独立Skill | 是；7个公开文件，来源90377ac | 官方CLI预检和实际提交通过；公开安装尚不可执行 | 已提交0.1.0-alpha.3，pending-publication | **未上架**；检查未能完成，平台保留上传并等待再次检查，详情见下 |
-| skills.sh / skills CLI | GitHub Skill可发现；main说明已同步 | skills1.7.6 --list发现1项；隔离Claude项目--copy安装成功 | 无独立审核提交回执；基于GitHub/实际安装发现 | **GitHub安装可用、目录未收录**；详情页HTTP200但正文为404不可用，不将HTTP200当上架 |
-| Cursor | Skill可作为后续入口；未专门适配原生目录 | 未进行Cursor实机验收 | 未提交 | 未上架 |
+| ClawHub独立Skill | 是；GitHub导入6个公开文件，MIT-0经持有人确认 | 官方CLI0.25.1隔离正常安装0.1.0退出0；6/6大小及SHA256匹配；未执行脚本 | GitHub导入0.1.0成功；旧alpha.3失败记录保留 | **已公开、可安装**；最终clean但辅助扫描有警告，见[导入验收](validation-clawhub-import.md) |
+| skills.sh / skills CLI | 是；GitHub独立Skill | 干净安装通过，目录实际显示Skill和安装命令 | 基于GitHub安装发现，无独立审核回执 | **已收录**；维护者测试安装不算自然用户；Snyk W011警告保留 |
+| Cursor | 当前源码专用清单/共享Skill与CLI | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
-| OpenAI相关目录 | 未完成具体产品目录/格式与鉴权评审 | 未验收 | 未提交 | 未上架；不能把普通Bearer MCP当OAuth目录集成 |
-| MCP 官方 Registry | 已纳入下一批准备；服务元数据、命名空间归属及发布格式待核对 | 未进行Registry发布/发现/连接验收 | 未提交 | 未登记；不等于各宿主官方目录收录 |
-| Glama | 补充分发渠道；材料与格式待核对 | 未验收 | 未提交 | 未收录 |
+| OpenAI相关目录 | 已核对目录与鉴权差距 | 受保护远程MCP缺所需OAuth；未验收 | 未提交 | 未上架；不得伪装匿名或提交个人Bearer秘密 |
+| MCP 官方 Registry | 是；远程元数据和鉴权说明 | 官方发布器校验及精确名称/版本读回 | 已发布1.1.0-alpha.5 | **active/isLatest**；见[回执](../registry/PUBLICATION.json)，不等于宿主商店审核 |
+| Glama | 已有公开托管Connector条目 | 仓库/端点及所有权核验通过 | GitHub身份关联并认领成功 | **公开条目、Ownership verified**；公开页Not tested；管理页匿名检查HTTP401，待专用测试鉴权，不宣称健康通过 |
 
 ## 本轮集中入口核对
 
@@ -51,13 +51,13 @@ npx skills@1.7.6 add jefferysun95-cmyk/agent-market --skill agent-market
 
 选择实际宿主和安装范围。该命令安装指引与HTTP脚本，不安装完整agent_market客户端。需要新注册且无执行器时先读[注册指南](registration.md)/[English registration](registration.en.md)，用完整插件便携CLI。官方skills CLI默认有安装遥测；用户可设DISABLE_TELEMETRY=1。维护者本轮隔离测试关闭遥测，不制造推广安装量，也不把测试安装计为自然用户。
 
-ClawHub精确引用为 `@jefferysun95-cmyk/agent-market`，不可简写为 `agent-market`；不带发布者的同名短名当前指向其他人的预测市场项目。我们的[版本详情](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market)当前仅能用于核对发布状态，**不是可安装承诺**。只有平台检查完成、公开可见并通过干净目录安装后，才发布正式安装指引。CLI登录仅持有发布者授权，不授予平台业务权限。
+ClawHub精确引用为 `@jefferysun95-cmyk/agent-market`，不可简写为 `agent-market`；不带发布者的同名短名当前指向其他人的预测市场项目。我们的[版本详情](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market)中独立Skill **0.1.0已公开并通过干净目录安装**；旧0.1.0-alpha.3检查失败记录仍保留，不能混写为所有版本都已通过。CLI登录仅持有发布者授权，不授予平台业务权限。
 
 ## 原生安装与业务验收分开
 
 Claude本轮使用冻结alpha.3 ZIP，59项内层hash一致；官方2.1.319 validate通过（可选目录图标缺失提示仍在）。普通沙箱的本地目录校验先失败；相同专用CLAUDE_CONFIG_DIR下获本机权限后marketplace add、plugin install、plugin list通过，显示version alpha.3/enabled。现有用户Claude配置未改、未启动模型、未读取生产Token、未注册或发单。
 
-OpenClaw2026.4.11本轮使用专用OPENCLAW_STATE_DIR/OPENCLAW_CONFIG_PATH安装冻结alpha.3，inspect显示enabled/activated/status=loaded；skills info给出安装目录内实际SKILL.md且eligible=true。安装前allow条目尚不存在有暂态警告，安装后inspect diagnostics为空。两种宿主实际安装副本的client.py --version和register start --help共4项离线检查通过；未启动模型/Gateway或读取原用户凭证。原生模型调用→新注册→身份/服务查询→免费任务仍是独立未完成门槛。已有S01/S02是真实CLI注册/交易证据，不等同于两种原生插件全链路。
+OpenClaw2026.4.11本轮使用专用OPENCLAW_STATE_DIR/OPENCLAW_CONFIG_PATH安装冻结alpha.3，inspect显示enabled/activated/status=loaded；skills info给出安装目录内实际SKILL.md且eligible=true。安装前allow条目尚不存在有暂态警告，安装后inspect diagnostics为空。两种宿主实际安装副本的client.py --version和register start --help共4项离线检查通过；未启动模型/Gateway或读取原用户凭证。后续OpenClaw真实宿主已确认插件内置Skill实际加载、新身份注册/查询及N01免费首单验收，详见[原生验收](validation-n01.md)；人工阶段转发不等于无人值守。Claude完整原生公网验收仍因登录限制暂缓。已有S01/S02是真实CLI注册/交易证据，不替代Claude原生证据。
 
 遇账号、模型授权或宿主限制应明确阻塞，不为测试读取生产秘密或绕过校验。ClawHub/skills分发先以清楚标记的预览能力发布，官方目录申请在原生验收和各自格式/鉴权评审后推进，不跳过审核。
 
@@ -132,3 +132,49 @@ PR #23经14项CI通过，合并commit **90377ac9ad82b872dca0b0abc5cefabaabc58dd6
 3. **MCP官方Registry并行准备材料**：核对当时的官方发布规范，选择并验证发布者命名空间，准备服务/包版本元数据、HTTPS端点或安装方式、Bearer鉴权说明及连接验证。Registry登记与宿主商店上架分开；若规则与现有远程MCP不兼容先报告，不为登记开放匿名业务接口或宣称完整OAuth已实现。准备工作可以先做，实际发布在原生验收后推进。
 4. **Glama补充**：复用已审核公开资料，核对提交条件与可访问性，再提交并记录回执；不抢占原生验收和官方目录的优先级。
 5. 每渠道继续分别记录“已适配、已测试、已提交、已上架/可用”。本次仅调整计划，未向上述新目录提交、未增加运行功能、未改线上配置或冻结发布资产。
+
+
+## OpenClaw 公网验收进展（2026-11-10，用户转回）
+
+原生alpha.3插件由宿主报告loaded/doctor通过；插件目录客户端完成Alpha5公网新注册、identity、3项data-cleaning供给查询、空的个人任务查询。验证码由持有人本机隐藏输入，首次400原因未确定，收到challenge unavailable后仅请求一次新挑战并成功。不能把这一结果写成自动邮箱取码通过。
+
+**门槛仍未全通过**：宿主实际加载旧openclaw-managed Skill，插件内置Skill未选中；免费任务未执行。下一步以可回滚方式处理同名来源，重查宿主实际路径，再复用本轮新身份跑一单纯API/CNY0任务，不重复注册。Gmail链路故障另记，不阻挡纯API任务；重启是否能解决来源冲突尚待验证。详见[插件验收](validation-plugins.md)。
+
+
+## N01 结案：OpenClaw 原生买方门槛通过（用户转回，2026-11-10）
+
+旧 managed Skill 已备份并移出扫描根，授权重启后宿主实际路径/哈希指向插件内置 Skill（source=openclaw-extra）。复用本轮新身份完成 N01 发布→Richard报价→选择→确认→交付→买方独立21项核验→accepted，CNY0/payment为空。该结果更新上文历史“来源冲突/首单待测”，详见[N01证据](validation-n01.md)。
+
+人工阶段转发不为零；Richard发生一次请求前UTF-16本地修复；accept进程退出码未捕获，记未知。不是无人值守、邮件或付款验证。Claude原生公网门槛仍待持有人登录后完成，官方目录/Registry尚未因本次测试自动提交。
+
+
+## 后续渠道继续推进 — 2026-11-10
+
+用户确认Claude本机登录受地区限制，不再阻塞其他渠道。Registry远程候选元数据与官方schema校验已就绪；GitHub发布者授权待官方发布器就绪后由持有人完成。Cursor/OpenAI当前规范获取及专用适配仍待确认；Glama实际提交入口要求登录。各渠道均未因准备完成而记为已提交。详见[提交准备清单](directory-submission-readiness.md)。
+
+
+## MCP 官方 Registry 已登记并读回 — 2026-11-10
+
+正式名称 `io.github.jefferysun95-cmyk/agent-market`，版本 `1.1.0-alpha.5`。官方mcp-publisher1.8.9的validate通过；首次发布因发布者JWT过期返回401，查重确认无记录后重新完成同范围GitHub设备授权，紧接提交返回exit0/Successfully published。官方v0.1查询已读回精确名称/版本及原元数据，status=active/isLatest=true，publishedAt=2026-11-10T15:40:51.431621Z（UTC+8为23:40:51）。详见[公开回执](../registry/PUBLICATION.json)。
+
+登记包含Streamable HTTP端点和必填私密Authorization头，无实际个人Token；线上服务/认证/支付规则未改。它是Registry可发现登记，不是Claude/Cursor/OpenAI/Glama审核上架或新增宿主MCP验收。前文“候选/未登记”为历史阶段，本段及回执代表此时实际结果。
+
+## Future display-brand policy — 2026-11-11
+
+The owner chose to keep Agent Market for now and plan **Run7 Agent Market** as the later display brand. This planning entry changes no listing or approval status. Keep current publisher-qualified installs and canonical Registry/Skill/plugin IDs; schedule display metadata edits per channel without reuploading the blocked ClawHub artifact or altering frozen releases. Track separate review outcomes under the [brand transition plan](brand-transition-plan.md).
+
+## ClawHub 实际上架 — 2026-11-11
+
+持有人确认六个Skill文件按MIT-0发布后，通过GitHub官方导入保留原发布者/agent-market标识，平台生成Skill版本0.1.0；由waiting检查推进到公开页面/安装入口。官方CLI隔离安装exit0，6/6文件大小与SHA256匹配，无force/force-install、无执行脚本。线上Alpha5与旧Release未改。
+
+最终clean/benign不等于所有辅助扫描无警告；SkillSpector CRITICAL/10项及覆盖不足提示保留。平台自动changelog混入无关预测市场历史，文件/发布者已核对，说明纠正待处理。旧alpha.3失败及Issue4508不因本次成功被抹去。详见[证据](validation-clawhub-import.md)。此前“未上架”的段落为历史阶段，当前结果以本段和上表为准。Glama/skills/Registry表格按本轮已实际确认结果同步；未完成的主分支/入口同步与Cursor源码提交仍单列。
+
+## 当前源码与双语入口同步 — 2026-11-11
+
+当前源码补充Cursor清单与打包允许项，共享原Skill/CLI；独立安装副本/官方模板静态验证与原生Cursor实机验收分开。Skill与SECURITY新增对外部任务/提案/邮件/交付文本的信任边界，不能把内容当授权或执行指令；这不是Snyk W011已消失的声明。README双语、Pages双语、插件指南和目录清单同步当前事实；合并/CI与Pages公开验证另按实际回执记录。
+
+## 2026-11-11 Glama 健康检查诊断
+
+管理页Test Profile的Authentication Type为None，连接测试历史返回HTTP401（Agent token missing, invalid or revoked）；公开页Not tested不能理解为服务端没有响应。Glama支持API Key及OAuth测试配置，说明健康检查仅初始化MCP并列工具/提示/资源，不调用业务工具、不读资源正文、不请求采样。尚未配置凭证或点击新测试。
+
+下一步需要单独授权，把新建、无业务数据的专用测试身份凭证保存到Glama Test Profile；不得使用现有业务Agent或管理员凭证。当前普通Agent Token没有只读权限限制，Glama的检查范围声明不等于服务端强制最小权限。凭证交付尚未获确认前，不宣称健康检查完成。Cursor常见安装路径未发现程序，PATH也无cursor；这不证明其他位置或其他电脑没有安装，实机验收仍待安排。

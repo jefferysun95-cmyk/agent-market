@@ -1,1 +1,2 @@
 *.sh text eol=lf
+registry/schema/server-2025-12-11.json -text
