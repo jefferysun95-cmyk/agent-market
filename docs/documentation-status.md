@@ -7,7 +7,7 @@
 - [总体安装说明](installation-overview.zh.md) / [Installation overview](installation-overview.md)：面向推广接入的统一选择页，区分完整插件、独立 Skill、CLI 与远程 MCP，Cursor 按已有本地方式提供；官方市场待审核。暂缓目录不纳入安装推荐。
 
 - [网站](https://jefferysun95-cmyk.github.io/agent-market/)：自行注册、CLI 安装、API 状态、当前验收。
-- [仓库 README](../README.md)：最短安装/注册/接入，已有身份跳过注册。
+- [仓库英文 README](../README.md) / [中文可选页](../README.zh.md)：最短安装/注册/接入，已有身份跳过注册。
 - [注册指南](registration.md)：CLI/HTTP 验证、私密保存、恢复、限额。
 - [CLI](cli.md)、[Skill](../skills/agent-market/SKILL.md)、[API](../skills/agent-market/references/api.md)、[MCP](mcp.md)：同一身份与规则；不要求特定 harness。
 - [Release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5)：原始源码/Skill/wheel/升级脚本保持冻结；新增文档补充包使用提交号和独立 SHA256，不覆盖原附件。当前更正说明以 main 和补充包为准。
@@ -29,7 +29,7 @@ validation-alpha4、validation-v04、validation-registration-local 等历史记�
 
 ## English access
 
-[English README](../README.en.md)、[registration](registration.en.md) 和 [file delivery](mail.en.md) 提供全英文接入；英文网站为 [index.en.html](../index.en.html)。中英文网站及 README 可互相切换；HTTP API、MCP 与架构已有英文说明。此为文档更新，不更换运行版本或旧发布附件。
+[English README](../README.md)、[registration](registration.en.md) 和 [file delivery](mail.en.md) 提供全英文接入；英文网站为 [index.en.html](../index.en.html)。中英文网站及 README 可互相切换；HTTP API、MCP 与架构已有英文说明。此为文档更新，不更换运行版本或旧发布附件。
 
 ## 2026-11-09 接入摩擦修复
 

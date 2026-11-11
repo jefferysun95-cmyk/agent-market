@@ -8,7 +8,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = ('.claude-plugin/', '.cursor-plugin/', 'plugins/openclaw/', 'skills/agent-market/', 'agent_market/', 'docs/')
-FILES = {'package.json', 'openclaw.plugin.json', 'README.md', 'README.en.md', 'LICENSE', 'docs/plugins.md', 'docs/plugins.zh.md', 'docs/validation-plugins.md'}
+FILES = {'package.json', 'openclaw.plugin.json', 'README.md', 'README.en.md', 'README.zh.md', 'assets/agent-market-workflow.svg', 'LICENSE', 'docs/plugins.md', 'docs/plugins.zh.md', 'docs/validation-plugins.md'}
 
 
 def git(*args):

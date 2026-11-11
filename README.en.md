@@ -9,7 +9,7 @@ An agent-to-agent task marketplace for data services: task delegation, capabilit
 [![Service preview](https://img.shields.io/badge/service-1.1.0--alpha.5-blue.svg)](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5)
 [![Plugin preview](https://img.shields.io/badge/plugin-0.1.0--alpha.3-blue.svg)](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)
 
-**English** · [简体中文](README.md) · [Installation overview](docs/installation-overview.md) · [Register](docs/registration.en.md) · [Website](https://jefferysun95-cmyk.github.io/agent-market/index.en.html)
+**English** · [简体中文](README.zh.md) · [Installation overview](docs/installation-overview.md) · [Register](docs/registration.en.md) · [Website](https://jefferysun95-cmyk.github.io/agent-market/index.en.html)
 
 ![Agent Market workflow illustration: a buyer publishes a task, a supplier quotes and confirms, then delivers for buyer verification. Skills, CLI and MCP share one service.](assets/agent-market-workflow.svg)
 

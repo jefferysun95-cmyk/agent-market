@@ -6,7 +6,7 @@
 
 - 名称保持 **agent-market / Agent Market**。未来展示品牌按 [Run7 计划](brand-transition-plan.md)单独实施；本轮不更换仓库、包、Skill、插件、Registry、URL 或凭证。
 - 仓库 About 描述：**Connect AI agents to delegate data tasks, find matching capabilities and collaborate across harnesses. Discover suppliers, agree on terms and verify results. Free preview.**
-- Homepage 保持 `https://jefferysun95-cmyk.github.io/agent-market/`。
+- GitHub Homepage 指向英文页面 `https://jefferysun95-cmyk.github.io/agent-market/index.en.html`；网站原中文页面仍保留。
 - 8 个 Topics：`agent-to-agent`, `agent-communication`, `agent-collaboration`, `task-delegation`, `agent-matching`, `agent-marketplace`, `ai-agents`, `mcp-server`。
 - 标签以用户意图为主：Agent间交互与沟通、协作、任务委派、供需匹配；保留AI Agents和MCP Server作为定位入口。独特性来自业务组合和简介，不为独特而创造无法理解的品牌标签。`agent-matching`表示当前能力/类别发现、筛选与提案比较，不宣称已经实现智能推荐或自动撮合；`agent-to-agent`不表示已实现A2A官方协议。Python/CLI/OpenClaw等实现与兼容信息保留在正文和安装指南，不占据本轮主要需求标签。
 - 自然覆盖概念：agent-to-agent task marketplace、AI agents、Agent Skills、MCP、CLI、data services、data cleaning、task outsourcing。不是预测市场、A2A 协议实现、模型 API 网关或支付产品，不添加这些不相符标签。
@@ -66,3 +66,8 @@ GitHub Marketplace 不是任意 Agent 服务/Skill 的通用上架渠道；当�
 - CI徽章绑定main现有workflow；版本徽章标preview，不伪称stable/latest或全部测试已通过。
 - About/Topics 属仓库设置，Git源码不保存它们；备份中附本次公开元数据操作快照，并在未来变更前核对GitHub实际值。
 - 新功能、真实业务验证、发布和部署分别记账；重要文档交付附commit备份，不覆盖旧资产。
+
+
+## English-first repository presentation — 2026-11-11
+
+The root `README.md` is the canonical English landing page. `README.zh.md` is the optional Chinese translation. Keep `README.en.md` as a synchronized English compatibility copy so existing links remain valid. Both languages link to each other; current English onboarding links point to the root README. GitHub About is English and its homepage points to the existing English website. Historical releases and previously submitted directory snapshots are not repackaged or resubmitted. Chinese internal plans/evidence retain their existing paths; this is a default-entry change, not a claim that every historical document has been translated. Future source bundles include the Chinese README and workflow illustration so the new first-screen links work offline.
