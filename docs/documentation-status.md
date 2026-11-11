@@ -76,4 +76,4 @@ PR23入口集中核对已合并90377ac、14项CI通过，中英文Pages公开链
 
 ## 公开入口集中同步 — 2026-11-11
 
-中英文README/Pages/插件说明明确完整插件alpha.3、ClawHub独立Skill0.1.0与服务Alpha5不同；更新skills.sh已收录、Registryactive、Glama所有权已验证但健康未测。ClawHub辅助警告和平台错误auto-changelog保留为待办，不把上架写成零风险。Cursor源码清单/安全信任边界等待本轮PR/CI；没有发布替换冻结ZIP，没有提前更名。最新材料门槛见[directory readiness](directory-submission-readiness.md)。
+中英文README/Pages/插件说明明确完整插件alpha.3、ClawHub独立Skill0.1.0与服务Alpha5不同；更新skills.sh已收录、Registryactive、Glama所有权及专用测试鉴权健康检查通过（20工具）。ClawHub辅助警告和平台错误auto-changelog保留为待办，不把上架写成零风险。Cursor源码清单/安全信任边界已由PR #27/CI合入main；没有发布替换冻结ZIP，没有提前更名。最新材料门槛见[directory readiness](directory-submission-readiness.md)。
