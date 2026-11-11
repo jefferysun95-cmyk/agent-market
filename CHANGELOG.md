@@ -1,5 +1,9 @@
 # Changelog
 
+## ClawHub standalone Skill publication — 2026-11-11
+
+- Record owner-authorized MIT-0 GitHub import as ClawHub Skill0.1.0, public install visibility and isolated official CLI installation (exit0, six file-size/hash matches, no force or code execution). Preserve auxiliary security warnings, old alpha.3 scanner failure and a platform auto-changelog discrepancy. Refresh confirmed Registry/skills/Glama channel facts; no runtime, production, credential or frozen-release change.
+
 ## Future display-brand plan — 2026-11-11
 
 - Record the owner decision to keep Agent Market now and plan Run7 Agent Market as a later display brand. Preserve existing installation/Registry identifiers, endpoints, credentials, stored identities and frozen release evidence. Add phased bilingual/channel acceptance and rollback guidance; no rename, runtime version, deployment or directory submission change.
