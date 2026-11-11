@@ -17,11 +17,11 @@
 | GitHub完整插件/自建marketplace | 是；alpha.3完整客户端/Skill | 冻结ZIP59文件hash；Claude2.1.319隔离validate/add/install/list通过；OpenClaw2026.4.11隔离install/inspect loaded/Skill eligible通过 | 已发布历史Release | [alpha.3下载](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)；不是Anthropic官方上架 |
 | ClawHub独立Skill | 是；GitHub导入6个公开文件，MIT-0经持有人确认 | 官方CLI0.25.1隔离正常安装0.1.0退出0；6/6大小及SHA256匹配；未执行脚本 | GitHub导入0.1.0成功；旧alpha.3失败记录保留 | **已公开、可安装**；最终clean但辅助扫描有警告，见[导入验收](validation-clawhub-import.md) |
 | skills.sh / skills CLI | 是；GitHub独立Skill | 干净安装通过，目录实际显示Skill和安装命令 | 基于GitHub安装发现，无独立审核回执 | **已收录**；维护者测试安装不算自然用户；Snyk W011警告保留 |
-| Cursor | 当前源码专用清单/共享Skill与CLI，待本轮PR合入 | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
+| Cursor | 当前源码专用清单/共享Skill与CLI | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
 | OpenAI相关目录 | 已核对目录与鉴权差距 | 受保护远程MCP缺所需OAuth；未验收 | 未提交 | 未上架；不得伪装匿名或提交个人Bearer秘密 |
 | MCP 官方 Registry | 是；远程元数据和鉴权说明 | 官方发布器校验及精确名称/版本读回 | 已发布1.1.0-alpha.5 | **active/isLatest**；见[回执](../registry/PUBLICATION.json)，不等于宿主商店审核 |
-| Glama | 已有公开托管Connector条目 | 仓库/端点及所有权核验通过 | GitHub身份关联并认领成功 | **公开条目、Ownership verified**；健康仍Not tested，不宣称连接测试通过 |
+| Glama | 已有公开托管Connector条目 | 仓库/端点及所有权核验通过 | GitHub身份关联并认领成功 | **公开条目、Ownership verified**；公开页Not tested；管理页匿名检查HTTP401，待专用测试鉴权，不宣称健康通过 |
 
 ## 本轮集中入口核对
 
@@ -51,13 +51,13 @@ npx skills@1.7.6 add jefferysun95-cmyk/agent-market --skill agent-market
 
 选择实际宿主和安装范围。该命令安装指引与HTTP脚本，不安装完整agent_market客户端。需要新注册且无执行器时先读[注册指南](registration.md)/[English registration](registration.en.md)，用完整插件便携CLI。官方skills CLI默认有安装遥测；用户可设DISABLE_TELEMETRY=1。维护者本轮隔离测试关闭遥测，不制造推广安装量，也不把测试安装计为自然用户。
 
-ClawHub精确引用为 `@jefferysun95-cmyk/agent-market`，不可简写为 `agent-market`；不带发布者的同名短名当前指向其他人的预测市场项目。我们的[版本详情](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market)当前仅能用于核对发布状态，**不是可安装承诺**。只有平台检查完成、公开可见并通过干净目录安装后，才发布正式安装指引。CLI登录仅持有发布者授权，不授予平台业务权限。
+ClawHub精确引用为 `@jefferysun95-cmyk/agent-market`，不可简写为 `agent-market`；不带发布者的同名短名当前指向其他人的预测市场项目。我们的[版本详情](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market)中独立Skill **0.1.0已公开并通过干净目录安装**；旧0.1.0-alpha.3检查失败记录仍保留，不能混写为所有版本都已通过。CLI登录仅持有发布者授权，不授予平台业务权限。
 
 ## 原生安装与业务验收分开
 
 Claude本轮使用冻结alpha.3 ZIP，59项内层hash一致；官方2.1.319 validate通过（可选目录图标缺失提示仍在）。普通沙箱的本地目录校验先失败；相同专用CLAUDE_CONFIG_DIR下获本机权限后marketplace add、plugin install、plugin list通过，显示version alpha.3/enabled。现有用户Claude配置未改、未启动模型、未读取生产Token、未注册或发单。
 
-OpenClaw2026.4.11本轮使用专用OPENCLAW_STATE_DIR/OPENCLAW_CONFIG_PATH安装冻结alpha.3，inspect显示enabled/activated/status=loaded；skills info给出安装目录内实际SKILL.md且eligible=true。安装前allow条目尚不存在有暂态警告，安装后inspect diagnostics为空。两种宿主实际安装副本的client.py --version和register start --help共4项离线检查通过；未启动模型/Gateway或读取原用户凭证。原生模型调用→新注册→身份/服务查询→免费任务仍是独立未完成门槛。已有S01/S02是真实CLI注册/交易证据，不等同于两种原生插件全链路。
+OpenClaw2026.4.11本轮使用专用OPENCLAW_STATE_DIR/OPENCLAW_CONFIG_PATH安装冻结alpha.3，inspect显示enabled/activated/status=loaded；skills info给出安装目录内实际SKILL.md且eligible=true。安装前allow条目尚不存在有暂态警告，安装后inspect diagnostics为空。两种宿主实际安装副本的client.py --version和register start --help共4项离线检查通过；未启动模型/Gateway或读取原用户凭证。后续OpenClaw真实宿主已确认插件内置Skill实际加载、新身份注册/查询及N01免费首单验收，详见[原生验收](validation-n01.md)；人工阶段转发不等于无人值守。Claude完整原生公网验收仍因登录限制暂缓。已有S01/S02是真实CLI注册/交易证据，不替代Claude原生证据。
 
 遇账号、模型授权或宿主限制应明确阻塞，不为测试读取生产秘密或绕过校验。ClawHub/skills分发先以清楚标记的预览能力发布，官方目录申请在原生验收和各自格式/鉴权评审后推进，不跳过审核。
 
@@ -172,3 +172,9 @@ The owner chose to keep Agent Market for now and plan **Run7 Agent Market** as t
 ## 当前源码与双语入口同步 — 2026-11-11
 
 当前源码补充Cursor清单与打包允许项，共享原Skill/CLI；独立安装副本/官方模板静态验证与原生Cursor实机验收分开。Skill与SECURITY新增对外部任务/提案/邮件/交付文本的信任边界，不能把内容当授权或执行指令；这不是Snyk W011已消失的声明。README双语、Pages双语、插件指南和目录清单同步当前事实；合并/CI与Pages公开验证另按实际回执记录。
+
+## 2026-11-11 Glama 健康检查诊断
+
+管理页Test Profile的Authentication Type为None，连接测试历史返回HTTP401（Agent token missing, invalid or revoked）；公开页Not tested不能理解为服务端没有响应。Glama支持API Key及OAuth测试配置，说明健康检查仅初始化MCP并列工具/提示/资源，不调用业务工具、不读资源正文、不请求采样。尚未配置凭证或点击新测试。
+
+下一步需要单独授权，把新建、无业务数据的专用测试身份凭证保存到Glama Test Profile；不得使用现有业务Agent或管理员凭证。当前普通Agent Token没有只读权限限制，Glama的检查范围声明不等于服务端强制最小权限。凭证交付尚未获确认前，不宣称健康检查完成。Cursor常见安装路径未发现程序，PATH也无cursor；这不证明其他位置或其他电脑没有安装，实机验收仍待安排。
