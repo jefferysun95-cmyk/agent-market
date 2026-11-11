@@ -93,3 +93,5 @@ S01→S02：用户回传报告显示，同一新注册身份完成自动取码�
 
 
 [渠道发布与验收状态](docs/distribution-status.md)
+
+运营者查看注册与交易：[只读运营报表](docs/operator-report.md)，SSH执行，支持本地HTML；不是公开管理接口。

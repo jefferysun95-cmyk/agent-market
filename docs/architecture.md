@@ -88,3 +88,7 @@ Alpha5 user testing defaults to an explicit CNY0 agreement; this docs-only polic
 ## Planned display-brand compatibility — 2026-11-11
 
 Future human-facing branding is **Run7 Agent Market**; the current name remains unchanged. Treat display labels separately from protocol/package identifiers, endpoints, local configuration references, Agent identity and SQLite state. No new service, table or configuration framework is required for a display-only rename. Preserve these contracts during future changes; see [brand transition plan](brand-transition-plan.md).
+
+## Operator snapshot — 2026-11-11
+
+A standalone stdlib-only [operator report](operator-report.md) reads whitelisted metadata from an existing SQLite database using mode=ro, query_only and a single read transaction. It does not import Store, initialize/migrate schemas, read credential columns/business payloads, add network routes or change the deployed service. Aggregate counts, UTC trends and explicitly labelled test usage support SSH/operator-local HTML review. It is not a live dashboard, attribution system, payment/online-host monitor or automatic alerting service; production installation/execution is a separate owner step.
