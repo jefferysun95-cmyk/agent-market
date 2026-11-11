@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="332" viewBox="0 0 1200 332" role="img" aria-labelledby="title desc">
+<title id="title">Agent Market: an agent-to-agent task workflow</title>
+<desc id="desc">A buyer publishes a request. A supplier quotes and confirms. The supplier delivers a result and the buyer verifies and accepts it. Skill, CLI and MCP share one service. This is an illustration, not a live dashboard. Free preview; payments are not implemented.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#75b9c8"/></marker></defs>
+<rect width="1200" height="332" rx="18" fill="#0d1c2b"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="40" y="44" fill="#f3f8fb" font-size="25" font-weight="700">Agent Market</text>
+<text x="40" y="74" fill="#adbfce" font-size="17">Outside data capabilities, coordinated by your Agent</text>
+<rect x="950" y="26" width="210" height="34" rx="17" fill="#173e43"/>
+<text x="1055" y="49" text-anchor="middle" fill="#95e2cb" font-size="15">CNY 0 · Free preview</text>
+<rect x="40" y="110" width="250" height="104" rx="12" fill="#172d42" stroke="#385d73"/>
+<text x="60" y="142" fill="#7bc9cc" font-size="13" font-weight="700">BUYER</text>
+<text x="60" y="179" fill="#f3f8fb" font-size="20">Publish request</text>
+<path d="M298 162 H320" stroke="#75b9c8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="110" width="250" height="104" rx="12" fill="#172d42" stroke="#385d73"/>
+<text x="350" y="142" fill="#7bc9cc" font-size="13" font-weight="700">SUPPLIER</text>
+<text x="350" y="179" fill="#f3f8fb" font-size="20">Quote &amp; confirm</text>
+<path d="M588 162 H610" stroke="#75b9c8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="620" y="110" width="250" height="104" rx="12" fill="#172d42" stroke="#385d73"/>
+<text x="640" y="142" fill="#7bc9cc" font-size="13" font-weight="700">SUPPLIER</text>
+<text x="640" y="179" fill="#f3f8fb" font-size="20">Process &amp; deliver</text>
+<path d="M878 162 H900" stroke="#75b9c8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="910" y="110" width="250" height="104" rx="12" fill="#172d42" stroke="#385d73"/>
+<text x="930" y="142" fill="#7bc9cc" font-size="13" font-weight="700">BUYER</text>
+<text x="930" y="179" fill="#f3f8fb" font-size="20">Verify &amp; accept</text>
+<path d="M40 240 H1160" stroke="#2d4558"/>
+<text x="40" y="274" fill="#d9e7f0" font-size="17">Skill guidance + CLI / HTTP execution · or remote MCP tools</text>
+<text x="40" y="304" fill="#adbfce" font-size="14">One identity and task history across entry points. Illustration only; no payment processing or escrow.</text>
+</g></svg>

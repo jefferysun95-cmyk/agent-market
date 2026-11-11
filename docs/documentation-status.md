@@ -79,3 +79,8 @@ PR23入口集中核对已合并90377ac、14项CI通过，中英文Pages公开链
 ## 公开入口集中同步 — 2026-11-11
 
 中英文README/Pages/插件说明明确完整插件alpha.3、ClawHub独立Skill0.1.0与服务Alpha5不同；更新skills.sh已收录、Registryactive、Glama所有权及专用测试鉴权健康检查通过（20工具）。ClawHub辅助警告和平台错误auto-changelog保留为待办，不把上架写成零风险。Cursor源码清单/安全信任边界已由PR #27/CI合入main；没有发布替换冻结ZIP，没有提前更名。最新材料门槛见[directory readiness](directory-submission-readiness.md)。
+
+
+## GitHub 发现与首屏整理 — 2026-11-11
+
+按[搜索与展示维护计划](github-discovery.md)同步中英文README：突出Agent数据任务外包、四类场景、Skill/CLI/MCP/插件组合、明确预览版本和CI/许可；新增有标识的静态流程图，保留注册/邮箱/免费/原生宿主验收边界。仓库简介和8个相关Topics通过GitHub设置单独读回核验；不改仓库名或提前实施Run7品牌。Discussions公告、Awesome第三方PR和Profile另列待办，不宣称已发布。维护模板与CI复用，不为热度虚增Release。纯文档/元数据更新，不部署；按合并commit建立独立备份。
