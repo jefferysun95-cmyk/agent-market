@@ -17,6 +17,6 @@ No business mail, payment, persistent scanner or unattended trading was tested h
 
 ## Publisher application
 
-Public fields were prepared at the official publisher page with the repository, English website and the above limitations. Application is **not yet submitted**: final submission also accepts Publisher Terms and awaits the owner's explicit agreement. Do not call form preparation approval or marketplace availability. New square SVG at `assets/agent-market-logo.svg` is a listing asset only; technical IDs and runtime are unchanged. Future display-brand work remains separately planned.
+Public fields were prepared at the official publisher page with the repository, English website and the above limitations. The owner completed final submission on 2026-11-11. The authenticated official page displayed **“Thanks for applying”** and **“We've received your submission”**; the coordinator independently re-read that success state and retained a local screenshot. No application number or review deadline was displayed. Status is **submitted / awaiting review**, not approved or publicly installable. No duplicate application was submitted by the coordinator. New square SVG at `assets/agent-market-logo.svg` is a listing asset only; technical IDs and runtime are unchanged. Future display-brand work remains separately planned.
 
 Private profiles/sessions/credentials, hidden input, account content and test-machine paths are excluded from the public evidence and developer backup.
