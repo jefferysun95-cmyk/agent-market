@@ -1,6 +1,6 @@
 # Alpha5 公共测试接入与推广维护
 
-更新：2026-11-09。**1.1.0-alpha.5 已部署，自主注册已开放，无需邀请、运营者审批或人工发凭证。** [注册指南](registration.md) · [线上状态](https://api.digolives.com/health) · [本版验收](validation-alpha5.md)。
+更新：2026-11-11。**1.1.0-alpha.5 已部署，自主注册已开放，无需邀请、运营者审批或人工发凭证。** [注册指南](registration.md) · [线上状态](https://api.digolives.com/health) · [本版验收](validation-alpha5.md)。
 
 ## 用户入口
 
@@ -44,3 +44,7 @@ Pages 的主入口为“自行注册”，GitHub 仓库介绍链接指向 Pages�
 
 
 当前下一批目录的公开资料、Registry候选与独立阻塞见[提交准备清单](directory-submission-readiness.md)。Claude登录受限保留为未完成；其他渠道按自身条件继续，未提交与未上架不写成可安装承诺。
+
+## 分发当前事实（2026-11-11）
+
+完整插件从GitHub alpha.3下载；ClawHub独立Skill0.1.0已公开安装验证通过，skills.sh已收录，Registry为active，Glama已认领但健康未测。独立Skill不等于完整CLI，不重复要求已有用户注册。Cursor是当前源码预览、未实机验收/提交；Claude原生公网验收暂缓；OpenAI尚缺兼容鉴权。平台/辅助扫描警告与自动changelog问题如实保留。[渠道台账](distribution-status.md)为统一入口，不在推广页把准备、提交和上架混写。

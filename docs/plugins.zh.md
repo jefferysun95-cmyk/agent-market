@@ -53,4 +53,7 @@ S01→S02：用户回传报告显示，同一新注册身份完成自动取码�
 [渠道发布与验收台账](distribution-status.md)：按已适配、已测试、已提交、已上架分项记录；独立 Skill 安装不包含完整 CLI。
 
 
-2026-11-10渠道结果：ClawHub @jefferysun95-cmyk/agent-market alpha.3已提交，平台秘密/安全检查未能完成，上传保留待重查，尚不可公开安装。不要安装不带发布者的同名短名。skills CLI的GitHub安装通过，但skills.sh目录未收录；精确状态见渠道台账。
+2026-11-11渠道结果：ClawHub独立Skill0.1.0已公开上架，使用@jefferysun95-cmyk/agent-market；官方CLI0.25.1隔离正常安装exit0、6/6大小及哈希匹配，无force且未执行下载脚本。持有人确认6个Skill文件按MIT-0导入；最终clean/benign仍保留辅助扫描警告和平台自动changelog混入无关历史的问题，详见[验收](validation-clawhub-import.md)。skills.sh已收录，仍有Snyk W011警告；维护者安装不算自然用户。旧alpha.3失败记录保留。不要用不带发布者的同名短名；独立Skill不包含完整CLI。
+
+
+Cursor-specific current-source preview: [Cursor installation and acceptance](cursor.md). This is separate from the frozen alpha.3 release archive and is not a marketplace listing.

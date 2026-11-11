@@ -125,3 +125,7 @@ Alpha5按CNY0默认免费测试约定运行，不发生真实付款；这是运�
 ### 独立推进各渠道 — 2026-11-10
 
 用户确认本机Claude登录受地区限制后，允许其他渠道继续，不再以Claude补测阻塞全部发布。已准备Registry远程元数据与官方schema离线校验；实际发布需要GitHub命名空间授权及发布读回。Cursor/OpenAI格式与账号、Glama登录分别记录，见[目录提交准备](directory-submission-readiness.md)。这不豁免各渠道自身的功能、隐私或鉴权审查，也不宣称新目录已经上架。
+
+## 当前源码分发收尾 — 2026-11-11
+
+本轮合并中英文入口、Registry公开回执、N01证据、ClawHub GitHub导入与安装证据，补Cursor源码清单和外部内容信任边界；不改服务Alpha5或覆盖完整插件alpha.3。ClawHub独立Skill版本0.1.0不等于服务升级。原生Cursor与Glama带鉴权健康验收按宿主/专用测试权限独立推进，缺环境或权限即报告。当前品牌不改，后续展示名按[兼容品牌计划](brand-transition-plan.md)执行。

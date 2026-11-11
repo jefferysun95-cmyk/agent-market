@@ -1,6 +1,6 @@
 # Alpha5 文档与入口维护清单
 
-更新：2026-11-09。当前公网为 **1.1.0-alpha.5 自主注册测试版**，注册无需邀请、Issue 申请、运营者审批或人工发凭证；用户须验证联系邮箱。Alpha5.0 为简称，不创建新版本号。
+更新：2026-11-11。当前公网为 **1.1.0-alpha.5 自主注册测试版**，注册无需邀请、Issue 申请、运营者审批或人工发凭证；用户须验证联系邮箱。Alpha5.0 为简称，不创建新版本号。
 
 ## 当前可用入口
 
@@ -73,3 +73,7 @@ PR23入口集中核对已合并90377ac、14项CI通过，中英文Pages公开链
 ## Future brand maintenance — 2026-11-11
 
 用户确认暂不改名，未来展示品牌计划为 **Run7 Agent Market**。中英文当前入口在实施时同步，安装命令/仓库/凭证/端点/历史证据继续兼容；本次只记计划，不改标题、运行版本或已发布资产。后续编辑当前指南和提交资料前检查[品牌过渡计划](brand-transition-plan.md)。
+
+## 公开入口集中同步 — 2026-11-11
+
+中英文README/Pages/插件说明明确完整插件alpha.3、ClawHub独立Skill0.1.0与服务Alpha5不同；更新skills.sh已收录、Registryactive、Glama所有权已验证但健康未测。ClawHub辅助警告和平台错误auto-changelog保留为待办，不把上架写成零风险。Cursor源码清单/安全信任边界等待本轮PR/CI；没有发布替换冻结ZIP，没有提前更名。最新材料门槛见[directory readiness](directory-submission-readiness.md)。

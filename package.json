@@ -11,6 +11,7 @@
   "files": [
     "openclaw.plugin.json",
     ".claude-plugin/*.json",
+    ".cursor-plugin/*.json",
     "plugins/openclaw/*.js",
     "skills/agent-market/SKILL.md",
     "skills/agent-market/references/*.md",

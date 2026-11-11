@@ -1,14 +1,32 @@
 # 下一批目录：提交材料与真实状态
 
-更新2026-11-10。用户已确认本机Claude登录受地区限制，允许其他渠道继续准备和逐项推进；不是将Claude原生验收记为通过。OpenClaw N01原生买方已通过（参与方回传）；人工阶段转发、验证码和维护成本见[N01](validation-n01.md)。
+更新2026-11-11。当前服务Alpha5、冻结完整插件alpha.3、ClawHub独立Skill0.1.0分别记账；不把上架等同于宿主业务验收。当前名称不变，[Run7 Agent Market展示品牌](brand-transition-plan.md)仅列入后续计划。
 
-| 渠道 | 已完成的具体材料/检查 | 剩余门槛 | 当前提交状态 |
+| 渠道 | 已完成 | 剩余门槛 | 当前状态 |
 |---|---|---|---|
-| MCP官方Registry | registry/server.json远程元数据；官方schema离线校验；私密Bearer头与注册说明；离线校验工具 | 发布者GitHub设备授权、官方发布器校验/登录、最终端点核对、一次发布和精确版本读回 | 未发布；本地schema通过不等于登记 |
-| Claude官方目录 | 既有自建marketplace、原生安装验证；OpenClaw N01不替代Claude | 本机浏览器登录显示地区不可用；由可正常使用Claude Code的测试者补模型/注册/首单，再核对官方表单 | 未提交 |
-| Cursor Marketplace | 共享Skill/CLI/README与现有证据可复用 | 官方文档HTTP请求超时，浏览器仅得到空文档；待取得当前格式并进行Cursor原生验证、发布者账号/仓库授权 | 未适配当前Cursor专用清单，未提交 |
-| OpenAI目录 | 可复用公开Skill/CLI与Alpha5注册契约 | 本轮官方提交页/schema请求失败；需重新取得现行清单和鉴权规则，核对Skill-only与MCP路径、发布者账号/隐私与使用条款材料 | 未提交；不把Bearer当作完整OAuth，不填虚假匿名鉴权 |
-| Glama | 官方FAQ确认可从GitHub提交；实际Add Server入口可访问 | 点击后显示注册/登录，需要持有人账号与必要条款确认；质量/安全/健康扫描另计 | 停在登录入口，未提交 |
+| MCP官方Registry | 发布者授权、官方校验、一次成功发布、精确版本active读回 | 后续元数据维护；各宿主连接验证独立 | 已发布，见[回执](../registry/PUBLICATION.json) |
+| Claude官方目录 | 自建marketplace安装及隔离验证 | Claude本机地区登录受限；按用户要求暂缓原生公网验收 | 未提交；N01不是Claude证据 |
+| Cursor Marketplace | 当前源码专用清单、共享Skill/CLI、官方模板静态校验通过 | 源码合入、Cursor实机加载/已有身份查询/授权免费任务、发布者账号与官方表单 | 未提交；静态校验不是实机验收 |
+| OpenAI目录 | 已取得并核对当前官方打包、鉴权及提交说明 | 私人Bearer属API-key方式，门户不提供该连接输入；受保护远程MCP须补兼容OAuth流程，另需账号/隐私/条款/验收 | 未提交；不伪造匿名或把秘密写入配置 |
+| Glama | 公开条目、GitHub身份关联和Ownership verified | 认证测试profile与专用测试身份；健康/工具检查须分别通过 | 已收录已认领，Not tested |
+| ClawHub | GitHub导入0.1.0；6项文件/哈希和正常隔离安装通过 | 辅助警告及平台自动changelog纠正；旧扫描失败保留 | 已上架可安装，见[验收](validation-clawhub-import.md) |
+| skills.sh | 真实可见条目与Skill安装命令 | Snyk W011防护说明更新和后续扫描；不伪造自然安装量 | 已收录 |
+
+## 接下来执行
+
+1. 将已审阅源码/安全说明与中英文入口经PR/CI合入GitHub，确认Pages实际内容，不重打冻结包。
+2. Glama健康检查仅用专用最小权限测试身份，先核对profile的鉴权与可调用工具范围。不得上传现有买卖方Token、邀请密钥或邮箱授权；若profile可能执行写工具，须先限制或报告阻塞，不为了健康状态开放匿名业务接口。
+3. Cursor遵循当前官方本地插件目录/重载/Customize核验规则。缺宿主或登录时记录阻塞，不用manifest通过替代实际安装，不静默下载安装宿主或改默认配置。
+4. OpenAI OAuth属于单独开发里程碑；本轮不扩展平台认证、资金或生产数据库。
+5. 每个渠道保持适配/测试/提交/上架/健康分项证据和版本备份。
+
+## 官方规范（核对2026-11-11）
+
+- Cursor: https://cursor.com/docs/plugins ; https://cursor.com/docs/reference/plugins
+- Glama authenticated test profiles: https://glama.ai/mcp/faq
+- OpenAI connection limitations: https://developers.openai.com/plugins/deploy/submission ; https://developers.openai.com/plugins/build/auth
+
+## 历史准备过程（下文保留2026-11-10时点，不代表当前阻塞）
 
 ## Registry候选的审阅与安全边界
 

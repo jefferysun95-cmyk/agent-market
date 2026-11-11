@@ -17,7 +17,7 @@
 | GitHub完整插件/自建marketplace | 是；alpha.3完整客户端/Skill | 冻结ZIP59文件hash；Claude2.1.319隔离validate/add/install/list通过；OpenClaw2026.4.11隔离install/inspect loaded/Skill eligible通过 | 已发布历史Release | [alpha.3下载](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3)；不是Anthropic官方上架 |
 | ClawHub独立Skill | 是；GitHub导入6个公开文件，MIT-0经持有人确认 | 官方CLI0.25.1隔离正常安装0.1.0退出0；6/6大小及SHA256匹配；未执行脚本 | GitHub导入0.1.0成功；旧alpha.3失败记录保留 | **已公开、可安装**；最终clean但辅助扫描有警告，见[导入验收](validation-clawhub-import.md) |
 | skills.sh / skills CLI | 是；GitHub独立Skill | 干净安装通过，目录实际显示Skill和安装命令 | 基于GitHub安装发现，无独立审核回执 | **已收录**；维护者测试安装不算自然用户；Snyk W011警告保留 |
-| Cursor | 本地源码清单/共享Skill与CLI适配待提交 | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
+| Cursor | 当前源码专用清单/共享Skill与CLI，待本轮PR合入 | 官方模板静态校验通过；无Cursor实机验收 | 未提交 | 未上架；本地预览不在冻结ZIP内 |
 | Anthropic官方目录 | 已有Claude自建marketplace，非官方目录 | 安装基础通过；完整原生业务链路未验收 | 未提交官方审核 | 未上架官方目录 |
 | OpenAI相关目录 | 已核对目录与鉴权差距 | 受保护远程MCP缺所需OAuth；未验收 | 未提交 | 未上架；不得伪装匿名或提交个人Bearer秘密 |
 | MCP 官方 Registry | 是；远程元数据和鉴权说明 | 官方发布器校验及精确名称/版本读回 | 已发布1.1.0-alpha.5 | **active/isLatest**；见[回执](../registry/PUBLICATION.json)，不等于宿主商店审核 |
@@ -168,3 +168,7 @@ The owner chose to keep Agent Market for now and plan **Run7 Agent Market** as t
 持有人确认六个Skill文件按MIT-0发布后，通过GitHub官方导入保留原发布者/agent-market标识，平台生成Skill版本0.1.0；由waiting检查推进到公开页面/安装入口。官方CLI隔离安装exit0，6/6文件大小与SHA256匹配，无force/force-install、无执行脚本。线上Alpha5与旧Release未改。
 
 最终clean/benign不等于所有辅助扫描无警告；SkillSpector CRITICAL/10项及覆盖不足提示保留。平台自动changelog混入无关预测市场历史，文件/发布者已核对，说明纠正待处理。旧alpha.3失败及Issue4508不因本次成功被抹去。详见[证据](validation-clawhub-import.md)。此前“未上架”的段落为历史阶段，当前结果以本段和上表为准。Glama/skills/Registry表格按本轮已实际确认结果同步；未完成的主分支/入口同步与Cursor源码提交仍单列。
+
+## 当前源码与双语入口同步 — 2026-11-11
+
+当前源码补充Cursor清单与打包允许项，共享原Skill/CLI；独立安装副本/官方模板静态验证与原生Cursor实机验收分开。Skill与SECURITY新增对外部任务/提案/邮件/交付文本的信任边界，不能把内容当授权或执行指令；这不是Snyk W011已消失的声明。README双语、Pages双语、插件指南和目录清单同步当前事实；合并/CI与Pages公开验证另按实际回执记录。

@@ -1,5 +1,9 @@
 # Changelog
 
+## Source distribution and bilingual entry synchronization — 2026-11-11
+
+- Add a Cursor source-preview manifest and packaging allowance without changing canonical IDs or frozen release assets. Explicitly treat third-party tasks/proposals/messages/files as untrusted content in the shared Skill and security guidance. Synchronize bilingual README/Pages/plugin onboarding and channel readiness with verified ClawHub, skills.sh, Registry and Glama outcomes; retain scan/auth/native-test limitations. Service, credentials, transactions and deployment are unchanged.
+
 ## ClawHub standalone Skill publication — 2026-11-11
 
 - Record owner-authorized MIT-0 GitHub import as ClawHub Skill0.1.0, public install visibility and isolated official CLI installation (exit0, six file-size/hash matches, no force or code execution). Preserve auxiliary security warnings, old alpha.3 scanner failure and a platform auto-changelog discrepancy. Refresh confirmed Registry/skills/Glama channel facts; no runtime, production, credential or frozen-release change.

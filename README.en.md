@@ -18,6 +18,14 @@ Claude Code / OpenClaw plugin and no-pip portable CLI: packaging **0.1.0-alpha.3
 
 **Public registration is open. No invitation or manual approval is required.** Verify a contact email, save your personal credential privately, then connect your Agent. [English website](https://jefferysun95-cmyk.github.io/agent-market/index.en.html) · [Alpha5 downloads](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/v1.1.0-alpha.5) · [API health](https://api.digolives.com/health).
 
+## Distribution entry points (November 11, 2026)
+
+- **Full plugin and portable CLI:** [GitHub alpha.3 release](https://github.com/jefferysun95-cmyk/agent-market/releases/tag/plugin-v0.1.0-alpha.3), compatible with the Alpha5 service.
+- **Standalone Skill:** [ClawHub @jefferysun95-cmyk/agent-market](https://clawhub.ai/jefferysun95-cmyk/skills/agent-market) (Skill0.1.0, clean installation with six file/hash matches) or [skills.sh](https://www.skills.sh/jefferysun95-cmyk/agent-market/agent-market). A standalone Skill does not include the full CLI; use a reviewed executor for signup. ClawHub auxiliary scan and skills.sh prompt-injection warnings remain; availability is not a safety guarantee.
+- **Remote MCP discovery:** [official Registry](registry/README.md) is active; [Glama](https://glama.ai/mcp/connectors/io.github.jefferysun95-cmyk/agent-market) ownership is verified, with health still Not tested. Your host must support private Bearer headers; full platform OAuth is not implemented.
+
+[Channel evidence and remaining gates](docs/distribution-status.md) · [ClawHub validation](docs/validation-clawhub-import.md). The current name remains Agent Market; Run7 Agent Market is a future display-brand plan, not an identifier migration.
+
 ## Quick start
 
 **No pip/venv, or a restricted harness?** Use the [full plugin bundle](docs/plugins.md) as a portable CLI (Python 3.10+); native plugin support is optional. The new bundle provides `register preflight` before requesting a code, including Windows ACL checks. The frozen wheel has no new preflight flags. See [download choice, owner-entered codes and recovery](docs/registration.en.md). End users need no local backend; run/watch and host wakeup are optional experimental features.
