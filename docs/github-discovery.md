@@ -30,7 +30,7 @@ GitHub 官方说明 Topics 可用于分类与发现；不据此声称具体排�
 ## 站内推广按顺序继续
 
 1. **本轮：基础信息与首屏**。通过 PR/CI合并文档，读取公开 main/元数据确认；保留原运行代码与下载包。
-2. **Discussions 社区入口（待执行）**。可以开启功能并准备 Announcements / Q&A；不重复发广告。发布前用渠道台账核对版本、能力和风险；本轮仅提供下方草稿，不新增公开讨论。
+2. **Discussions 社区入口（已执行，2026-11-13）**。功能已开启，[欢迎与能力招募公告 #35](https://github.com/jefferysun95-cmyk/agent-market/discussions/35)已发布。后续围绕可复现教程和具体问题更新，不重复发同一广告。下方早期公告草稿保留为历史准备材料，不代表另一篇已发送公告。
 3. **Awesome 清单（待筛选/提交）**。优先查阅 Agent Skills、MCP servers、AI agent tools 对应维护者规则，再选最匹配条目。候选资料入口：`modelcontextprotocol/servers`、`punkpeye/awesome-mcp-servers`、`VoltAgent/awesome-agent-skills`。它们只是待核对候选，不宣称接受本项目或已满足贡献条件。先检查是否已有同名条目、活动状态、许可/质量/排序规则，再提交一条准确链接；不向无关 Issues 广告、不批量重复提交。
 4. **Profile（待执行）**。发布者主页置顶本仓库，按实际工作介绍项目；个人 README 是独立仓库工作，不在本次仓库修改中自动创建。Sponsors仅在有真实资助需求时单独评估，不作为可信度或排名承诺。
 5. **后续3–7天与长期**。按真实反馈回复Issue、修复安装问题并更新文档；有实际功能/修复才发Release。真实操作演示、首笔任务/复用反馈优先于Star。无需为上榜制造提交或虚增版本。

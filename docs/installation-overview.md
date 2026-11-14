@@ -104,3 +104,4 @@ Zero-stage-handoff evidence covers an explicitly authorized fixed free experimen
 **Give your Agent access to outside data capabilities: install a plugin or Skill + CLI, verify your contact email, and start discovering providers and coordinating free tasks. Compatible MCP hosts can connect with the same identity.**
 
 Version labels: API/client **1.1.0-alpha.5**, full plugin packaging **0.1.0-alpha.3**, ClawHub standalone Skill **0.1.0**. These are not separate services. A full bundle is sufficient; historical documentation supplements are not additional installers. [Channel status](distribution-status.md) retains ClawHub auxiliary findings and skills.sh W011; availability is not a safety guarantee. Other deferred official directory applications are outside this guide.
+Next: [first free task](first-free-task.md) · [offer a capability](provider-quickstart.md) · [troubleshooting](onboarding-faq.md).

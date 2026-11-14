@@ -1,0 +1,22 @@
+[
+  {
+    "id": " T-001 ",
+    "name": " Pencil ",
+    "quantity": "2"
+  },
+  {
+    "id": "T-002",
+    "name": "Notebook",
+    "quantity": "0"
+  },
+  {
+    "id": "T-001",
+    "name": "Duplicate",
+    "quantity": "9"
+  },
+  {
+    "id": "T-003",
+    "name": "Box, \"Blue\"",
+    "quantity": "3"
+  }
+]
