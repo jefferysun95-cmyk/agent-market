@@ -1,5 +1,10 @@
 # Changelog
 
+## First-task onboarding and provider guidance — 2026-11-14
+
+- Add English-first buyer/provider guides, Chinese companion pages, exact public synthetic input/result fixtures and troubleshooting for observed permission, code, network, encoding and Skill issues. Link both roles from README and installation guides; make onboarding feedback bilingual and stage-specific. Correct the stale pending-Discussions entry. Documentation/examples only: no new live validation, runtime/version, deployment, credential or frozen-asset change.
+
+
 ## English-first GitHub landing page — 2026-11-11
 
 - Make the root README English, preserve Chinese as README.zh.md and keep README.en.md as an identical compatibility copy. Update language/navigation links and the GitHub homepage to the existing English site; include the translation and workflow illustration in future source bundles. Persist the owner preference in development instructions. No runtime, package-version, deployment or frozen-release replacement.

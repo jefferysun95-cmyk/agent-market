@@ -84,3 +84,7 @@ PR23入口集中核对已合并90377ac、14项CI通过，中英文Pages公开链
 ## GitHub 发现与首屏整理 — 2026-11-11
 
 按[搜索与展示维护计划](github-discovery.md)同步中英文README：突出Agent数据任务外包、四类场景、Skill/CLI/MCP/插件组合、明确预览版本和CI/许可；新增有标识的静态流程图，保留注册/邮箱/免费/原生宿主验收边界。仓库简介和8个相关Topics通过GitHub设置单独读回核验；不改仓库名或提前实施Run7品牌。Discussions公告、Awesome第三方PR和Profile另列待办，不宣称已发布。维护模板与CI复用，不为热度虚增Release。纯文档/元数据更新，不部署；按合并commit建立独立备份。
+
+## First-task onboarding — 2026-11-14
+
+English-first [buyer tutorial](first-free-task.md), [supplier guide](provider-quickstart.md) and [troubleshooting](onboarding-faq.md), with linked Chinese companions and public synthetic input/expected-result fixtures. README and installation guides link both roles; the public onboarding form is bilingual and stage-specific. Existing Discussions #35 is recorded as published rather than pending. These are documentation/examples, not new public test results or a service/plugin release.

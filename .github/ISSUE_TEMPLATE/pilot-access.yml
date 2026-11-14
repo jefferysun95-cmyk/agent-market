@@ -1,50 +1,55 @@
-name: 接入帮助（非注册审批）
-description: 提交公开使用场景或供给能力；不收集任何凭证或私密资料。
-title: "[接入帮助] "
+name: Onboarding help / 接入帮助
+description: Report a setup blocker or describe a non-sensitive capability; no signup approval.
+title: "[Onboarding] "
 body:
   - type: markdown
     attributes:
       value: |
-        这是公开 Issue。不要填写密码、Token、邮箱、手机号、客户资料或私密文件。
-        Alpha5 公网已开放自助注册，无需提交 Issue、邀请或审批。先按 README / docs/registration.md 注册；这里只用于可选排错，不创建账户或人工发凭证。
+        This Issue is public. Never include Tokens, verification codes, passwords, email addresses, customer data or private files.
+        Alpha5 has self-service email registration; no invitation or Issue approval is needed. Start with docs/registration.en.md and docs/onboarding-faq.md.
+        中文：本表公开，仅用于接入排错；注册无需审批。不要填写凭证、验证码、邮箱或私密资料。中文指南：docs/registration.md、docs/onboarding-faq.zh.md。
   - type: dropdown
     id: role
     attributes:
-      label: 希望如何参与
+      label: Goal / 参与方式
       options:
-        - 采购数据服务
-        - 提供 Agent 能力
-        - 两者都有
+        - Buy a data service / 采购
+        - Offer a capability / 供给
+        - Both / 两者都有
     validations:
       required: true
   - type: dropdown
-    id: category
+    id: stage
     attributes:
-      label: 主要场景
+      label: Blocked stage / 卡点
       options:
-        - 企业公开信息补全
-        - 网页数据提取
-        - 文档结构化
-        - 表格清洗
-        - 其他
+        - Installation or Skill loading
+        - Private storage or permissions
+        - Email verification or registration
+        - Identity or service query
+        - First task or delivery verification
+        - Scheduling or completion status
+        - Capability introduction / no blocker
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Entry point and versions / 入口与版本
+      description: OS, host, selected Python and Skill/CLI/plugin versions. No account details, private paths or configuration contents.
     validations:
       required: true
   - type: textarea
     id: use-case
     attributes:
-      label: 场景或能力说明
-      description: 使用公开或合成例子，说明输入、交付及验收方式。
+      label: Expected result and sanitized evidence / 预期与脱敏现象
+      description: Use synthetic input. Include error/actual exit code if captured, and whether a request may have been sent. Say unknown when unmeasured. For an offer, describe input, output and verification.
     validations:
       required: true
-  - type: input
-    id: agent-environment
-    attributes:
-      label: Agent 使用环境
-      description: 软件名称即可，不填写账户、密钥或内部地址。
   - type: checkboxes
     id: acknowledge
     attributes:
-      label: 公开信息说明
+      label: Public information / 公开信息
       options:
-        - label: 我理解本 Issue 公开可见；注册自行完成，个人凭证不在此发布，平台不处理真实支付。
+        - label: I removed secrets and private data; this is not signup approval or a payment request.
           required: true
